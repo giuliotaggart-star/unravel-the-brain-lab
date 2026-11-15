@@ -2939,42 +2939,40 @@
   "prizeTag": "{{prizeValue}} prize",
   "value": "£50",
   "wordsMin": 400,
-  "wordsMax": 500,
+  "wordsMax": 400,
   "intro": "Turn any finding from the Data Lab into a short essay.",
-  "rulesHeading": "How it works",
+  "rulesHeading": "Who can enter",
   "rules": [
-   "Write {{wordsMin}}–{{wordsMax}} words on any finding from the SEA-AD data on this site.",
-   "Winners receive a {{prizeValue}} voucher.",
-   "Every entry gets personal feedback.",
    "PLACEHOLDER: who can enter (year groups, schools).",
    "PLACEHOLDER: the deadline, how winners are chosen and when they hear."
   ],
-  "builderHeading": "Build your essay: claim, evidence, reasoning",
-  "builderIntro": "Four boxes. One for each part of a scientific argument. Your draft saves on this device only.",
+  "builderHeading": "Need some help? Here is a framework to get you started.",
+  "builderIntro": "Four boxes, one for each part of a scientific report. Your draft saves on this device only.",
   "sections": [
    {
-    "id": "claim",
-    "label": "Claim and biological system",
-    "target": 75,
-    "prompt": "What did you find, in which cells, in one or two sentences?"
+    "id": "introduction",
+    "label": "1. Introduction",
+    "target": 80,
+    "prompt": "What is already known, and what question are you asking? End with your hypothesis."
    },
    {
-    "id": "evidence",
-    "label": "Data evidence from SEA-AD",
-    "target": 150,
-    "prompt": "Quote the medians and the spread. Say how many donors are in each group."
+    "id": "methods",
+    "label": "2. Methods",
+    "target": 80,
+    "prompt": "Which data did you use? Name the cell type, the measure, how donors were grouped and how many were in each group."
    },
    {
-    "id": "mechanism",
-    "label": "A-level biological mechanism",
-    "target": 175,
-    "prompt": "Use what you know from A-level Biology to suggest why this might happen."
+    "id": "results",
+    "label": "3. Results",
+    "target": 120,
+    "prompt": "What did the data show? Quote the medians and the spread for each group."
    },
    {
-    "id": "evaluation",
-    "label": "Evaluation and limitations",
-    "target": 100,
-    "prompt": "How far can this data support your claim?"
+    "id": "discussion",
+    "label": "4. Discussion",
+    "target": 120,
+    "prompt": "What does your result mean, and how far can the data support it? Name a limitation and a next step.",
+    "tip": "Stuck for ideas? You could use something you know from A-level Biology to suggest why this might happen. This is optional."
    }
   ],
   "checklistHeading": "A-level evaluation checklist",
@@ -2984,7 +2982,7 @@
    "What are the limits of post-mortem snRNA-seq data?"
   ],
   "wordCount": "{{count}} words · aim for about {{target}}",
-  "totalCount": "{{count}} words in total · the essay must be {{wordsMin}}–{{wordsMax}}",
+  "totalCount": "{{count}} / {{wordsMax}} words · strict maximum",
   "copyLabel": "Copy draft to clipboard",
   "clearLabel": "Clear my draft",
   "originalityNote": "Write it in your own words. Essays are read by a person, and copied or AI-written text will not win.",
@@ -3034,7 +3032,28 @@
     ]
    }
   ],
-  "deadlineLabel": "Entries close {{deadline}}."
+  "deadlineLabel": "Entries close {{deadline}}.",
+  "detailsHeading": "Details and requirements",
+  "details": [
+   {
+    "label": "Deadline",
+    "value": "{{deadline}}",
+    "pending": "To be confirmed."
+   },
+   {
+    "label": "What we are asking for",
+    "value": "A short scientific report on any finding from the SEA-AD data on this site."
+   },
+   {
+    "label": "Word count",
+    "value": "A strict maximum of {{wordsMax}} words. Entries over {{wordsMax}} words will not be marked."
+   },
+   {
+    "label": "Prize",
+    "value": "Winners receive a {{prizeValue}} voucher. Every entry gets personal feedback."
+   }
+  ],
+  "totalOver": "Over the {{wordsMax}}-word limit: cut {{over}} words."
  },
  "ucas": {
   "heading": "UCAS and careers",
@@ -3195,7 +3214,11 @@
  "explore": {
   "heading": "Ask your own question",
   "intro": "Pick your own data from our bioinformatic tool and build your own report!",
-  "steps": ["Pick a starting track", "Shape your question", "See the data"],
+  "steps": [
+   "Pick a starting track",
+   "Shape your question",
+   "See the data"
+  ],
   "pickNote": "Choose one of the three tracks to begin.",
   "explain": {
    "look": "1 dot = 1 donor. The thick line is the median. The box shows the middle half of donors (the IQR).",
@@ -3214,8 +3237,8 @@
   "prize": {
    "badge": "{{prizeValue}} essay prize",
    "heading": "Found a pattern? Turn it into a {{prizeValue}} essay.",
-   "body": "Write {{wordsMin}}–{{wordsMax}} words about what you discover. Every entry gets personal feedback. Winners get a {{prizeValue}} voucher.",
-   "bodyAfterWork": "PLACEHOLDER: You have worked with real data. Now turn it into {{wordsMin}}–{{wordsMax}} words and a {{prizeValue}} voucher.",
+   "body": "Write up to {{wordsMax}} words about what you discover. Every entry gets personal feedback. Winners get a {{prizeValue}} voucher.",
+   "bodyAfterWork": "PLACEHOLDER: You have worked with real data. Now turn it into up to {{wordsMax}} words and a {{prizeValue}} voucher.",
    "cta": "See how to enter"
   },
   "doors": [

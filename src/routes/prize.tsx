@@ -5,14 +5,15 @@ import { Button } from "@/components/ui/button";
 import { PSec, SidePage, Ticks } from "@/components/unravel/SidePage";
 import { data, fill, isText, isUrl } from "@/lib/unravel/data";
 import { store } from "@/lib/unravel/store";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/prize")({
   head: () => ({
     meta: [
-      { title: "The £50 essay prize — Unravel" },
-      { name: "description", content: "Turn any finding from the Data Lab into a 400–500 word essay. Every entry gets personal feedback." },
-      { property: "og:title", content: "The £50 essay prize — Unravel" },
-      { property: "og:description", content: "Claim, evidence, reasoning: build your essay on real SEA-AD data." },
+      { title: "Essay competition: £50 prize — Unravel" },
+      { name: "description", content: "Write a short scientific report of up to 400 words on real SEA-AD data. Every entry gets personal feedback." },
+      { property: "og:title", content: "Essay competition: £50 prize — Unravel" },
+      { property: "og:description", content: "Introduction, methods, results, discussion: write your report on real Alzheimer's data." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -29,38 +30,23 @@ function Prize() {
   useEffect(() => setDraft(store.get<Record<string, string>>("essay") || {}), []);
   const update = (id: string, v: string) => setDraft((d) => { const n = { ...d, [id]: v }; store.set("essay", n); return n; });
   const total = p.sections.reduce((a: number, s: any) => a + words(draft[s.id] || ""), 0);
+  const over = total - p.wordsMax;
   const hasDeadline = isText(cfg["essayDeadline"]) && cfg["essayDeadline"] !== "PLACEHOLDER";
   const text = () => p.sections.map((s: any) => `${s.label}\n${(draft[s.id] || "").trim()}`).join("\n\n");
   return (
     <SidePage gold heading={fill(p.title)} tag={fill(p.prizeTag)} intro={p.intro}>
-      <PSec title={p.submitHeading}>
-        {isUrl(cfg["essayFormUrl"]) ? (
-          <Button asChild variant="gold" size="pill"><a href={cfg["essayFormUrl"]} target="_blank" rel="noopener">{p.submitLabel} ↗</a></Button>
-        ) : (
-          <div className="space-y-2"><Button variant="gold" size="pill" disabled>{p.submitLabel}</Button><p className="text-sm text-muted-foreground">{p.submitPending}</p></div>
-        )}
-        {p.submitPrivacy.map((x: string) => <p key={x} className="text-sm text-muted-foreground">{x}</p>)}
-      </PSec>
-      <PSec title={p.builderHeading}>
-        <p>{p.builderIntro}</p>
-        <p className="text-sm text-muted-foreground">{p.originalityNote}</p>
-        {p.sections.map((s: any) => {
-          const c = words(draft[s.id] || "");
-          return (
-            <div key={s.id} className="card-surface space-y-2 p-5">
-              <label htmlFor={"essay-" + s.id} className="kicker">{s.label}</label>
-              <p className="text-sm text-muted-foreground">{s.prompt}</p>
-              <textarea id={"essay-" + s.id} rows={Math.max(4, Math.round(s.target / 22))} value={draft[s.id] || ""} onChange={(e) => update(s.id, e.target.value)} className="w-full rounded-xl border border-input bg-card p-3 outline-none focus-visible:border-peri focus-visible:ring-2 focus-visible:ring-peri/30" />
-              <p className="text-xs text-muted-foreground">{fill(p.wordCount, { count: c, target: s.target })}</p>
+      <PSec title={p.detailsHeading}>
+        <dl className="grid gap-3 sm:grid-cols-2">
+          {p.details.map((x: any) => (
+            <div key={x.label} className="card-surface p-5">
+              <dt className="text-base font-bold text-go">{x.label}</dt>
+              <dd className="mt-1 text-base">{x.label === "Deadline" && !hasDeadline ? x.pending : fill(x.value)}</dd>
             </div>
-          );
-        })}
-        <p className="sticky bottom-4 rounded-full border border-border bg-card/95 px-4 py-2 text-center text-sm font-medium shadow-lift backdrop-blur">{fill(p.totalCount, { count: total })}</p>
-        <div className="card-surface p-5"><p className="kicker mb-3">{p.checklistHeading}</p><Ticks items={p.checklist} /></div>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="soft" size="pillSm" onClick={() => navigator.clipboard?.writeText(text()).then(() => toast(data.ui["copied"]), () => {})}>{p.copyLabel}</Button>
-          <Button variant="quiet" size="pillSm" onClick={() => { setDraft({}); store.del("essay"); }}>{p.clearLabel}</Button>
-        </div>
+          ))}
+        </dl>
+        {p.rules.length > 0 && (
+          <div className="pt-2"><p className="mb-2 font-bold">{p.rulesHeading}</p><Ticks items={p.rules.map((r: string) => fill(r))} /></div>
+        )}
       </PSec>
       <PSec title={p.rubricHeading}>
         <p className="text-sm text-muted-foreground">{p.rubricNote}</p>
@@ -71,9 +57,40 @@ function Prize() {
           </table>
         </div>
       </PSec>
-      <PSec title={p.rulesHeading}>
-        <Ticks items={p.rules.map((r: string) => fill(r))} />
-        {hasDeadline && <p>{fill(p.deadlineLabel)}</p>}
+      <section className="rounded-2xl border border-gold/40 bg-gold-soft p-6 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h2 className="font-display-tight text-3xl font-medium">{p.submitHeading}</h2>
+          {isUrl(cfg["essayFormUrl"]) ? (
+            <Button asChild variant="gold" size="pill"><a href={cfg["essayFormUrl"]} target="_blank" rel="noopener">{p.submitLabel} ↗</a></Button>
+          ) : (
+            <div className="text-right"><Button variant="gold" size="pill" disabled>{p.submitLabel}</Button><p className="mt-1 text-sm text-muted-foreground">{p.submitPending}</p></div>
+          )}
+        </div>
+        {p.submitPrivacy.map((x: string) => <p key={x} className="text-sm text-muted-foreground">{x}</p>)}
+      </section>
+      <PSec title={p.builderHeading}>
+        <p>{p.builderIntro}</p>
+        <p className="text-sm text-muted-foreground">{p.originalityNote}</p>
+        {p.sections.map((s: any) => {
+          const c = words(draft[s.id] || "");
+          return (
+            <div key={s.id} className="card-surface space-y-2 p-5">
+              <label htmlFor={"essay-" + s.id} className="block text-xl font-bold text-go">{s.label}</label>
+              <p className="text-muted-foreground">{s.prompt}</p>
+              {s.tip && <p className="rounded-lg border-l-4 border-peri bg-peri-soft px-3 py-2 text-sm">{s.tip}</p>}
+              <textarea id={"essay-" + s.id} rows={Math.max(4, Math.round(s.target / 22))} value={draft[s.id] || ""} onChange={(e) => update(s.id, e.target.value)} className="w-full rounded-xl border border-input bg-card p-3 outline-none focus-visible:border-peri focus-visible:ring-2 focus-visible:ring-peri/30" />
+              <p className="text-xs text-muted-foreground">{fill(p.wordCount, { count: c, target: s.target })}</p>
+            </div>
+          );
+        })}
+        <p className={cn("sticky bottom-4 rounded-full border bg-card/95 px-4 py-2 text-center text-sm font-medium shadow-lift backdrop-blur", over > 0 ? "border-destructive text-destructive" : "border-border")}>
+          {over > 0 ? fill(p.totalOver, { over }) : fill(p.totalCount, { count: total })}
+        </p>
+        <div className="card-surface p-5"><p className="mb-3 font-bold">{p.checklistHeading}</p><Ticks items={p.checklist} /></div>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="soft" size="pillSm" onClick={() => navigator.clipboard?.writeText(text()).then(() => toast(data.ui["copied"]), () => {})}>{p.copyLabel}</Button>
+          <Button variant="quiet" size="pillSm" onClick={() => { setDraft({}); store.del("essay"); }}>{p.clearLabel}</Button>
+        </div>
       </PSec>
     </SidePage>
   );

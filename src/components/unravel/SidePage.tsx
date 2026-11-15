@@ -9,8 +9,8 @@ export function SidePage({ heading, intro, children, gold = false, tag }: { head
     <div>
       <div className={cn("border-b", gold ? "border-gold/40 bg-gold-soft" : "border-border bg-surface")}>
         <PageWrap className="pb-12 pt-14 sm:pt-20">
-          {gold && <span className="mb-5 flex size-11 items-center justify-center rounded-xl bg-gold text-foreground"><Trophy className="size-5" aria-hidden /></span>}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            {gold && <span className="glow-star flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gold text-gold-ink sm:size-16"><Trophy className="size-7 sm:size-8" aria-hidden /></span>}
             <h1 className="font-display-tight text-[clamp(2.4rem,6vw,4.5rem)] font-medium leading-none">{heading}</h1>
             {tag && (
               <span className={cn("rounded-full px-5 py-2 font-display-tight text-2xl font-semibold leading-none sm:text-3xl", gold ? "bg-gold text-gold-ink" : "bg-go text-go-foreground")}>
