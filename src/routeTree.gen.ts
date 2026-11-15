@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DataRouteImport } from './routes/data'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as FurtherRouteImport } from './routes/further'
+import { Route as LabRouteImport } from './routes/lab'
+import { Route as PollRouteImport } from './routes/poll'
+import { Route as PrizeRouteImport } from './routes/prize'
+import { Route as TeachersRouteImport } from './routes/teachers'
+import { Route as UcasRouteImport } from './routes/ucas'
+import { Route as WhatDementiaIsRouteImport } from './routes/what-dementia-is'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FurtherRoute = FurtherRouteImport.update({
+  id: '/further',
+  path: '/further',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabRoute = LabRouteImport.update({
+  id: '/lab',
+  path: '/lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PollRoute = PollRouteImport.update({
+  id: '/poll',
+  path: '/poll',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrizeRoute = PrizeRouteImport.update({
+  id: '/prize',
+  path: '/prize',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeachersRoute = TeachersRouteImport.update({
+  id: '/teachers',
+  path: '/teachers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UcasRoute = UcasRouteImport.update({
+  id: '/ucas',
+  path: '/ucas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhatDementiaIsRoute = WhatDementiaIsRouteImport.update({
+  id: '/what-dementia-is',
+  path: '/what-dementia-is',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/data': typeof DataRoute
+  '/explore': typeof ExploreRoute
+  '/further': typeof FurtherRoute
+  '/lab': typeof LabRoute
+  '/poll': typeof PollRoute
+  '/prize': typeof PrizeRoute
+  '/teachers': typeof TeachersRoute
+  '/ucas': typeof UcasRoute
+  '/what-dementia-is': typeof WhatDementiaIsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/data': typeof DataRoute
+  '/explore': typeof ExploreRoute
+  '/further': typeof FurtherRoute
+  '/lab': typeof LabRoute
+  '/poll': typeof PollRoute
+  '/prize': typeof PrizeRoute
+  '/teachers': typeof TeachersRoute
+  '/ucas': typeof UcasRoute
+  '/what-dementia-is': typeof WhatDementiaIsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/data': typeof DataRoute
+  '/explore': typeof ExploreRoute
+  '/further': typeof FurtherRoute
+  '/lab': typeof LabRoute
+  '/poll': typeof PollRoute
+  '/prize': typeof PrizeRoute
+  '/teachers': typeof TeachersRoute
+  '/ucas': typeof UcasRoute
+  '/what-dementia-is': typeof WhatDementiaIsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/data'
+    | '/explore'
+    | '/further'
+    | '/lab'
+    | '/poll'
+    | '/prize'
+    | '/teachers'
+    | '/ucas'
+    | '/what-dementia-is'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/data'
+    | '/explore'
+    | '/further'
+    | '/lab'
+    | '/poll'
+    | '/prize'
+    | '/teachers'
+    | '/ucas'
+    | '/what-dementia-is'
+  id:
+    | '__root__'
+    | '/'
+    | '/data'
+    | '/explore'
+    | '/further'
+    | '/lab'
+    | '/poll'
+    | '/prize'
+    | '/teachers'
+    | '/ucas'
+    | '/what-dementia-is'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DataRoute: typeof DataRoute
+  ExploreRoute: typeof ExploreRoute
+  FurtherRoute: typeof FurtherRoute
+  LabRoute: typeof LabRoute
+  PollRoute: typeof PollRoute
+  PrizeRoute: typeof PrizeRoute
+  TeachersRoute: typeof TeachersRoute
+  UcasRoute: typeof UcasRoute
+  WhatDementiaIsRoute: typeof WhatDementiaIsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/further': {
+      id: '/further'
+      path: '/further'
+      fullPath: '/further'
+      preLoaderRoute: typeof FurtherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab': {
+      id: '/lab'
+      path: '/lab'
+      fullPath: '/lab'
+      preLoaderRoute: typeof LabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/poll': {
+      id: '/poll'
+      path: '/poll'
+      fullPath: '/poll'
+      preLoaderRoute: typeof PollRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prize': {
+      id: '/prize'
+      path: '/prize'
+      fullPath: '/prize'
+      preLoaderRoute: typeof PrizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teachers': {
+      id: '/teachers'
+      path: '/teachers'
+      fullPath: '/teachers'
+      preLoaderRoute: typeof TeachersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ucas': {
+      id: '/ucas'
+      path: '/ucas'
+      fullPath: '/ucas'
+      preLoaderRoute: typeof UcasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/what-dementia-is': {
+      id: '/what-dementia-is'
+      path: '/what-dementia-is'
+      fullPath: '/what-dementia-is'
+      preLoaderRoute: typeof WhatDementiaIsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DataRoute: DataRoute,
+  ExploreRoute: ExploreRoute,
+  FurtherRoute: FurtherRoute,
+  LabRoute: LabRoute,
+  PollRoute: PollRoute,
+  PrizeRoute: PrizeRoute,
+  TeachersRoute: TeachersRoute,
+  UcasRoute: UcasRoute,
+  WhatDementiaIsRoute: WhatDementiaIsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

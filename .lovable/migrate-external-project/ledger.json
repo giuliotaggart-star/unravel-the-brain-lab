@@ -1,0 +1,15 @@
+{
+  "source": "github:giuliotaggart-star/alzheimers-explorer",
+  "capabilities": [
+    {"capability": "code", "source": "index.html + assets/app.js (vanilla JS single page)", "outcome": "rebuilt as TanStack Start React routes with a new light design", "status": "migrate", "next_action": "verify chapters render"},
+    {"capability": "content data", "source": "data/seaad-mtg.json", "outcome": "bundled unchanged at src/data/seaad-mtg.json (identical to uploaded file)", "status": "migrate", "next_action": "none"},
+    {"capability": "schema/records", "source": "none (static JSON only)", "outcome": "not applicable", "status": "not_applicable", "next_action": "none"},
+    {"capability": "auth", "source": "none", "outcome": "not applicable", "status": "not_applicable", "next_action": "none"},
+    {"capability": "device storage", "source": "localStorage (poll result, lab progress, essay draft, findings)", "outcome": "kept on device, same privacy promise", "status": "migrate", "next_action": "verify"},
+    {"capability": "poll collection endpoint", "source": "config.pollEndpoint (empty)", "outcome": "kept: posts only when an https endpoint is set", "status": "migrate", "next_action": "set endpoint in data when wanted"},
+    {"capability": "external forms", "source": "config.essayFormUrl / teacherFormUrl (PLACEHOLDER)", "outcome": "buttons disabled with pending note until URLs set", "status": "migrate", "next_action": "user supplies URLs"},
+    {"capability": "data film", "source": "assets/video/data-journey.mp4 (missing in repo)", "outcome": "panel hidden while missing, as in source", "status": "pending", "next_action": "user supplies film if wanted"},
+    {"capability": "service worker/offline", "source": "sw.js", "outcome": "not carried over (hosted app)", "status": "accepted_removal", "next_action": "none"},
+    {"capability": "fonts", "source": "self-hosted Bagel Fat One, Plus Jakarta Sans, DM Mono", "outcome": "Bagel Fat One kept for the UNRAVEL brand; Plus Jakarta Sans body; Fraunces editorial headings; DM Mono labels", "status": "migrate", "next_action": "none"}
+  ]
+}

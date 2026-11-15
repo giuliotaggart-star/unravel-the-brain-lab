@@ -16,12 +16,18 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        coral:
+          "rounded-full bg-coral text-primary-foreground shadow-[0_8px_20px_-8px_color-mix(in_oklab,var(--coral)_70%,transparent)] hover:bg-coral-ink active:translate-y-px",
+        soft: "rounded-full border border-border bg-card text-foreground shadow-card hover:border-peri/40 hover:bg-peri-soft",
+        quiet: "rounded-full text-peri-ink hover:bg-peri-soft",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        pill: "h-11 rounded-full px-6 text-[0.95rem] font-semibold",
+        pillSm: "h-9 rounded-full px-4 text-sm font-semibold",
       },
     },
     defaultVariants: {
