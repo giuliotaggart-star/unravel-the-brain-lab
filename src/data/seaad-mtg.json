@@ -65,6 +65,7 @@
   "skip": "Skip to the content",
   "progress": "How far down the page you are",
   "next": "Next",
+  "skipAhead": "Skip ahead to",
   "about": "About"
  },
  "nav": {
@@ -3133,8 +3134,8 @@
    "glowX": 85,
    "glowY": 100,
    "kicker": "PART 2",
-   "title": "MYTH BUSTING",
-   "line": "What dementia really is"
+   "title": "WHAT DEMENTIA REALLY IS",
+   "line": ""
   },
   {
    "id": "video",

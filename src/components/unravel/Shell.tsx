@@ -245,24 +245,20 @@ export function ChapterPager({ id }: { id: string }) {
   const i = chapterIndex(id);
   const next: Chapter | undefined = chapters[i + 1];
   const prize = groups.find(isGold);
-  const card = "group flex w-full items-center justify-between gap-4 rounded-2xl p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-lift sm:max-w-md";
+  const link = "group inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground";
   return (
-    <nav aria-label={ui("sections")} className="mx-auto mt-20 flex max-w-7xl justify-end px-4 sm:px-6 lg:px-8">
+    <nav aria-label={ui("sections")} className="mx-auto mt-16 flex max-w-7xl justify-end px-4 sm:px-6 lg:px-8">
       {next ? (
-        <Link to={next.to} className={cn(card, next.standalone ? "bg-peri text-primary-foreground" : "bg-go text-go-foreground")}>
-          <span>
-            <span className="block font-mono text-xs uppercase tracking-[0.12em] opacity-80">{ui("next")}</span>
-            <span className="text-lg font-semibold">{next.step === chapters[i]!.step ? next.name : steps[next.step]!.name}</span>
-          </span>
-          <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden />
+        <Link to={next.to} className={link}>
+          <span>{ui("skipAhead")}</span>
+          <span className="font-semibold text-foreground">{next.step === chapters[i]!.step ? next.name : steps[next.step]!.name}</span>
+          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
         </Link>
       ) : prize ? (
-        <Link to={prize.to} className={cn(card, "bg-gold text-foreground")}>
-          <span>
-            <span className="block font-mono text-xs uppercase tracking-[0.12em] opacity-70">{ui("next")}</span>
-            <span className="text-lg font-semibold">{prize.label}</span>
-          </span>
-          <Trophy className="size-5 transition-transform group-hover:scale-110" aria-hidden />
+        <Link to={prize.to} className={cn(link, "border-gold/50")}>
+          <span>{ui("skipAhead")}</span>
+          <span className="font-semibold text-foreground">{prize.label}</span>
+          <Trophy className="size-3.5 text-gold-ink" aria-hidden />
         </Link>
       ) : null}
     </nav>

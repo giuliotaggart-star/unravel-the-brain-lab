@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useId, useState } from "react";
-import { cellColourVar } from "@/lib/unravel/data";
+import { useEffect, useId, useState } from "react";
+import { cellColourVar, cellOf, label } from "@/lib/unravel/data";
 import { useReducedMotion } from "@/lib/unravel/store";
 import { cn } from "@/lib/utils";
 
@@ -195,27 +195,59 @@ export function GfxCellGroups({ g }: { g: any }) {
 
 /* 4 · ground-up tissue gives one average; one cell at a time shows each type */
 export function GfxOneAtATime({ g }: { g: any }) {
-  const [mode, setMode] = useState<"avg" | "one">("avg");
-  const types = ["l2-3-it", "sst", "microglia-pvm", "astrocyte"];
-  const cells = Array.from({ length: 48 }, (_, i) => ({ x: 30 + (i % 12) * 32 + ((Math.floor(i / 12) % 2) * 14), y: 34 + Math.floor(i / 12) * 38, t: types[(i * 7 + Math.floor(i / 5)) % 4]! }));
+  const reduced = useReducedMotion();
+  const types = ["l2-3-it", "sst", "microglia-pvm", "astrocyte", "l2-3-it", "astrocyte", "sst", "l2-3-it", "microglia-pvm", "astrocyte"];
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (reduced) return;
+    const t = setInterval(() => setN((k) => k + 1), 1500);
+    return () => clearInterval(t);
+  }, [reduced]);
+  const SLOT = 60, CX = 210, VIS = 9;
+  // cell k sits at x = CX + (k - n) * SLOT; cells with k <= n have been read
+  const ks = Array.from({ length: VIS + 2 }, (_, j) => n - 5 + j);
+  const cur = types[((n % types.length) + types.length) % types.length]!;
+  const curCell = cellOf(cur);
   return (
     <div className="space-y-4">
-      <Segmented label="mode" options={[{ id: "avg", label: g.controls[0] }, { id: "one", label: g.controls[1] }]} value={mode} onChange={setMode} />
-      <svg viewBox="0 0 420 180" className="w-full rounded-2xl border border-border bg-surface" role="img" aria-label={mode === "avg" ? g.labels[0] : g.labels[1]}>
+      <svg viewBox="0 0 420 200" className="w-full rounded-2xl border border-border bg-surface" role="img" aria-label={g.labels[1]}>
         <defs>
-          <filter id="blur-avg"><feGaussianBlur stdDeviation="5" /></filter>
+          <clipPath id="belt-clip"><rect x="0" y="0" width="420" height="200" /></clipPath>
         </defs>
-        <g filter={mode === "avg" ? "url(#blur-avg)" : undefined}>
-          {cells.map((c, i) => (
-            <motion.circle key={i} cx={c.x} cy={c.y} r={10} initial={false} animate={{ fill: mode === "avg" ? "var(--muted-foreground)" : cellColourVar(c.t), opacity: mode === "avg" ? 0.4 : 0.92 }} transition={{ duration: 0.5, delay: mode === "one" ? i * 0.008 : 0 }} />
-          ))}
+        {/* scanner */}
+        <path d={`M${CX - 34} 18 h68 l-10 22 h-48 z`} fill="var(--foreground)" opacity="0.85" />
+        <motion.path d={`M${CX - 24} 40 L${CX - 34} 112 L${CX + 34} 112 L${CX + 24} 40 Z`} fill="var(--go)" initial={false} animate={{ opacity: [0.08, 0.2, 0.08] }} transition={{ duration: 1.5, repeat: Infinity }} />
+        <circle cx={CX} cy={29} r={4} fill="var(--go)" />
+        {/* belt */}
+        <rect x="6" y="128" width="408" height="16" rx="8" fill="var(--muted)" stroke="var(--border)" />
+        {Array.from({ length: 14 }, (_, j) => (
+          <line key={j} x1={22 + j * 29} x2={22 + j * 29} y1={131} y2={141} stroke="var(--border)" strokeWidth={2} />
+        ))}
+        <circle cx="14" cy="136" r="10" fill="var(--card)" stroke="var(--border)" />
+        <circle cx="406" cy="136" r="10" fill="var(--card)" stroke="var(--border)" />
+        <g clipPath="url(#belt-clip)">
+          {ks.map((k) => {
+            const t = types[((k % types.length) + types.length) % types.length]!;
+            const read = k <= n;
+            const x = CX + (k - n) * SLOT;
+            return (
+              <motion.g key={k} initial={{ x: x + SLOT, opacity: 0 }} animate={{ x, opacity: 1 }} transition={{ duration: reduced ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}>
+                <motion.circle cy={108} r={k === n ? 17 : 14} initial={false} animate={{ fill: read ? cellColourVar(t) : "var(--muted-foreground)", fillOpacity: read ? 0.9 : 0.3 }} transition={{ duration: 0.4 }} stroke="var(--card)" strokeWidth={2} />
+                <circle cy={108} r={4} fill="var(--card)" opacity={0.7} />
+              </motion.g>
+            );
+          })}
         </g>
+        {/* readout */}
+        <rect x={CX - 90} y={156} width={180} height={30} rx={8} fill="var(--card)" stroke="var(--border)" />
+        <circle cx={CX - 74} cy={171} r={6} fill={cellColourVar(cur)} />
+        <AnimatePresence mode="wait">
+          <motion.text key={n} x={CX - 62} y={175} fontSize="12" fill="var(--foreground)" fontWeight={600} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            {curCell ? label(curCell) : cur}
+          </motion.text>
+        </AnimatePresence>
       </svg>
-      <AnimatePresence mode="wait">
-        <motion.p key={mode} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="kicker">
-          {mode === "avg" ? g.labels[0] : g.labels[1]}
-        </motion.p>
-      </AnimatePresence>
+      <p className="kicker">{g.labels[1]}</p>
     </div>
   );
 }

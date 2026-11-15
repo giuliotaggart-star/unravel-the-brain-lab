@@ -15,10 +15,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/what-dementia-is")({
   head: () => ({
     meta: [
-      { title: "Myth busting: what dementia is — Unravel" },
+      { title: "What dementia really is — Unravel" },
       { name: "description", content: "Dementia versus Alzheimer's, amyloid and tau, the brain's cell types and why scientists read cells one at a time." },
-      { property: "og:title", content: "Myth busting: what dementia really is — Unravel" },
-      { property: "og:description", content: "Four myths about dementia, unravelled with clear interactive graphics." },
+      { property: "og:title", content: "What dementia really is — Unravel" },
+      { property: "og:description", content: "Four common misunderstandings about dementia, unravelled with clear interactive graphics." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -60,10 +60,10 @@ function Pivot() {
                     aria-current={k === i ? "step" : undefined}
                     className={cn(
                       "flex w-56 items-start gap-3 rounded-2xl border p-3 text-left transition-all lg:w-full",
-                      k === i ? "border-peri/30 bg-card shadow-card" : "border-transparent text-muted-foreground hover:bg-card/70 hover:text-foreground",
+                      k === i ? "border-border bg-card shadow-card" : "border-transparent text-muted-foreground hover:bg-card/70 hover:text-foreground",
                     )}
                   >
-                    <span className={cn("flex size-7 shrink-0 items-center justify-center rounded-lg font-mono text-xs", k === i ? "bg-peri text-primary-foreground" : "bg-muted")}>{k + 1}</span>
+                    <span className={cn("flex size-7 shrink-0 items-center justify-center rounded-lg font-mono text-xs", k === i ? "bg-foreground text-background" : "bg-muted")}>{k + 1}</span>
                     <span className="text-sm font-semibold leading-snug">{x.headline}</span>
                   </button>
                 </li>
@@ -82,10 +82,10 @@ function Pivot() {
                 className="card-surface overflow-hidden"
               >
                 <GlossaryScope>
-                  <div className="border-b border-border bg-surface/70 px-6 py-4 sm:px-10">
-                    <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="rounded-md bg-coral-soft px-2 py-0.5 font-mono text-[0.7rem] uppercase tracking-widest text-coral-ink">{data.pivot["mythLabel"]}</span>
-                      <span className="text-muted-foreground line-through decoration-coral/60 decoration-2">{it.myth}</span>
+                  <div className="px-6 pt-8 sm:px-10">
+                    <p className="flex flex-col gap-1.5 rounded-xl border border-dashed border-border bg-surface/60 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-3">
+                      <span className="font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">{data.pivot["mythLabel"]}:</span>
+                      <span className="italic text-muted-foreground">{it.myth}</span>
                     </p>
                   </div>
                   <div className="grid gap-10 px-6 py-8 sm:px-10 sm:py-10 xl:grid-cols-2">
@@ -118,13 +118,13 @@ function Pivot() {
                     {i + 1} / {items.length}
                   </span>
                   {last ? (
-                    <Button asChild variant="coral" size="pill">
+                    <Button asChild variant="go" size="pill">
                       <Link to="/data">
                         {it.nextLabel ?? data.pivot["nextLabel"]} <ArrowRight className="size-4" />
                       </Link>
                     </Button>
                   ) : (
-                    <Button variant="coral" size="pill" onClick={() => go(i + 1)}>
+                    <Button variant="go" size="pill" onClick={() => go(i + 1)}>
                       {data.pivot["nextLabel"]} <ArrowRight className="size-4" />
                     </Button>
                   )}
