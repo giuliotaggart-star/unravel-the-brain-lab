@@ -45,7 +45,7 @@ function Prize() {
             <>
               <dl className="grid gap-6 sm:grid-cols-3">
                 {stats.map((x: any) => {
-                  const Icon = icons[x.label];
+                  const Icon = icons[x.label] ?? FileText;
                   return (
                     <div key={x.label} className="border-l-4 border-gold pl-4">
                       <dt className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gold-ink">
