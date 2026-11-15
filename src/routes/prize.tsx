@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Calendar, FileText, Trophy } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -36,14 +37,38 @@ function Prize() {
   return (
     <SidePage gold heading={fill(p.title)} tag={fill(p.prizeTag)} intro={p.intro}>
       <PSec title={p.detailsHeading}>
-        <dl className="grid gap-3 sm:grid-cols-2">
-          {p.details.map((x: any) => (
-            <div key={x.label} className="card-surface p-5">
-              <dt className="text-base font-bold text-go">{x.label}</dt>
-              <dd className="mt-1 text-base">{x.label === "Deadline" && !hasDeadline ? x.pending : fill(x.value)}</dd>
-            </div>
-          ))}
-        </dl>
+        {(() => {
+          const stats = p.details.filter((x: any) => ["Deadline", "Word count", "Prize"].includes(x.label));
+          const boxes = p.details.filter((x: any) => !["Deadline", "Word count", "Prize"].includes(x.label));
+          const icons: Record<string, typeof Calendar> = { Deadline: Calendar, "Word count": FileText, Prize: Trophy };
+          return (
+            <>
+              <dl className="grid gap-6 sm:grid-cols-3">
+                {stats.map((x: any) => {
+                  const Icon = icons[x.label];
+                  return (
+                    <div key={x.label} className="border-l-4 border-gold pl-4">
+                      <dt className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gold-ink">
+                        <Icon className="size-4" aria-hidden />{x.label}
+                      </dt>
+                      <dd className="mt-2 font-display-tight text-2xl font-medium leading-snug text-go">
+                        {x.label === "Deadline" && !hasDeadline ? x.pending : fill(x.value)}
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {boxes.map((x: any, i: number) => (
+                  <div key={x.label} className={cn("rounded-2xl border p-5", i % 2 === 0 ? "border-peri/30 bg-peri-soft" : "border-gold/40 bg-gold-soft")}>
+                    <p className="text-base font-bold text-go">{x.label}</p>
+                    <p className="mt-1 text-base">{fill(x.value)}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          );
+        })()}
         {p.rules.length > 0 && (
           <div className="pt-2"><p className="mb-2 font-bold">{p.rulesHeading}</p><Ticks items={p.rules.map((r: string) => fill(r))} /></div>
         )}
