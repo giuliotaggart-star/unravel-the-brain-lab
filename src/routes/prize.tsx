@@ -32,7 +32,7 @@ function Prize() {
   const hasDeadline = isText(cfg["essayDeadline"]) && cfg["essayDeadline"] !== "PLACEHOLDER";
   const text = () => p.sections.map((s: any) => `${s.label}\n${(draft[s.id] || "").trim()}`).join("\n\n");
   return (
-    <SidePage gold heading={fill(p.heading)} intro={p.intro}>
+    <SidePage gold heading={fill(p.title)} tag={fill(p.prizeTag)} intro={p.intro}>
       <PSec title={p.submitHeading}>
         {isUrl(cfg["essayFormUrl"]) ? (
           <Button asChild variant="gold" size="pill"><a href={cfg["essayFormUrl"]} target="_blank" rel="noopener">{p.submitLabel} ↗</a></Button>

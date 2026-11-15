@@ -2935,6 +2935,8 @@
  ],
  "prize": {
   "heading": "The {{prizeValue}} essay prize",
+  "title": "Essay competition",
+  "prizeTag": "{{prizeValue}} prize",
   "value": "£50",
   "wordsMin": 400,
   "wordsMax": 500,
@@ -3423,7 +3425,7 @@
    },
    {
     "id": "prize",
-    "label": "The competition",
+    "label": "Essay competition",
     "to": "/prize"
    },
    {
