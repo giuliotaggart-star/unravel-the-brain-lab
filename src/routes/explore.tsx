@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Download, ImageDown } from "lucide-react";
+import { Download, ImageDown, PenLine } from "lucide-react";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DonorPlot, StatsTable, type DonorPlotHandle } from "@/components/unravel/DonorPlot";
@@ -151,14 +151,29 @@ function Explore() {
           </div>
         )}
         </>)}
-        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-go/20 bg-go-soft/60 p-6 sm:flex-row sm:items-center sm:p-8">
-          <div>
-            <p className="font-display-tight text-2xl font-medium">{(ex as any).writeCta.heading}</p>
-            <p className="mt-1 text-muted-foreground">{(ex as any).writeCta.line}</p>
-          </div>
-          <Button asChild variant="go" size="pill"><Link to="/write">{(ex as any).writeCta.button} →</Link></Button>
-        </div>
       </PageWrap>
+
+      {/* The write-up reads as its own section: a lavender band, set well below the track options. */}
+      <section aria-labelledby="write-up-heading" className="relative mt-20 overflow-hidden border-y border-peri/25 bg-peri-soft sm:mt-28">
+        <div className="dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+        <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-12 sm:px-6 sm:py-16 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="flex items-start gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-go text-go-foreground shadow-card">
+              <PenLine className="size-5" aria-hidden />
+            </span>
+            <div>
+              <h2 id="write-up-heading" className="font-display-tight text-3xl font-bold tracking-tight text-go-ink sm:text-4xl">
+                {(ex as any).writeCta.heading}
+              </h2>
+              <p className="mt-2 max-w-xl text-lg leading-relaxed text-muted-foreground">{(ex as any).writeCta.line}</p>
+            </div>
+          </div>
+          <Button asChild variant="go" size="pill" className="w-full justify-center lg:w-auto">
+            <Link to="/write">{(ex as any).writeCta.button} →</Link>
+          </Button>
+        </div>
+      </section>
+
       <ChapterPager id="explore" />
     </div>
   );
