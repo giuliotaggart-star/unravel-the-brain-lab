@@ -1,9 +1,10 @@
 # Roadmap
 
 ## Open
-- Contact: real email address still placeholder (waiting on Giulio)
+- (none)
 
 ## Done
+- Contact: real email giulio.taggart@gmail.com replaces the placeholder
 - Solo explore: "Write up what you found" is now its own full-width lavender band section, set well below the track options
 - About: thread now runs from the school badge into the university badge (continuous, drawn underneath both)
 - About: bridge graphic moved directly under "Bridging the gap", all other info below it
