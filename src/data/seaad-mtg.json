@@ -255,6 +255,14 @@
    "Results",
    "Discussion"
   ],
+  "easyLearnedLabel": "What you just learned",
+  "easyLearned": [
+   "Every report opens by saying what is already known and what is still missing: the gap your study fills.",
+   "A hypothesis is a prediction you commit to before looking at the data, so the data can prove you wrong.",
+   "Methods say who was studied, what was measured and how, so anyone could repeat your work.",
+   "Results describe what the data shows. Each dot is one person, and the line marks the middle value.",
+   "A discussion says what the result means, and is honest about what it cannot prove."
+  ],
   "h0Explainer": "The starting assumption that there is no difference. The data has to give us a reason to drop it.",
   "predictingNull": "You are predicting the null hypothesis.",
   "lockWarning": "Choose a hypothesis first",

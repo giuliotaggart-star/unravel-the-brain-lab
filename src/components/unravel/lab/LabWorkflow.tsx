@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, Copy, ExternalLink, Lock, Save, Table2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Copy, ExternalLink, Lightbulb, Lock, Save, Table2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -113,6 +113,9 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
   const vars = labVars(cs, S, st.hyp);
   const i = st.step;
   const isLast = index === total - 1;
+  const easy = index === 0;
+  /** Easy level: keep the right answer plus one wrong one, in their original order. */
+  const trim = (opts: string[], correct: string) => (easy ? opts.filter((o) => o === correct || o === opts.find((x) => x !== correct)) : opts);
   const [table, setTable] = useState(false);
   const [showVerdict, setShowVerdict] = useState(st.revealed);
   const [lockWarn, setLockWarn] = useState(false);
@@ -263,7 +266,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
         <ReadingBlock delay={0.5}>
           <div className="space-y-3 rounded-2xl border border-coral/30 bg-coral-soft/50 p-4">
             <p className="font-semibold">{ck.question}</p>
-            <Segmented label={ck.question} options={ck.options.map((o) => ({ id: o, label: o }))} value={st.methodsPick} onChange={(id) => setSt((s) => ({ ...s, methodsPick: id, methodsOk: s.methodsOk || id === ck.correct }))} />
+            <Segmented label={ck.question} options={trim(ck.options, ck.correct).map((o) => ({ id: o, label: o }))} value={st.methodsPick} onChange={(id) => setSt((s) => ({ ...s, methodsPick: id, methodsOk: s.methodsOk || id === ck.correct }))} />
             {st.methodsPick && <Feedback good={st.methodsPick === ck.correct}>{st.methodsPick === ck.correct ? ck.right : ck.wrong}</Feedback>}
           </div>
         </ReadingBlock>
@@ -325,7 +328,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
         <ReadingBlock><CheckBlock cs={cs} S={S} mode={st.check} setMode={(m) => setSt((s) => ({ ...s, check: m }))} /></ReadingBlock>
         <ReadingBlock delay={0.08}>
           <NumberedBlock n={1} label={ui.discussion.conclusion}>
-            <Claim parts={D.claim.parts} vars={vars} values={st.claim} onPick={(b, v) => setSt((s) => ({ ...s, claim: { ...s.claim, [b]: v } }))} />
+            <Claim easy={easy} parts={D.claim.parts} vars={vars} values={st.claim} onPick={(b, v) => setSt((s) => ({ ...s, claim: { ...s.claim, [b]: v } }))} />
           </NumberedBlock>
         </ReadingBlock>
         <ReadingBlock delay={0.14}>
@@ -423,6 +426,20 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
       },
     };
   }
+
+  const learned: string | undefined = easy ? L.easyLearned?.[i] : undefined;
+  if (learned)
+    reading = (
+      <>
+        {reading}
+        <ReadingBlock delay={0.6}>
+          <div className="flex gap-3 rounded-2xl border-2 border-go/25 bg-go-soft/60 p-4">
+            <Lightbulb className="mt-0.5 size-5 shrink-0 text-go" />
+            <div><p className="font-bold text-go-ink">{L.easyLearnedLabel}</p><p className="mt-1 leading-relaxed">{learned}</p></div>
+          </div>
+        </ReadingBlock>
+      </>
+    );
 
   return (
     <div ref={top} className="scroll-mt-24">
@@ -568,7 +585,7 @@ function CheckBlock({ cs, S, mode, setMode }: { cs: CaseStudy; S: LabStats; mode
 }
 
 /* ---------- the claim: each blank an inline choice, with one line of feedback ---------- */
-function Claim({ parts, vars, values, onPick }: { parts: (string | ClaimBlank)[]; vars: Record<string, any>; values: Record<string, string>; onPick: (b: string, v: string) => void }) {
+function Claim({ easy, parts, vars, values, onPick }: { easy?: boolean; parts: (string | ClaimBlank)[]; vars: Record<string, any>; values: Record<string, string>; onPick: (b: string, v: string) => void }) {
   const blanks = parts.filter((p): p is ClaimBlank => typeof p !== "string");
   return (
     <div className="space-y-3">
@@ -578,7 +595,7 @@ function Claim({ parts, vars, values, onPick }: { parts: (string | ClaimBlank)[]
             <span key={j}>{fill(p, vars)}</span>
           ) : (
             <span key={j} className="mx-1 inline-flex flex-wrap gap-1 align-middle">
-              {p.options.map((o) => {
+              {(easy ? p.options.filter((o) => o === p.correct || o === p.options.find((x) => x !== p.correct)) : p.options).map((o) => {
                 const on = values[p.blank] === o;
                 const good = on && o === p.correct;
                 return (
