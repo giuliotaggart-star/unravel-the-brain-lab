@@ -3184,13 +3184,15 @@
  },
  "explore": {
   "heading": "Ask your own question",
-  "intro": "No task, no marks. Pick a launchpad or build your own question.",
+  "intro": "Pick your own data from our bioinformatic tool and build your own report!",
+  "steps": ["Pick a starting track", "Shape your question", "See the data"],
+  "pickNote": "Choose one of the three tracks to begin.",
   "explain": {
    "look": "1 dot = 1 donor. The thick line is the median. The box shows the middle half of donors (the IQR).",
    "shows": "The median is {{trend}} in {{lastGroup}} than in {{firstGroup}}.",
    "matters": "PLACEHOLDER"
   },
-  "cellLabel": "Pick a cell type",
+  "cellLabel": "Change the cell type",
   "writeCta": {
    "heading": "Write up what you found",
    "line": "Turn your findings into your own short report.",

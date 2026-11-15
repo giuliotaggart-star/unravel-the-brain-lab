@@ -33,6 +33,8 @@ function Explore() {
   const first = pads[0];
   const [sb, setSb] = useStored<Sb>("sandbox", { metric: first.metric, cellType: first.cellType, grouping: first.grouping });
   const [made, setMade] = useState(false);
+  const [picked, setPicked] = useState(false);
+  const stepTo = (id: string) => requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }));
   const plot = useRef<DonorPlotHandle>(null);
   const metrics = data.metrics.filter((m) => data.series.some((x) => x.metric === m.id));
   const cellsFor = (mid: string) => data.cellTypes.filter((c) => seriesOf(mid, c.id));
@@ -55,19 +57,23 @@ function Explore() {
     <div>
       <ChapterOpener id="explore" heading={ex.heading} intro={ex.intro} />
       <PageWrap className="mt-12 space-y-8">
-        <ul className="grid gap-3 md:grid-cols-3">
+        <StepHead n={1} title={ex.steps[0]} />
+        {!picked && <p className="-mt-4 text-base text-muted-foreground">{ex.pickNote}</p>}
+        <ul className="grid gap-4 md:grid-cols-3">
           {pads.map((p) => {
-            const on = p.metric === metric && p.cellType === cellType && p.grouping === grouping;
+            const on = picked && p.metric === metric && p.cellType === cellType && p.grouping === grouping;
             return (
               <li key={p.id}>
-                <button type="button" aria-pressed={on} onClick={() => set({ metric: p.metric, cellType: p.cellType, grouping: p.grouping })} className={cn("card-surface flex w-full flex-col gap-1 p-5 text-left transition-all hover:-translate-y-0.5 hover:shadow-lift", on && "border-peri ring-2 ring-peri/20")}>
+                <button type="button" aria-pressed={on} onClick={() => { set({ metric: p.metric, cellType: p.cellType, grouping: p.grouping }); setPicked(true); stepTo("ex-build"); }} className={cn("card-surface flex w-full flex-col gap-2 p-6 text-left transition-all hover:-translate-y-0.5 hover:shadow-lift", on && "border-peri ring-2 ring-peri/20")}>
                   <span className="kicker" style={{ color: `color-mix(in oklab, ${cellColourVar(p.cellType)} 80%, var(--foreground))` }}>{label(cellOf(p.cellType))}</span>
-                  <span className="font-semibold">{p.title}</span>
+                  <span className="text-xl font-bold">{p.title}</span>
                 </button>
               </li>
             );
           })}
         </ul>
+        {picked && (<>
+        <div id="ex-build" className="scroll-mt-24"><StepHead n={2} title={ex.steps[1]} /></div>
         <div className="card-surface space-y-6 p-6 sm:p-8">
           <p className="font-display-tight text-[clamp(1.3rem,2.6vw,1.9rem)] leading-[1.9]">
             {b.lead}
@@ -82,7 +88,7 @@ function Explore() {
             {b.end}
           </p>
           <div className="space-y-2">
-            <p className="kicker">{ex.cellLabel}</p>
+            <p className="text-base font-bold">{ex.cellLabel}</p>
             <div role="radiogroup" aria-label={ex.cellLabel} className="flex flex-wrap gap-2">
               {cellsFor(metric).map((c) => {
                 const on = c.id === cellType;
@@ -95,17 +101,18 @@ function Explore() {
             </div>
           </div>
         </div>
+        <StepHead n={3} title={ex.steps[2]} />
         {Q && (
           <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
             <figure className="card-surface min-w-0 space-y-4 p-5 sm:p-8">
               <figcaption className="font-display-tight text-2xl font-medium">{questionText(Q)}</figcaption>
-              {isText(Q.grouping.explainer) && <p className="text-sm text-muted-foreground">{Q.grouping.explainer}</p>}
+              {isText(Q.grouping.explainer) && <p className="text-base text-muted-foreground">{Q.grouping.explainer}</p>}
               <DonorPlot ref={plot} Q={Q} colour="groups" />
               <dl className="grid gap-4 border-t border-border pt-4 sm:grid-cols-3">
                 {(["look", "shows", "matters"] as const).map((k) => (
                   <div key={k}>
-                    <dt className="kicker">{lab.explainLabels[k]}</dt>
-                    <dd className="mt-1 text-sm leading-relaxed">{fill(ex.explain[k], vars)}</dd>
+                    <dt className="text-base font-bold text-go-ink">{lab.explainLabels[k]}</dt>
+                    <dd className="mt-1 text-base leading-relaxed">{fill(ex.explain[k], vars)}</dd>
                   </div>
                 ))}
               </dl>
@@ -128,9 +135,9 @@ function Explore() {
             </figure>
             <aside className="space-y-4">
               <div className="card-surface p-5">
-                <p className="kicker">{fill(lab.effectLabel, vars)}</p>
+                <p className="text-base font-bold">{fill(lab.effectLabel, vars)}</p>
                 <p className="font-display-tight mt-2 text-2xl font-medium">{!enoughDonors(Q) ? lab.tooFewLabel : !Number.isFinite(Q.fold) ? lab.noRatioLabel : foldWords(Q.fold)}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{!enoughDonors(Q) ? fill(lab.tooFewNote, { ...vars, minDonors: String(minDonors()) }) : !Number.isFinite(Q.fold) ? fill(lab.noRatioNote, vars) : fill(lab.effectNote, vars)}</p>
+                <p className="mt-2 text-base text-muted-foreground">{!enoughDonors(Q) ? fill(lab.tooFewNote, { ...vars, minDonors: String(minDonors()) }) : !Number.isFinite(Q.fold) ? fill(lab.noRatioNote, vars) : fill(lab.effectNote, vars)}</p>
               </div>
               <Button variant="coral" size="pill" className="w-full" onClick={() => save(true)}><ImageDown className="size-4" /> {lab.snapshotLabel}</Button>
               <Button variant="soft" size="pill" className="w-full" onClick={() => save(false)}><Download className="size-4" /> {lab.exportLabel}</Button>
@@ -143,6 +150,7 @@ function Explore() {
             </aside>
           </div>
         )}
+        </>)}
         <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-go/20 bg-go-soft/60 p-6 sm:flex-row sm:items-center sm:p-8">
           <div>
             <p className="font-display-tight text-2xl font-medium">{(ex as any).writeCta.heading}</p>
@@ -153,5 +161,14 @@ function Explore() {
       </PageWrap>
       <ChapterPager id="explore" />
     </div>
+  );
+}
+
+function StepHead({ n, title }: { n: number; title: string }) {
+  return (
+    <h2 className="flex items-center gap-3 text-2xl font-bold tracking-tight sm:text-3xl">
+      <span className="inline-flex size-9 items-center justify-center rounded-full bg-go text-base text-primary-foreground">{n}</span>
+      {title}
+    </h2>
   );
 }
