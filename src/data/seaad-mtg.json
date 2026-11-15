@@ -3378,13 +3378,12 @@
     "pathHeading": "Your report, step by step",
     "skipHeading": "Or skip ahead",
     "exploreNote": "A free-roaming tool. Use it any time.",
-    "headingSub": "University research for A-level students",
-    "graphicFrom": "A-level",
-    "graphicTo": "University research",
+    "graphicFrom": "School work",
+    "graphicTo": "University",
     "introLead": "Unravel offers a simplified version of a university report in biology, specifically",
     "introTerm": "bioinformatics",
     "termExplainer": "A fancy word for working with biology data.",
-    "breakdown": "We break down scientific reports from start to finish, showing the different stages of data collection, analysis and interpretation.",
+    "breakdown": "We break down every step of a scientific report, from data collection to analysis and interpretation.",
     "benefitsHeading": "The benefits",
     "points": [
       "Early exposure to bioinformatics, simplified",
@@ -3393,7 +3392,9 @@
     ],
     "toolsHeading": "Our tools",
     "startHere": "Start here",
-    "ucasNote": "Where this could take you next."
+    "ucasNote": "Where this could take you next.",
+    "builtBy": "Built and based off an Imperial student",
+    "builtByOrg": "Imperial College London"
   },
   "journey": {
     "groups": [

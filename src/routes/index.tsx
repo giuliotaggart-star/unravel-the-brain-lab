@@ -31,7 +31,7 @@ function Home() {
         <h1 className="leading-[0.85]">
           <Brand className="block text-[clamp(4.5rem,17vw,12.5rem)]" />
         </h1>
-        <Thread untie className="max-w-xl" />
+        <Thread className="max-w-xl" />
         <p className="font-display-tight mt-6 max-w-2xl text-[clamp(1.5rem,3.4vw,2.4rem)] font-normal leading-tight text-foreground">{data.hero["homeLine"]}</p>
         <Button asChild variant="go" size="pill" className="mt-10 h-12 px-8 text-base">
           <Link to="/about">
