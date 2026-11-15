@@ -3049,6 +3049,10 @@
     "value": "A strict maximum of {{wordsMax}} words. Entries over {{wordsMax}} words will not be marked."
    },
    {
+    "label": "No AI",
+    "value": "Your report must be written by you. Essays written or rewritten by AI tools will be disqualified."
+   },
+   {
     "label": "Prize",
     "value": "Winners receive a {{prizeValue}} voucher. Every entry gets personal feedback."
    }
