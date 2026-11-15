@@ -32,5 +32,5 @@ use the editor.
 ## Project rules
 - All site copy and data are read from `src/data/seaad-mtg.json` through `src/lib/unravel/data.ts`; components never hardcode content, so the authors can edit one file.
 - Donor statistics live in `src/lib/unravel/stats.ts`, ported unchanged from the original app so lab verdicts match the source.
-- Navigation: 4 groups from `journey` in the JSON live in the Menu sheet; practice steps are numbered except `standalone` ones (Solo explore); About is the hub, not a step.
-- Student progress (poll, lab, essay, findings) stays in localStorage only, matching the site's no-tracking privacy promise.
+- Navigation: 5 groups from `journey` in the JSON live in the Menu sheet; practice steps are numbered except `standalone` ones (Solo explore); About is the hub, not a step.
+- Student progress (poll, lab, essay, findings) stays in localStorage; the only exception is poll results, which are sent to the optional `pollEndpoint` from the JSON config when set, with a notice shown, matching the site's no-tracking privacy promise.
