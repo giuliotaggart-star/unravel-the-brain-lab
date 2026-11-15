@@ -3190,7 +3190,12 @@
    "shows": "The median is {{trend}} in {{lastGroup}} than in {{firstGroup}}.",
    "matters": "PLACEHOLDER"
   },
-  "cellLabel": "Pick a cell type"
+  "cellLabel": "Pick a cell type",
+  "writeCta": {
+   "heading": "Write up what you found",
+   "line": "Turn your findings into your own short report.",
+   "button": "Open the report writer"
+  }
  },
  "further": {
   "heading": "Take it further",
@@ -3468,5 +3473,35 @@
   ],
   "emailLabel": "Email",
   "email": "your-email@example.com"
+ },
+ "write": {
+  "heading": "Write your report",
+  "intro": "Use what you found in Solo explore. Your writing stays on this device.",
+  "placeholder": "Start with your question, then what the data showed…",
+  "font": "Font",
+  "fonts": [
+   {
+    "label": "Sans",
+    "value": "Plus Jakarta Sans, sans-serif"
+   },
+   {
+    "label": "Serif",
+    "value": "Georgia, serif"
+   },
+   {
+    "label": "Mono",
+    "value": "ui-monospace, monospace"
+   }
+  ],
+  "bold": "Bold",
+  "italic": "Italic",
+  "underline": "Underline",
+  "bullets": "Bullet points",
+  "numbered": "Numbered list",
+  "heading2": "Heading",
+  "clear": "Clear",
+  "copy": "Copy text",
+  "back": "Back to Solo explore",
+  "words": "{{count}} words"
  }
 }

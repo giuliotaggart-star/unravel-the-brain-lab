@@ -21,6 +21,7 @@ import { Route as PrizeRouteImport } from './routes/prize'
 import { Route as TeachersRouteImport } from './routes/teachers'
 import { Route as UcasRouteImport } from './routes/ucas'
 import { Route as WhatDementiaIsRouteImport } from './routes/what-dementia-is'
+import { Route as WriteRouteImport } from './routes/write'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -82,6 +83,11 @@ const WhatDementiaIsRoute = WhatDementiaIsRouteImport.update({
   path: '/what-dementia-is',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WriteRoute = WriteRouteImport.update({
+  id: '/write',
+  path: '/write',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/teachers': typeof TeachersRoute
   '/ucas': typeof UcasRoute
   '/what-dementia-is': typeof WhatDementiaIsRoute
+  '/write': typeof WriteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/teachers': typeof TeachersRoute
   '/ucas': typeof UcasRoute
   '/what-dementia-is': typeof WhatDementiaIsRoute
+  '/write': typeof WriteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/teachers': typeof TeachersRoute
   '/ucas': typeof UcasRoute
   '/what-dementia-is': typeof WhatDementiaIsRoute
+  '/write': typeof WriteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/teachers'
     | '/ucas'
     | '/what-dementia-is'
+    | '/write'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/teachers'
     | '/ucas'
     | '/what-dementia-is'
+    | '/write'
   id:
     | '__root__'
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/teachers'
     | '/ucas'
     | '/what-dementia-is'
+    | '/write'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   TeachersRoute: typeof TeachersRoute
   UcasRoute: typeof UcasRoute
   WhatDementiaIsRoute: typeof WhatDementiaIsRoute
+  WriteRoute: typeof WriteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhatDementiaIsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/write': {
+      id: '/write'
+      path: '/write'
+      fullPath: '/write'
+      preLoaderRoute: typeof WriteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeachersRoute: TeachersRoute,
   UcasRoute: UcasRoute,
   WhatDementiaIsRoute: WhatDementiaIsRoute,
+  WriteRoute: WriteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -143,6 +143,13 @@ function Explore() {
             </aside>
           </div>
         )}
+        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-go/20 bg-go-soft/60 p-6 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <p className="font-display-tight text-2xl font-medium">{(ex as any).writeCta.heading}</p>
+            <p className="mt-1 text-muted-foreground">{(ex as any).writeCta.line}</p>
+          </div>
+          <Button asChild variant="go" size="pill"><Link to="/write">{(ex as any).writeCta.button} →</Link></Button>
+        </div>
       </PageWrap>
       <ChapterPager id="explore" />
     </div>
