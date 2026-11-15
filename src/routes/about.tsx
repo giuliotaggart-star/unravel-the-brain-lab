@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Compass, GraduationCap, Landmark, Monitor, School, Sparkles, Trophy, Users } from "lucide-react";
 import { PageWrap } from "@/components/unravel/Shell";
+import imperialLogo from "@/assets/imperial_logo.png.asset.json";
 import { groups, steps } from "@/lib/unravel/chapters";
 import { data, fill } from "@/lib/unravel/data";
 
@@ -69,13 +70,6 @@ function About() {
           <div className="mt-10 grid items-center gap-10 lg:grid-cols-[auto_1fr] lg:gap-14">
             <div className="flex flex-col items-center gap-8">
               <BridgeGraphic from={a.graphicFrom} to={a.graphicTo} />
-              <div className="flex items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3 shadow-card">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-foreground font-display-tight text-lg font-semibold text-background" aria-hidden>I</span>
-                <span className="leading-tight">
-                  <span className="block text-sm font-semibold">{a.builtBy}</span>
-                  <span className="block text-xs text-muted-foreground">{a.builtByOrg}</span>
-                </span>
-              </div>
             </div>
             <div className="max-w-2xl">
               <p className="text-lg leading-relaxed sm:text-xl">
@@ -97,6 +91,18 @@ function About() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-card">
+                <img src={imperialLogo.url} alt="Imperial College London" className="h-8 w-auto shrink-0" />
+                <span className="leading-tight">
+                  <span className="block text-sm font-semibold">
+                    {a.builtByLead}{" "}
+                    <Link to="/contact" className="text-go-ink underline decoration-go/50 underline-offset-2 transition-colors hover:decoration-go">
+                      {a.builtByLink}
+                    </Link>
+                  </span>
+                  <span className="block text-xs text-muted-foreground">{a.builtByOrg}</span>
+                </span>
+              </div>
             </div>
           </div>
         </PageWrap>

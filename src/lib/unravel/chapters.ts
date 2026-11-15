@@ -1,7 +1,7 @@
 import { data } from "./data";
 
 export type ChapterPath = "/about" | "/poll" | "/what-dementia-is" | "/data" | "/lab" | "/explore";
-export type GroupPath = "/about" | "/prize" | "/ucas" | "/teachers";
+export type GroupPath = "/about" | "/prize" | "/ucas" | "/teachers" | "/contact";
 
 const PATHS: Record<string, ChapterPath> = {
   about: "/about",
