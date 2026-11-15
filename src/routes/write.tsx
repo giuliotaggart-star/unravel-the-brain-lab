@@ -3,7 +3,7 @@ import { Bold, Heading2, Italic, List, ListOrdered, Underline } from "lucide-rea
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { SidePage } from "@/components/unravel/SidePage";
+import { SidePage, Ticks } from "@/components/unravel/SidePage";
 import { data, fill } from "@/lib/unravel/data";
 import { store } from "@/lib/unravel/store";
 
@@ -48,7 +48,8 @@ function Write() {
   const btn = "inline-flex size-9 items-center justify-center rounded-lg transition-colors hover:bg-peri-soft aria-pressed:bg-go aria-pressed:text-primary-foreground";
   return (
     <SidePage heading={w.heading} intro={w.intro}>
-      <div className="card-surface overflow-hidden">
+      <div className="grid gap-6 lg:grid-cols-[1fr_260px]">
+      <div className="card-surface min-w-0 overflow-hidden">
         <div role="toolbar" aria-label={w.heading} className="flex flex-wrap items-center gap-1 border-b border-border bg-surface p-2">
           <label className="sr-only" htmlFor="font">{w.font}</label>
           <select id="font" onChange={(e) => cmd("fontName", e.target.value)} className="mr-2 rounded-lg border border-border bg-card px-2 py-1.5 text-sm">
@@ -77,6 +78,8 @@ function Write() {
             <Button variant="quiet" size="pillSm" onClick={() => { if (ed.current) ed.current.innerHTML = ""; sync(); }}>{w.clear}</Button>
           </div>
         </div>
+      </div>
+      <aside className="card-surface h-fit space-y-3 p-5"><p className="kicker">{w.tipsHeading}</p><Ticks items={w.tips} /></aside>
       </div>
       <Link to="/explore" className="text-sm font-semibold text-peri-ink hover:underline">← {w.back}</Link>
     </SidePage>

@@ -3476,7 +3476,7 @@
  },
  "write": {
   "heading": "Write your report",
-  "intro": "Use what you found in Solo explore. Your writing stays on this device.",
+  "intro": "A free space to practise writing up what you found. Your writing stays on this device.",
   "placeholder": "Start with your question, then what the data showed…",
   "font": "Font",
   "fonts": [
@@ -3502,6 +3502,15 @@
   "clear": "Clear",
   "copy": "Copy text",
   "back": "Back to Solo explore",
-  "words": "{{count}} words"
+  "words": "{{count}} words",
+  "tipsHeading": "Key tips",
+  "tips": [
+   "Start with your question: which measure, which cell type, which grouping.",
+   "Say what the data showed in one clear sentence, using the median.",
+   "Give the numbers: how many donors, and how big the difference was.",
+   "Be careful with words: the data shows a link, not proof of a cause.",
+   "Finish with what it might mean and one thing you would test next.",
+   "Short sentences. One idea per paragraph."
+  ]
  }
 }
