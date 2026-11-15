@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { GraduationCap, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { PSec, SidePage } from "@/components/unravel/SidePage";
 import { data } from "@/lib/unravel/data";
 import imperialLogo from "@/assets/imperial_logo.png.asset.json";
@@ -20,30 +20,39 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const c = (data as any).contact;
+  const bio: string[] = Array.isArray(c.bio) ? c.bio : [c.bio];
   return (
     <SidePage heading={c.heading} intro={c.intro}>
       <PSec>
-        <div className="card-surface flex flex-col gap-6 p-6 sm:flex-row sm:items-start sm:p-8">
-          <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-go text-go-foreground shadow-lift">
-            <GraduationCap className="size-8" aria-hidden />
-          </span>
-          <div className="space-y-3">
+        <div className="card-surface overflow-hidden">
+          <div className="flex items-center justify-center border-b border-border bg-card px-6 py-12 sm:py-16">
+            <img src={imperialLogo.url} alt="Imperial College London" className="h-24 w-auto sm:h-32" />
+          </div>
+          <div className="space-y-5 p-6 sm:p-8">
             <div>
-              <p className="font-display-tight text-2xl font-semibold text-go-ink">{c.name}</p>
-              <p className="text-sm text-muted-foreground">{c.role}</p>
+              <p className="font-display-tight text-2xl font-semibold text-go-ink sm:text-3xl">{c.name}</p>
+              <p className="mt-1.5 text-base leading-snug text-muted-foreground sm:text-lg">{c.role}</p>
             </div>
-            <p className="leading-relaxed">{c.bio}</p>
-            <img src={imperialLogo.url} alt="Imperial College London" className="h-7 w-auto" />
+            <div className="space-y-4">
+              {bio.map((p) => (
+                <p key={p} className="text-lg leading-relaxed">
+                  {p}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </PSec>
       <PSec title={c.emailLabel}>
         <a
           href={`mailto:${c.email}`}
-          className="card-surface inline-flex items-center gap-3 px-5 py-4 font-semibold text-go-ink transition-all hover:-translate-y-0.5 hover:border-go/50"
+          className="card-surface flex items-center justify-between gap-4 px-6 py-5 text-lg font-semibold text-go-ink transition-all hover:-translate-y-0.5 hover:border-go/50"
         >
-          <Mail className="size-5" aria-hidden />
-          {c.email}
+          <span className="flex items-center gap-3">
+            <Mail className="size-5" aria-hidden />
+            {c.email}
+          </span>
+          <ArrowRight className="size-5 shrink-0 text-muted-foreground" aria-hidden />
         </a>
       </PSec>
     </SidePage>

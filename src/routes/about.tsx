@@ -91,16 +91,16 @@ function About() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-card">
-                <img src={imperialLogo.url} alt="Imperial College London" className="h-8 w-auto shrink-0" />
+              <div className="mt-8 flex flex-col items-center gap-6 rounded-3xl border border-peri/30 bg-card px-6 py-8 text-center shadow-lift sm:flex-row sm:gap-9 sm:px-9 sm:text-left">
+                <img src={imperialLogo.url} alt="Imperial College London" className="h-20 w-auto shrink-0 sm:h-24" />
                 <span className="leading-tight">
-                  <span className="block text-sm font-semibold">
+                  <span className="block text-lg font-semibold sm:text-xl">
                     {a.builtByLead}{" "}
                     <Link to="/contact" className="text-go-ink underline decoration-go/50 underline-offset-2 transition-colors hover:decoration-go">
                       {a.builtByLink}
                     </Link>
                   </span>
-                  <span className="block text-xs text-muted-foreground">{a.builtByOrg}</span>
+                  <span className="mt-1 block text-sm text-muted-foreground">{a.builtByOrg}</span>
                 </span>
               </div>
             </div>

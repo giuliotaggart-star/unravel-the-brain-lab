@@ -3461,8 +3461,11 @@
   "heading": "The student behind Unravel",
   "intro": "Unravel was built and is based off an Imperial College London student.",
   "name": "Giulio Taggart",
-  "role": "Student, Imperial College London",
-  "bio": "Add a short bio here — what you study, why you built Unravel, and what you want students to get from it.",
+  "role": "Fourth and Final-year Biological Sciences BSc student at Imperial College London.",
+  "bio": [
+   "I built Unravel because of two main things that I was not prepared for at university. One, learning how to write scientific reports. Two, understanding that a degree in Biology does not mean a career in the lab.",
+   "I want to help equip students for the transition into scientific writing and show them the power of computational Biology."
+  ],
   "emailLabel": "Email",
   "email": "your-email@example.com"
  }
