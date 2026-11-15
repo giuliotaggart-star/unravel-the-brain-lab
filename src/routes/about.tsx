@@ -23,11 +23,13 @@ export const Route = createFileRoute("/about")({
 function BridgeGraphic({ from, to }: { from: string; to: string }) {
   return (
     <div className="relative flex w-[320px] justify-between" aria-hidden>
-      {/* Fixed 1:1 drawing box: the thread runs underneath both badges, so it reads as
-          leaving the school badge and entering the university one */}
+      {/* Both badges are present from the start. The thread leaves the school badge and
+          stops at the university badge's border (x=280 is its left edge); only then does
+          the white building pop up inside the purple badge. */}
       <svg viewBox="0 0 320 80" fill="none" className="absolute inset-x-0 top-0 h-[80px] w-full">
         <motion.path
-          d="M10 40 C 60 8, 100 72, 160 40 S 260 8, 310 40"
+          d="M40 40 C 100 8, 150 72, 210 40 S 265 14, 280 40"
+          pathLength={1}
           stroke="var(--coral)"
           strokeWidth="3.5"
           strokeLinecap="round"
@@ -45,14 +47,16 @@ function BridgeGraphic({ from, to }: { from: string; to: string }) {
       </div>
 
       <div className="relative z-10 flex flex-col items-center gap-2">
-        <motion.span
-          initial={{ scale: 0.85, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 1.85, type: "spring", stiffness: 220, damping: 16 }}
-          className="flex size-16 items-center justify-center rounded-2xl bg-go text-go-foreground shadow-lift sm:size-20"
-        >
-          <Landmark className="size-7 sm:size-8" />
-        </motion.span>
+        <span className="flex size-16 items-center justify-center rounded-2xl bg-go text-go-foreground shadow-lift sm:size-20">
+          <motion.span
+            initial={{ scale: 0.4, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 2.15, type: "spring", stiffness: 260, damping: 14 }}
+            className="flex"
+          >
+            <Landmark className="size-7 sm:size-8" />
+          </motion.span>
+        </span>
         <span className="kicker !text-go-ink">{to}</span>
       </div>
     </div>
