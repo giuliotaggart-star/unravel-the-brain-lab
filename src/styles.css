@@ -65,6 +65,13 @@
   --color-good: var(--good);
   --color-good-soft: var(--good-soft);
   --color-surface: var(--surface);
+  --color-go: var(--go);
+  --color-go-soft: var(--go-soft);
+  --color-go-ink: var(--go-ink);
+  --color-go-foreground: var(--go-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-ink: var(--gold-ink);
 
   --shadow-card: var(--shadow-card);
   --shadow-lift: var(--shadow-lift);
@@ -99,6 +106,15 @@
   --peri: oklch(0.585 0.204 277.1);                 /* #6366F1 */
   --peri-soft: oklch(0.962 0.025 272.3);
   --peri-ink: oklch(0.5 0.2 277.1);
+  /* "go": the one colour that always means "this is your next move" */
+  --go: oklch(0.52 0.1 192);
+  --go-soft: oklch(0.96 0.025 192);
+  --go-ink: oklch(0.42 0.09 192);
+  --go-foreground: oklch(0.99 0.005 192);
+  /* gold: always and only the competition */
+  --gold: oklch(0.76 0.14 80);
+  --gold-soft: oklch(0.97 0.04 88);
+  --gold-ink: oklch(0.5 0.1 70);
   --good: oklch(0.56 0.12 160);
   --good-soft: oklch(0.965 0.03 160);
 

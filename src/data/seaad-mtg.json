@@ -63,7 +63,9 @@
     "checkCount": "{{count}} PLACEHOLDER on this page",
     "checkVideoMissing": "Video file missing: {{src}}",
     "skip": "Skip to the content",
-    "progress": "How far down the page you are"
+    "progress": "How far down the page you are",
+    "next": "Next",
+    "about": "About"
   },
   "nav": {
     "prize": "£50 essay prize",
@@ -3359,8 +3361,8 @@
     }
   ],
   "about": {
-    "heading": "Bridging the Gap: University Research for A-Level Minds.",
-    "mission": "Unravel simulates real Alzheimer's and dementia university research reports and breaks them down into digestible pieces, easing you into bioinformatics, data analysis and academic writing one step at a time.",
+    "heading": "Bridging the gap: university research for A-level students",
+    "mission": "Unravel simulates a simplified university report using real Alzheimer's data. It is broken down into digestible pieces to ease you through bioinformatics, data analysis and academic writing.",
     "cards": [
       {
         "title": "Report Simulation",
@@ -3369,14 +3371,15 @@
       {
         "title": "Bioinformatics & Data",
         "body": "Early exposure to how scientists analyse real dementia data."
-      },
-      {
-        "title": "Competitions & Careers",
-        "body": "Our essay competition, plus guidance on scientific career pathways."
       }
     ],
-    "cta": "Try the Simulation",
-    "kicker": "About Unravel"
+    "cta": "Get started on practising your report",
+    "kicker": "About Unravel",
+    "headingLead": "Bridging the gap",
+    "headingAccent": "University research for A-level students",
+    "pathHeading": "Your report, step by step",
+    "skipHeading": "Or skip ahead",
+    "exploreNote": "A free-roaming tool. Use it any time."
   },
   "journey": {
     "groups": [
@@ -3403,12 +3406,6 @@
     ],
     "steps": [
       {
-        "name": "About",
-        "sections": [
-          "about"
-        ]
-      },
-      {
         "name": "Understanding dementia",
         "sections": [
           "poll",
@@ -3431,8 +3428,11 @@
         "name": "Solo explore",
         "sections": [
           "explore"
-        ]
+        ],
+        "standalone": true
       }
-    ]
+    ],
+    "homeHeading": "Where to go",
+    "homeHint": "Scroll to see everything"
   }
 }

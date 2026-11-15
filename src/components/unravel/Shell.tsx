@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Menu } from "lucide-react";
+import { ArrowRight, Compass, Menu, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -41,91 +41,108 @@ function useScrollProgress() {
   return p;
 }
 
+const isGold = (g: Group) => g.id === "prize";
+
+/** The full site map: the four parts, with the practice steps under the first. Used by the menu and the About page. */
+export function SiteMap({ onPick, current }: { onPick?: () => void; current?: string }) {
+  return (
+    <ol className="space-y-2">
+      {groups.map((g, i) => (
+        <li key={g.id}>
+          <Link
+            to={g.to}
+            onClick={onPick}
+            className={cn(
+              "flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors",
+              isGold(g) ? "border-gold/50 bg-gold-soft hover:bg-gold/25" : g.id === "practice" ? "border-go/30 bg-go-soft hover:bg-go/15" : "border-border bg-card hover:bg-muted",
+            )}
+          >
+            <span className={cn("font-mono text-xs", isGold(g) ? "text-gold-ink" : g.id === "practice" ? "text-go-ink" : "text-muted-foreground")}>{i + 1}</span>
+            <span className="font-semibold">{g.label}</span>
+            {isGold(g) && <Trophy className="ml-auto size-4 text-gold-ink" aria-hidden />}
+          </Link>
+          {g.id === "practice" && (
+            <ol className="ml-6 mt-1.5 space-y-0.5 border-l-2 border-go/25 pl-3">
+              {steps.map((st) => (
+                <li key={st.name}>
+                  <Link to={st.to} onClick={onPick} className={cn("flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted", current === st.to ? "font-semibold text-foreground" : "text-muted-foreground", st.standalone && "mt-1.5 border-t border-dashed border-border pt-2.5")}>
+                    {st.standalone ? <Compass className="size-3.5 text-peri-ink" aria-hidden /> : <span className="font-mono text-[0.7rem]">{st.n}</span>}
+                    {st.name}
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          )}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 export function SiteHeader() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const current = chapters.find((c) => c.to === path);
   const inPractice = !!current;
   const progress = useScrollProgress();
   const [open, setOpen] = useState(false);
-  const groupOn = (g: Group) => (g.id === "practice" ? inPractice : path === g.to);
+  const numbered = steps.filter((s) => !s.standalone);
+  const solo = steps.find((s) => s.standalone);
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/85 backdrop-blur-md">
       <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-card focus:px-4 focus:py-2 focus:shadow-lift">
         {ui("skip")}
       </a>
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="relative inline-block shrink-0 pb-2 text-xl leading-none" aria-label={data.meta.title}>
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="relative inline-block shrink-0 pb-3 text-xl leading-none" aria-label={data.meta.title}>
           <Brand />
-          <Thread small delay={0.1} className="absolute inset-x-0 -bottom-1.5 h-3" />
+          <Thread small delay={0.1} className="absolute -bottom-1 left-0 w-full" />
         </Link>
-        <nav aria-label={ui("sections")} className="mx-auto hidden md:block">
-          <ol className="flex items-center gap-1">
-            {groups.map((g, i) => {
-              const on = groupOn(g);
-              return (
-                <li key={g.id}>
-                  <Link to={g.to} aria-current={on ? "page" : undefined} className={cn("relative flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors", on ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>
-                    {on && <motion.span layoutId="group-pill" className="absolute inset-0 rounded-full bg-peri-soft ring-1 ring-peri/25" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
-                    <span className={cn("relative font-mono text-[0.7rem]", on ? "text-peri-ink" : "text-muted-foreground/70")}>{i + 1}</span>
-                    <span className="relative whitespace-nowrap">{g.label}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ol>
-        </nav>
+        <Link
+          to="/about"
+          className={cn("ml-4 rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors", path === "/about" ? "bg-go text-go-foreground" : "text-foreground hover:bg-muted")}
+        >
+          {ui("about")}
+        </Link>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <button type="button" className="ml-auto flex h-10 items-center gap-2 rounded-full border border-border bg-card px-4 text-sm font-medium shadow-card md:hidden">
+            <button type="button" className="ml-auto flex h-10 items-center gap-2 rounded-full border border-border bg-card px-4 text-sm font-semibold shadow-card transition-colors hover:border-go/40">
               <Menu className="size-4" aria-hidden />
               {ui("menu")}
             </button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[88vw] max-w-sm border-border bg-background p-0">
             <SheetTitle className="sr-only">{ui("menu")}</SheetTitle>
-            <div className="flex h-full flex-col overflow-y-auto p-6">
-              <ol className="space-y-1">
-                {groups.map((g, i) => (
-                  <li key={g.id}>
-                    <Link to={g.to} onClick={() => setOpen(false)} className={cn("flex items-baseline gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-muted", groupOn(g) && "bg-peri-soft")}>
-                      <span className="font-mono text-xs text-muted-foreground">{i + 1}</span>
-                      <span className="font-semibold">{g.label}</span>
-                    </Link>
-                    {g.id === "practice" && (
-                      <ol className="ml-7 mt-1 space-y-0.5 border-l border-border pl-3">
-                        {steps.map((st, j) => (
-                          <li key={st.n}>
-                            <Link to={st.to} onClick={() => setOpen(false)} className={cn("block rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted", current?.step === j ? "font-semibold text-foreground" : "text-muted-foreground")}>
-                              {st.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ol>
-                    )}
-                  </li>
-                ))}
-              </ol>
+            <div className="flex h-full flex-col overflow-y-auto p-6 pt-14">
+              <SiteMap onPick={() => setOpen(false)} current={path} />
             </div>
           </SheetContent>
         </Sheet>
       </div>
       {inPractice && (
         <div className="border-t border-border/60">
-          <ol className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-1.5 sm:px-6 lg:px-8">
-            {steps.map((st, j) => {
-              const on = current?.step === j;
-              const done = (current?.step ?? -1) > j;
-              return (
-                <li key={st.n} className="flex shrink-0 items-center">
-                  {j > 0 && <span className={cn("mx-1 h-px w-4 sm:w-8", done || on ? "bg-coral/60" : "bg-border")} aria-hidden />}
-                  <Link to={st.to} aria-current={on ? "step" : undefined} className={cn("flex items-center gap-2 rounded-full px-2.5 py-1 text-[0.8rem] font-medium transition-colors", on ? "bg-card text-foreground shadow-card ring-1 ring-border" : "text-muted-foreground hover:text-foreground")}>
-                    <span className={cn("font-mono text-[0.7rem]", on ? "text-peri-ink" : done ? "text-coral" : "text-muted-foreground/70")}>{st.n}</span>
-                    <span className="whitespace-nowrap">{st.name}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ol>
+          <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-1.5 sm:px-6 lg:px-8">
+            <ol className="flex items-center gap-1">
+              {numbered.map((st, j) => {
+                const on = current?.step === steps.indexOf(st);
+                const done = !current?.standalone && (current?.step ?? -1) > steps.indexOf(st);
+                return (
+                  <li key={st.n} className="flex shrink-0 items-center">
+                    {j > 0 && <span className={cn("mx-1 h-px w-4 sm:w-8", done || on ? "bg-go/60" : "bg-border")} aria-hidden />}
+                    <Link to={st.to} aria-current={on ? "step" : undefined} className={cn("flex items-center gap-2 rounded-full px-3 py-1 text-[0.8rem] font-semibold transition-colors", on ? "bg-go text-go-foreground shadow-card" : "text-muted-foreground hover:text-foreground")}>
+                      <span className={cn("font-mono text-[0.7rem]", on ? "text-go-foreground/80" : done ? "text-go-ink" : "text-muted-foreground/70")}>{st.n}</span>
+                      <span className="whitespace-nowrap">{st.name}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ol>
+            {solo && (
+              <Link to={solo.to} aria-current={current?.standalone ? "page" : undefined} className={cn("ml-auto flex shrink-0 items-center gap-2 rounded-full border px-3 py-1 text-[0.8rem] font-semibold transition-colors", current?.standalone ? "border-peri bg-peri text-primary-foreground" : "border-peri/30 bg-peri-soft text-peri-ink hover:border-peri/60")}>
+                <Compass className="size-3.5" aria-hidden />
+                <span className="whitespace-nowrap">{solo.name}</span>
+              </Link>
+            )}
+          </div>
         </div>
       )}
       <div className="h-[3px] w-full bg-transparent" role="progressbar" aria-label={ui("progress")} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
@@ -199,7 +216,11 @@ export function ChapterOpener({ id, heading, intro, children }: { id: string; he
       <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-14 sm:px-6 sm:pt-20 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
           <div className="flex items-center gap-3">
-            <span className="flex h-8 min-w-8 items-center justify-center rounded-lg border border-coral/40 bg-card px-2 font-mono text-sm text-coral-ink">{c.n}</span>
+            {c.standalone ? (
+              <span className="flex h-8 items-center gap-1.5 rounded-lg bg-peri-soft px-2.5 text-sm font-semibold text-peri-ink"><Compass className="size-4" aria-hidden />{c.name}</span>
+            ) : (
+              <span className="flex h-8 min-w-8 items-center justify-center rounded-lg bg-go px-2 font-mono text-sm text-go-foreground">{c.n}</span>
+            )}
             {c.kicker && <span className="kicker">{c.kicker}</span>}
             <span className="h-px flex-1 bg-border" aria-hidden />
             <span className="kicker hidden sm:inline">{c.name}</span>
@@ -219,41 +240,31 @@ export function ChapterOpener({ id, heading, intro, children }: { id: string; he
   );
 }
 
-/** Previous / next chapter cards at the foot of every chapter. */
+/** One way forward: a filled "Next" card. Going back is via About in the header. */
 export function ChapterPager({ id }: { id: string }) {
   const i = chapterIndex(id);
-  const prev: Chapter | undefined = chapters[i - 1];
   const next: Chapter | undefined = chapters[i + 1];
+  const prize = groups.find(isGold);
+  const card = "group flex w-full items-center justify-between gap-4 rounded-2xl p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-lift sm:max-w-md";
   return (
-    <nav aria-label={ui("sections")} className="mx-auto mt-20 grid max-w-7xl gap-4 px-4 sm:grid-cols-2 sm:px-6 lg:px-8">
-      {prev ? (
-        <Link to={prev.to} className="card-surface group flex items-center gap-4 p-5 transition-all hover:-translate-y-0.5 hover:shadow-lift">
-          <ArrowLeft className="size-5 text-muted-foreground transition-transform group-hover:-translate-x-1" aria-hidden />
-          <span>
-            <span className="kicker block">{prev.n}</span>
-            <span className="font-semibold">{prev.name}</span>
-          </span>
-        </Link>
-      ) : (
-        <span />
-      )}
+    <nav aria-label={ui("sections")} className="mx-auto mt-20 flex max-w-7xl justify-end px-4 sm:px-6 lg:px-8">
       {next ? (
-        <Link to={next.to} className="card-surface group flex items-center justify-end gap-4 p-5 text-right transition-all hover:-translate-y-0.5 hover:border-coral/40 hover:shadow-lift sm:col-start-2">
+        <Link to={next.to} className={cn(card, next.standalone ? "bg-peri text-primary-foreground" : "bg-go text-go-foreground")}>
           <span>
-            <span className="kicker block">{next.n}</span>
-            <span className="font-semibold">{next.name}</span>
+            <span className="block font-mono text-xs uppercase tracking-[0.12em] opacity-80">{ui("next")}</span>
+            <span className="text-lg font-semibold">{next.step === chapters[i]!.step ? next.name : steps[next.step]!.name}</span>
           </span>
-          <ArrowRight className="size-5 text-coral transition-transform group-hover:translate-x-1" aria-hidden />
+          <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden />
         </Link>
-      ) : (
-        <Link to={groups[1]!.to} className="card-surface group flex items-center justify-end gap-4 p-5 text-right transition-all hover:-translate-y-0.5 hover:border-coral/40 hover:shadow-lift sm:col-start-2">
+      ) : prize ? (
+        <Link to={prize.to} className={cn(card, "bg-gold text-foreground")}>
           <span>
-            <span className="kicker block">2</span>
-            <span className="font-semibold">{groups[1]!.label}</span>
+            <span className="block font-mono text-xs uppercase tracking-[0.12em] opacity-70">{ui("next")}</span>
+            <span className="text-lg font-semibold">{prize.label}</span>
           </span>
-          <ArrowRight className="size-5 text-coral transition-transform group-hover:translate-x-1" aria-hidden />
+          <Trophy className="size-5 transition-transform group-hover:scale-110" aria-hidden />
         </Link>
-      )}
+      ) : null}
     </nav>
   );
 }

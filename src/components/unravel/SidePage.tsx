@@ -1,11 +1,15 @@
 import type { ReactNode } from "react";
+import { Trophy } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { PageWrap } from "./Shell";
 
-export function SidePage({ heading, intro, children }: { heading: string; intro?: string; children: ReactNode }) {
+/** `gold` is reserved for the competition: it is always shown in gold. */
+export function SidePage({ heading, intro, children, gold = false }: { heading: string; intro?: string; children: ReactNode; gold?: boolean }) {
   return (
     <div>
-      <div className="border-b border-border bg-surface">
+      <div className={cn("border-b", gold ? "border-gold/40 bg-gold-soft" : "border-border bg-surface")}>
         <PageWrap className="pb-12 pt-14 sm:pt-20">
+          {gold && <span className="mb-5 flex size-11 items-center justify-center rounded-xl bg-gold text-foreground"><Trophy className="size-5" aria-hidden /></span>}
           <h1 className="font-display-tight text-[clamp(2.4rem,6vw,4.5rem)] font-medium leading-none">{heading}</h1>
           {intro && <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{intro}</p>}
         </PageWrap>

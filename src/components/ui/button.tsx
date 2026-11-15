@@ -18,6 +18,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         coral:
           "rounded-full bg-coral text-primary-foreground shadow-[0_8px_20px_-8px_color-mix(in_oklab,var(--coral)_70%,transparent)] hover:bg-coral-ink active:translate-y-px",
+        go: "rounded-full bg-go text-go-foreground shadow-[0_8px_20px_-8px_color-mix(in_oklab,var(--go)_70%,transparent)] hover:bg-go-ink active:translate-y-px",
+        gold: "rounded-full bg-gold text-foreground shadow-[0_8px_20px_-8px_color-mix(in_oklab,var(--gold)_70%,transparent)] hover:brightness-95 active:translate-y-px",
         soft: "rounded-full border border-border bg-card text-foreground shadow-card hover:border-peri/40 hover:bg-peri-soft",
         quiet: "rounded-full text-peri-ink hover:bg-peri-soft",
       },

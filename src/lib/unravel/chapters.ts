@@ -18,22 +18,26 @@ export interface Chapter {
   n: string;
   name: string;
   step: number;
+  standalone: boolean;
   kicker?: string;
   title?: string;
   line?: string;
 }
-export interface Step { n: string; name: string; to: ChapterPath; ids: string[] }
+export interface Step { n: string; name: string; to: ChapterPath; ids: string[]; standalone: boolean }
 export interface Group { id: string; label: string; to: GroupPath }
 
-const J = (data as any).journey as { groups: Group[]; steps: { name: string; sections: string[] }[] };
+const J = (data as any).journey as { groups: Group[]; steps: { name: string; sections: string[]; standalone?: boolean }[] };
+
+// Numbered steps count 01, 02…; a standalone step (Solo explore) has no number.
+const num = (i: number) => (J.steps[i]!.standalone ? "" : String(J.steps.slice(0, i + 1).filter((s) => !s.standalone).length).padStart(2, "0"));
 export const groups: Group[] = J.groups;
 
-export const steps: Step[] = J.steps.map((s, i) => ({ n: String(i + 1).padStart(2, "0"), name: s.name, to: PATHS[s.sections[0]!]!, ids: s.sections }));
+export const steps: Step[] = J.steps.map((s, i) => ({ n: num(i), name: s.name, to: PATHS[s.sections[0]!]!, ids: s.sections, standalone: !!s.standalone }));
 
 export const chapters: Chapter[] = J.steps.flatMap((s, i) =>
   s.sections.map((id) => {
     const sec = data.sections.find((x: any) => x.id === id) ?? {};
-    return { id, to: PATHS[id]!, n: String(i + 1).padStart(2, "0"), step: i, name: sec.name ?? s.name, kicker: sec.kicker, title: sec.title, line: sec.line };
+    return { id, to: PATHS[id]!, n: num(i), step: i, standalone: !!s.standalone, name: sec.name ?? s.name, kicker: sec.kicker, title: sec.title, line: sec.line };
   }),
 );
 

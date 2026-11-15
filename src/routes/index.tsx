@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Brand } from "@/components/unravel/Shell";
+import { Brand, SiteMap } from "@/components/unravel/Shell";
 import { Thread } from "@/components/unravel/Thread";
 import { data } from "@/lib/unravel/data";
 
@@ -21,7 +21,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const j = (data as any).journey;
   return (
+    <>
     <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden">
       <div className="dot-grid pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" aria-hidden />
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[520px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--coral)_14%,transparent),transparent)]" aria-hidden />
@@ -29,14 +31,23 @@ function Home() {
         <h1 className="leading-[0.85]">
           <Brand className="block text-[clamp(4.5rem,17vw,12.5rem)]" />
         </h1>
-        <Thread className="max-w-xl" />
+        <Thread untie className="max-w-xl" />
         <p className="font-display-tight mt-6 max-w-2xl text-[clamp(1.5rem,3.4vw,2.4rem)] font-normal leading-tight text-foreground">{data.hero["homeLine"]}</p>
-        <Button asChild variant="coral" size="pill" className="mt-10 h-12 px-8 text-base">
+        <Button asChild variant="go" size="pill" className="mt-10 h-12 px-8 text-base">
           <Link to="/about">
             {data.hero["cta"]} <ArrowRight className="size-4" />
           </Link>
         </Button>
       </motion.div>
+      <a href="#map" className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+        {j.homeHint}
+        <ChevronDown className="size-4 animate-bounce" aria-hidden />
+      </a>
     </section>
+    <section id="map" className="mx-auto max-w-xl scroll-mt-24 px-4 pb-8 pt-16">
+      <h2 className="font-display-tight mb-6 text-3xl font-medium">{j.homeHeading}</h2>
+      <SiteMap />
+    </section>
+    </>
   );
 }
