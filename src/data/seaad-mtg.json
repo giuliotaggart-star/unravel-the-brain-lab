@@ -3392,6 +3392,8 @@
   "headingLead": "Bridging the gap",
   "pathHeading": "Your report, step by step",
   "skipHeading": "Or skip ahead",
+  "competitionTitle": "Essay competition",
+  "competitionPrize": "{{prizeValue}} prize",
   "exploreNote": "A free-roaming tool. Use it any time.",
   "graphicFrom": "School work",
   "graphicTo": "University",

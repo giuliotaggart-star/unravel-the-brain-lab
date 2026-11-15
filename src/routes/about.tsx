@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Compass, GraduationCap, Landmark, Monitor, School, Sparkles, Trophy, Users } from "lucide-react";
+import { ArrowRight, Check, Compass, GraduationCap, Landmark, Monitor, School, Trophy, Users } from "lucide-react";
 import { PageWrap } from "@/components/unravel/Shell";
 import imperialLogo from "@/assets/imperial-wordmark.png.asset.json";
 import { groups, steps } from "@/lib/unravel/chapters";
@@ -210,18 +210,13 @@ function About() {
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {prize && (
-              <Link to={prize.to} className="gold-shine group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-card/60">
-                  <Sparkles className="glow-star size-5" aria-hidden />
+              <Link to={prize.to} className="gold-shine group relative flex flex-col items-center gap-2 rounded-2xl p-6 text-center transition-all hover:-translate-y-0.5">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-card/60">
+                  <Trophy className="glow-star size-5" aria-hidden />
                 </span>
-                <span>
-                  <span className="flex items-center gap-2 font-semibold text-gold-ink">
-                    {prize.label}
-                    <Trophy className="size-4" aria-hidden />
-                  </span>
-                  <span className="mt-1 block text-sm font-medium text-gold-ink/80">{fill((data as any).prize?.heading)}</span>
-                </span>
-                <ArrowRight className="ml-auto size-4 shrink-0 text-gold-ink" aria-hidden />
+                <span className="font-display-tight text-xl font-semibold text-gold-ink">{a.competitionTitle}</span>
+                <span className="text-sm font-medium text-gold-ink/80">{fill(a.competitionPrize)}</span>
+                <ArrowRight className="absolute right-4 top-1/2 size-4 -translate-y-1/2 text-gold-ink" aria-hidden />
               </Link>
             )}
             {teachers && (
