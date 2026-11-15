@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ArrowRight, Compass, Menu, Trophy } from "lucide-react";
+import { ArrowRight, Compass, Info, Menu, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -47,6 +47,19 @@ const isGold = (g: Group) => g.id === "prize";
 export function SiteMap({ onPick, current }: { onPick?: () => void; current?: string }) {
   return (
     <ol className="space-y-2">
+      <li>
+        <Link
+          to="/about"
+          onClick={onPick}
+          className={cn(
+            "flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors",
+            current === "/about" ? "border-go/40 bg-go-soft" : "border-border bg-card hover:bg-muted",
+          )}
+        >
+          <Info className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+          <span className="font-semibold">{ui("about")}</span>
+        </Link>
+      </li>
       {groups.map((g, i) => (
         <li key={g.id}>
           <Link
