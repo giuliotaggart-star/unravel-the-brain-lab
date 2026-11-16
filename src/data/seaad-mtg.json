@@ -3062,7 +3062,73 @@
   ],
   "totalOver": "Over the {{wordsMax}}-word limit: cut {{over}} words.",
   "submitGroupHeading": "What to submit",
-  "keyDetailsHeading": "Key details"
+  "keyDetailsHeading": "Key details",
+  "brief": {
+   "lead": "Submit a short scientific abstract based on a finding from the SEA-AD data on this site. Pick one focused question, explain what is already known, show what the data says, and say what it means.",
+   "lead2": "You do not need to run new experiments or collect your own data. Use the Data Lab or Solo explore, and do not present guesses as findings.",
+   "includeHeading": "Your abstract should make clear:",
+   "include": [
+    {
+     "label": "Introduction",
+     "text": "What is known, what remains unanswered, and your hypothesis."
+    },
+    {
+     "label": "Methods",
+     "text": "Which cell type, measure and donor groups you compared, and how many donors."
+    },
+    {
+     "label": "Results",
+     "text": "What the data showed, with medians, spread and units."
+    },
+    {
+     "label": "Discussion",
+     "text": "What it means, one limitation, and a sensible next step."
+    }
+   ],
+   "notExpected": "You are not expected to write a full literature review or a complete research paper. One clear, well-supported idea beats several vague ones.",
+   "rulesHeading": "Submission rules",
+   "rules": [
+    "Your abstract must be your own original work. Abstracts written or rewritten by AI tools will be disqualified.",
+    "The limit is {{wordsMax}} words, excluding the title and your name. Subheadings count; references do not.",
+    "Include a title and your name.",
+    "Acknowledge any published research you draw on.",
+    "One entry per person, free to enter."
+   ],
+   "scoreHeading": "How abstracts are scored",
+   "scoreTotal": 50,
+   "scoreLead": "Every abstract is scored out of 50, with 10 marks for each area:",
+   "score": [
+    {
+     "label": "Introduction and research gap",
+     "points": 10,
+     "text": "Clear background, a real unanswered question and a testable hypothesis."
+    },
+    {
+     "label": "Methods",
+     "points": 10,
+     "text": "Says exactly which data were used and how the groups were compared."
+    },
+    {
+     "label": "Results",
+     "points": 10,
+     "text": "Accurate numbers with units, spread and sample size."
+    },
+    {
+     "label": "Discussion",
+     "points": 10,
+     "text": "A claim that fits the evidence, a named limitation and a next step."
+    },
+    {
+     "label": "Writing and scientific judgement",
+     "points": 10,
+     "text": "Concise, well organised and careful not to overclaim."
+    }
+   ],
+   "deadlineTime": "23:59 (UK time) on {{deadline}}",
+   "afterHeading": "After the deadline",
+   "after": "Entries are reviewed anonymously by university researchers. The winner is contacted by email, and every entry gets personal feedback.",
+   "scoreTotalLabel": "Total"
+  }
  },
  "ucas": {
   "heading": "UCAS and careers",
