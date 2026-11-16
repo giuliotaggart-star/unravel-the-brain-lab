@@ -2,8 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Mail } from "lucide-react";
 import { PSec, SidePage } from "@/components/unravel/SidePage";
 import { data } from "@/lib/unravel/data";
-import imperialLogo from "@/assets/imperial-wordmark.png.asset.json";
-import photo from "@/assets/giulio-taggart-full.jpg.asset.json";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -29,7 +27,7 @@ function Contact() {
           <div className="grid lg:grid-cols-[minmax(0,420px)_1fr]">
             {/* The whole photo, uncropped, down the left side */}
             <img
-              src={photo.url}
+              src="/giulio-taggart-full.jpg"
               alt={`${c.name} speaking at a lectern`}
               className="block h-auto w-full"
               loading="lazy"
@@ -39,7 +37,7 @@ function Contact() {
             {/* Imperial logo at the top, name and profile below it */}
             <div className="flex flex-col gap-5 bg-card p-6 sm:p-8">
               <img
-                src={imperialLogo.url}
+                src="/imperial-wordmark.png"
                 alt="Imperial College London"
                 className="h-auto w-full max-w-[320px]"
                 loading="lazy"

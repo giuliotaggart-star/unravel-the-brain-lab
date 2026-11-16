@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Compass, GraduationCap, Landmark, Monitor, School, Trophy, Users } from "lucide-react";
 import { PageWrap } from "@/components/unravel/Shell";
-import imperialLogo from "@/assets/imperial-wordmark.png.asset.json";
 import { groups, steps } from "@/lib/unravel/chapters";
 import { data, fill } from "@/lib/unravel/data";
 
@@ -119,7 +118,7 @@ function About() {
             {/* Quiet but present: slim rule, smaller wordmark */}
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6">
               <img
-                src={imperialLogo.url}
+                src="/imperial-wordmark.png"
                 alt="Imperial College London"
                 className="h-auto w-full max-w-[170px] shrink-0 sm:max-w-[200px]"
               />
