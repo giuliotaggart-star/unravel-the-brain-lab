@@ -81,6 +81,10 @@ function Write() {
       </div>
       <aside className="card-surface h-fit space-y-3 p-5"><p className="kicker">{w.tipsHeading}</p><Ticks items={w.tips} /></aside>
       </div>
+      <div className="gold-shine flex flex-wrap items-center justify-between gap-4 rounded-2xl p-5 text-gold-ink">
+        <p className="font-semibold">{fill(w.prizeBanner)}</p>
+        <Button asChild variant="gold" size="pill"><Link to="/prize">{w.prizeBannerLink} →</Link></Button>
+      </div>
       <Link to="/explore" className="text-sm font-semibold text-peri-ink hover:underline">← {w.back}</Link>
     </SidePage>
   );

@@ -40,11 +40,11 @@
  },
  "config": {
   "pollEndpoint": "",
-  "essayFormUrl": "PLACEHOLDER",
+  "essayFormUrl": "https://docs.google.com/forms/d/e/1FAIpQLSf3-0eaPeJhtPOQra47jLyX3BR_6feb7q3SCcFeWyLYCVXOtg/viewform",
   "teacherFormUrl": "PLACEHOLDER",
   "teacherPackUrl": "PLACEHOLDER",
   "contact": "PLACEHOLDER",
-  "essayDeadline": "PLACEHOLDER"
+  "essayDeadline": "28 February 2027"
  },
  "ui": {
   "site": "Site",
@@ -2943,8 +2943,10 @@
   "intro": "Turn any finding from the Data Lab into a short essay.",
   "rulesHeading": "Who can enter",
   "rules": [
-   "PLACEHOLDER: who can enter (year groups, schools).",
-   "PLACEHOLDER: the deadline, how winners are chosen and when they hear."
+   "Open to all pre-university students: Years 11 to 13, sixth form, college, or anyone on a gap year preparing to apply for their first undergraduate degree.",
+   "You can enter from anywhere, as long as you have not started university yet.",
+   "Free to enter, with one entry per person.",
+   "Entries are reviewed anonymously by university researchers against the marking criteria below, and the winner is contacted by email."
   ],
   "builderHeading": "Need some help? Here is a framework to get you started.",
   "builderIntro": "Four boxes, one for each part of a scientific report. Your draft saves on this device only.",
@@ -2989,8 +2991,7 @@
   "submitHeading": "Submit your essay",
   "submitPrivacy": [
    "The entry form is on another website, not this one.",
-   "It asks for your name, email, school, class code, how confident you feel about a STEM degree, and your essay.",
-   "PLACEHOLDER: who sees entries, how long they are kept, and what under-16s need to do."
+   "It asks for your name, email, school, class code, how confident you feel about a STEM degree, and your essay."
   ],
   "submitLabel": "Open the entry form",
   "submitPending": "The entry form is not open yet.",
@@ -3516,6 +3517,8 @@
   "email": "giulio.taggart@gmail.com"
  },
  "write": {
+  "prizeBanner": "Practising for the competition? Check the guidelines and word targets for the {{prizeValue}} Essay competition.",
+  "prizeBannerLink": "See the competition",
   "heading": "Write your report",
   "intro": "A free space to practise writing up what you found. Your writing stays on this device.",
   "placeholder": "Start with your question, then what the data showed…",
