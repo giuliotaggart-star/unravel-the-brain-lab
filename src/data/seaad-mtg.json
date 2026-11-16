@@ -3222,12 +3222,22 @@
    "glowY": 100
   },
   {
+   "id": "background",
+   "name": "Understanding dementia",
+   "tint": "peri",
+   "glowX": 50,
+   "glowY": 100,
+   "kicker": "BACKGROUND · LITERATURE REVIEW",
+   "title": "UNDERSTANDING DEMENTIA",
+   "line": "Every report starts with what is already known"
+  },
+  {
    "id": "poll",
    "name": "What you think",
    "tint": "peri",
    "glowX": 15,
    "glowY": 100,
-   "kicker": "PART 1",
+   "kicker": "BACKGROUND · WHAT YOU ALREADY KNOW",
    "title": "DEMENTIA POLL",
    "line": "Test your knowledge"
   },
@@ -3237,7 +3247,7 @@
    "tint": "rose",
    "glowX": 85,
    "glowY": 100,
-   "kicker": "PART 2",
+   "kicker": "BACKGROUND · LITERATURE REVIEW",
    "title": "WHAT DEMENTIA REALLY IS",
    "line": ""
   },
@@ -3247,7 +3257,7 @@
    "tint": "cream",
    "glowX": 80,
    "glowY": 0,
-   "kicker": "PART 3",
+   "kicker": "METHODS · WHERE THE DATA COMES FROM",
    "title": "DEEP DIVE",
    "line": "Inside a real study"
   },
@@ -3257,7 +3267,7 @@
    "tint": "coral",
    "glowX": 20,
    "glowY": 0,
-   "kicker": "PART 4",
+   "kicker": "RESULTS AND DISCUSSION",
    "title": "THE LAB",
    "line": "Run a real investigation"
   },
@@ -3267,7 +3277,7 @@
    "tint": "peri",
    "glowX": 80,
    "glowY": 100,
-   "kicker": "PART 5",
+   "kicker": "INDEPENDENT RESEARCH",
    "title": "EXPLORE",
    "line": "\n"
   },
@@ -3519,7 +3529,7 @@
    {
     "id": "practice",
     "label": "Working through a report",
-    "to": "/poll"
+    "to": "/background"
    },
    {
     "id": "prize",
@@ -3544,8 +3554,9 @@
   ],
   "steps": [
    {
-    "name": "Understanding dementia",
+    "name": "Background",
     "sections": [
+     "background",
      "poll",
      "pivot"
     ]
@@ -3626,5 +3637,67 @@
    "Finish with what it might mean and one thing you would test next.",
    "Short sentences. One idea per paragraph."
   ]
+ },
+ "background": {
+  "heading": "Every scientific report starts with a literature review",
+  "intro": "Before scientists run a single test, they read. A literature review sums up what is already known about a topic, so you can spot what is still unanswered. That gap becomes your research question.",
+  "whyHeading": "Why it matters",
+  "why": [
+   {
+    "label": "Know the field",
+    "text": "You cannot ask a good question until you know what others have already found."
+   },
+   {
+    "label": "Find the gap",
+    "text": "The best questions sit right at the edge of what is known."
+   },
+   {
+    "label": "Back up your claims",
+    "text": "Every statement in a report should be supported by evidence, usually a published paper."
+   }
+  ],
+  "outlineHeading": "The parts of a university report",
+  "outlineNote": "Unravel walks you through each part in order. Here is where each one happens.",
+  "outline": [
+   {
+    "part": "Title and abstract",
+    "where": "Written last, at the end of the workshop",
+    "here": false
+   },
+   {
+    "part": "Background (literature review)",
+    "where": "This section: the poll and What dementia really is",
+    "here": true
+   },
+   {
+    "part": "Aims and hypothesis",
+    "where": "The workshop",
+    "here": false
+   },
+   {
+    "part": "Methods",
+    "where": "The data, then the workshop",
+    "here": false
+   },
+   {
+    "part": "Results",
+    "where": "The workshop",
+    "here": false
+   },
+   {
+    "part": "Discussion",
+    "where": "The workshop",
+    "here": false
+   },
+   {
+    "part": "References",
+    "where": "The published study linked at the end of each investigation",
+    "here": false
+   }
+  ],
+  "hereLabel": "You are here",
+  "nextHeading": "Start your review",
+  "nextLine": "First, find out what you already know. Then we will fill in the gaps.",
+  "cta": "Take the dementia poll"
  }
 }

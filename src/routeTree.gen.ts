@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BackgroundRouteImport } from './routes/background'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DataRouteImport } from './routes/data'
 import { Route as ExploreRouteImport } from './routes/explore'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BackgroundRoute = BackgroundRouteImport.update({
+  id: '/background',
+  path: '/background',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -92,6 +98,7 @@ const WriteRoute = WriteRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/background': typeof BackgroundRoute
   '/contact': typeof ContactRoute
   '/data': typeof DataRoute
   '/explore': typeof ExploreRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/background': typeof BackgroundRoute
   '/contact': typeof ContactRoute
   '/data': typeof DataRoute
   '/explore': typeof ExploreRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/background': typeof BackgroundRoute
   '/contact': typeof ContactRoute
   '/data': typeof DataRoute
   '/explore': typeof ExploreRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/background'
     | '/contact'
     | '/data'
     | '/explore'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/background'
     | '/contact'
     | '/data'
     | '/explore'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/background'
     | '/contact'
     | '/data'
     | '/explore'
@@ -186,6 +198,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BackgroundRoute: typeof BackgroundRoute
   ContactRoute: typeof ContactRoute
   DataRoute: typeof DataRoute
   ExploreRoute: typeof ExploreRoute
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/background': {
+      id: '/background'
+      path: '/background'
+      fullPath: '/background'
+      preLoaderRoute: typeof BackgroundRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -298,6 +318,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BackgroundRoute: BackgroundRoute,
   ContactRoute: ContactRoute,
   DataRoute: DataRoute,
   ExploreRoute: ExploreRoute,
