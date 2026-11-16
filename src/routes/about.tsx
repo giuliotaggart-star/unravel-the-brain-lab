@@ -118,7 +118,7 @@ function About() {
             {/* Quiet but present: slim rule, smaller wordmark */}
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6">
               <img
-                src="/imperial-wordmark.png"
+                src={`${import.meta.env.BASE_URL}imperial-wordmark.png`}
                 alt="Imperial College London"
                 className="h-auto w-full max-w-[170px] shrink-0 sm:max-w-[200px]"
               />

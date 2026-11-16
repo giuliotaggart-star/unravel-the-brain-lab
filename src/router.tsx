@@ -7,7 +7,9 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    basepath: "/unravel-the-brain-lab",
+    // Works on both the Lovable preview (base "/") and the GitHub Pages
+    // build (base "/unravel-the-brain-lab/"): Vite injects the right value.
+    basepath: import.meta.env.BASE_URL.replace(/\/$/, "") || "/",
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,

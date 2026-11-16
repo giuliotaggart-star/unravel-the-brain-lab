@@ -27,7 +27,7 @@ function Contact() {
           <div className="grid lg:grid-cols-[minmax(0,420px)_1fr]">
             {/* The whole photo, uncropped, down the left side */}
             <img
-              src="/giulio-taggart-full.jpg"
+              src={`${import.meta.env.BASE_URL}giulio-taggart-full.jpg`}
               alt={`${c.name} speaking at a lectern`}
               className="block h-auto w-full"
               loading="lazy"
@@ -37,7 +37,7 @@ function Contact() {
             {/* Imperial logo at the top, name and profile below it */}
             <div className="flex flex-col gap-5 bg-card p-6 sm:p-8">
               <img
-                src="/imperial-wordmark.png"
+                src={`${import.meta.env.BASE_URL}imperial-wordmark.png`}
                 alt="Imperial College London"
                 className="h-auto w-full max-w-[320px]"
                 loading="lazy"
