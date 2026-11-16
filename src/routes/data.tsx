@@ -154,13 +154,13 @@ function DataJourney() {
                   <ArrowLeft className="size-4" /> {data.poll.backLabel}
                 </button>
                 {last ? (
-                  <Button asChild variant="coral" size="pill">
+                  <Button asChild variant="go" size="pill">
                     <Link to="/lab">
                       {v.finalLabel} <ArrowRight className="size-4" />
                     </Link>
                   </Button>
                 ) : (
-                  <Button variant="coral" size="pill" onClick={() => setK((x) => x + 1)}>
+                  <Button variant="go" size="pill" onClick={() => setK((x) => x + 1)}>
                     {v.nextLabel} <ArrowRight className="size-4" />
                   </Button>
                 )}

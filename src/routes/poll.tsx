@@ -260,7 +260,7 @@ function Result({ submitted, items, names, onRetake }: { submitted: Submitted; i
         <Button variant="soft" size="pill" onClick={onRetake}>
           <RotateCcw className="size-4" /> {poll.retakeLabel}
         </Button>
-        <Button asChild variant="coral" size="pill">
+        <Button asChild variant="go" size="pill">
           <Link to="/what-dementia-is">
             {poll.resultCta} <ArrowRight className="size-4" />
           </Link>
