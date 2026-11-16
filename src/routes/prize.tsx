@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, FileText, Trophy } from "lucide-react";
+import { Calendar, Trophy } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/prize")({
   head: () => ({
     meta: [
-      { title: "Essay competition: £50 prize — Unravel" },
-      { name: "description", content: "Write a short scientific report of up to 400 words on real SEA-AD data. Every entry gets personal feedback." },
-      { property: "og:title", content: "Essay competition: £50 prize — Unravel" },
+      { title: "Abstract competition: £50 prize — Unravel" },
+      { name: "description", content: "Write a short scientific report of up to 300 words on real SEA-AD data. Every entry gets personal feedback." },
+      { property: "og:title", content: "Abstract competition: £50 prize — Unravel" },
       { property: "og:description", content: "Introduction, methods, results, discussion: write your report on real Alzheimer's data." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -36,39 +36,39 @@ function Prize() {
   const text = () => p.sections.map((s: any) => `${s.label}\n${(draft[s.id] || "").trim()}`).join("\n\n");
   return (
     <SidePage gold heading={fill(p.title)} tag={fill(p.prizeTag)} intro={p.intro}>
-      <PSec title={p.detailsHeading}>
+      <PSec title={p.submitGroupHeading}>
         {(() => {
-          const stats = p.details.filter((x: any) => ["Deadline", "Word count", "Prize"].includes(x.label));
-          const boxes = p.details.filter((x: any) => !["Deadline", "Word count", "Prize"].includes(x.label));
-          const icons: Record<string, typeof Calendar> = { Deadline: Calendar, "Word count": FileText, Prize: Trophy };
+          const order = ["What we are asking for", "No AI", "Word count"];
+          const items = order.map((l) => p.details.find((x: any) => x.label === l)).filter(Boolean);
+          const tones = ["border-peri/30 bg-peri-soft", "border-gold/40 bg-gold-soft", "border-go/30 bg-card"];
           return (
-            <>
-              <dl className="grid gap-6 sm:grid-cols-3">
-                {stats.map((x: any) => {
-                  const Icon = icons[x.label] ?? FileText;
-                  return (
-                    <div key={x.label} className="border-l-4 border-gold pl-4">
-                      <dt className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gold-ink">
-                        <Icon className="size-4" aria-hidden />{x.label}
-                      </dt>
-                      <dd className="mt-2 font-display-tight text-2xl font-medium leading-snug text-go">
-                        {x.label === "Deadline" && !hasDeadline ? x.pending : fill(x.value)}
-                      </dd>
-                    </div>
-                  );
-                })}
-              </dl>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {boxes.map((x: any, i: number) => (
-                  <div key={x.label} className={cn("rounded-2xl border p-5", i % 2 === 0 ? "border-peri/30 bg-peri-soft" : "border-gold/40 bg-gold-soft")}>
-                    <p className="text-base font-bold text-go">{x.label}</p>
-                    <p className="mt-1 text-base">{fill(x.value)}</p>
-                  </div>
-                ))}
-              </div>
-            </>
+            <div className="grid gap-3 md:grid-cols-3">
+              {items.map((x: any, i: number) => (
+                <div key={x.label} className={cn("rounded-2xl border p-5", tones[i])}>
+                  <p className="text-base font-bold text-go">{x.label}</p>
+                  <p className="mt-1 text-base">{fill(x.value)}</p>
+                </div>
+              ))}
+            </div>
           );
         })()}
+      </PSec>
+      <PSec title={p.keyDetailsHeading}>
+        <dl className="grid gap-6 sm:grid-cols-2">
+          {p.details.filter((x: any) => ["Deadline", "Prize"].includes(x.label)).map((x: any) => {
+            const Icon = x.label === "Deadline" ? Calendar : Trophy;
+            return (
+              <div key={x.label} className="border-l-4 border-gold pl-4">
+                <dt className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gold-ink">
+                  <Icon className="size-4" aria-hidden />{x.label}
+                </dt>
+                <dd className="mt-2 font-display-tight text-2xl font-medium leading-snug text-go">
+                  {x.label === "Deadline" && !hasDeadline ? x.pending : fill(x.value)}
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
         {p.rules.length > 0 && (
           <div className="pt-2"><p className="mb-2 font-bold">{p.rulesHeading}</p><Ticks items={p.rules.map((r: string) => fill(r))} /></div>
         )}

@@ -69,7 +69,7 @@
   "about": "About"
  },
  "nav": {
-  "prize": "£50 essay prize",
+  "prize": "£50 abstract prize",
   "ucas": "UCAS & careers",
   "teachers": "For teachers"
  },
@@ -202,7 +202,7 @@
   "snapshotTitle": "Research snapshot",
   "snapshotQuestion": "{{cellLabel}}: {{metricLower}}, by {{groupingShort}}",
   "snapshotDone": "Snapshot saved to your downloads.",
-  "snapshotBridge": "Turn it into a {{prizeValue}} essay entry",
+  "snapshotBridge": "Turn it into a {{prizeValue}} abstract entry",
   "exportLabel": "Save this chart",
   "effectLabel": "{{lastGroup}} compared with {{firstGroup}}",
   "effectNote": "Median {{medianLastShort}} in {{lastGroup}}, {{medianFirstShort}} in {{firstGroup}}.",
@@ -394,7 +394,9 @@
     "notSupported": "not supported",
     "consistentNotProven": "consistent, not proven"
    }
-  }
+  },
+  "toWriter": "Open in the report writer",
+  "toPrize": "Enter the {{prizeValue}} Abstract competition"
  },
  "glossary": [
   {
@@ -2934,13 +2936,13 @@
   }
  ],
  "prize": {
-  "heading": "The {{prizeValue}} essay prize",
-  "title": "Essay competition",
+  "heading": "The {{prizeValue}} abstract prize",
+  "title": "Abstract competition",
   "prizeTag": "{{prizeValue}} prize",
   "value": "£50",
-  "wordsMin": 400,
-  "wordsMax": 400,
-  "intro": "Turn any finding from the Data Lab into a short essay.",
+  "wordsMin": 300,
+  "wordsMax": 300,
+  "intro": "Turn any finding from the Data Lab into a short scientific abstract.",
   "rulesHeading": "Who can enter",
   "rules": [
    "Open to all pre-university students: Years 11 to 13, sixth form, college, or anyone on a gap year preparing to apply for their first undergraduate degree.",
@@ -2954,25 +2956,25 @@
    {
     "id": "introduction",
     "label": "1. Introduction",
-    "target": 80,
+    "target": 60,
     "prompt": "What is already known, and what question are you asking? End with your hypothesis."
    },
    {
     "id": "methods",
     "label": "2. Methods",
-    "target": 80,
+    "target": 60,
     "prompt": "Which data did you use? Name the cell type, the measure, how donors were grouped and how many were in each group."
    },
    {
     "id": "results",
     "label": "3. Results",
-    "target": 120,
+    "target": 90,
     "prompt": "What did the data show? Quote the medians and the spread for each group."
    },
    {
     "id": "discussion",
     "label": "4. Discussion",
-    "target": 120,
+    "target": 90,
     "prompt": "What does your result mean, and how far can the data support it? Name a limitation and a next step.",
     "tip": "Stuck for ideas? You could use something you know from A-level Biology to suggest why this might happen. This is optional."
    }
@@ -2987,15 +2989,15 @@
   "totalCount": "{{count}} / {{wordsMax}} words · strict maximum",
   "copyLabel": "Copy draft to clipboard",
   "clearLabel": "Clear my draft",
-  "originalityNote": "Write it in your own words. Essays are read by a person, and copied or AI-written text will not win.",
-  "submitHeading": "Submit your essay",
+  "originalityNote": "Write it in your own words. Abstracts are read by a person, and copied or AI-written text will not win.",
+  "submitHeading": "Submit your abstract",
   "submitPrivacy": [
    "The entry form is on another website, not this one.",
-   "It asks for your name, email, school, class code, how confident you feel about a STEM degree, and your essay."
+   "It asks for your name, email, school, class code, how confident you feel about a STEM degree, and your abstract."
   ],
   "submitLabel": "Open the entry form",
   "submitPending": "The entry form is not open yet.",
-  "rubricHeading": "How essays are marked",
+  "rubricHeading": "How abstracts are marked",
   "rubricNote": "DRAFT rubric, written for review. PLACEHOLDER: Giulio confirms the wording before entries open.",
   "rubricLevels": [
    "1 · Developing",
@@ -3043,7 +3045,7 @@
    },
    {
     "label": "What we are asking for",
-    "value": "A short scientific report on any finding from the SEA-AD data on this site."
+    "value": "A short scientific abstract on any finding from the SEA-AD data on this site."
    },
    {
     "label": "Word count",
@@ -3051,14 +3053,16 @@
    },
    {
     "label": "No AI",
-    "value": "Your report must be written by you. Essays written or rewritten by AI tools will be disqualified."
+    "value": "Your abstract must be written by you. Abstracts written or rewritten by AI tools will be disqualified."
    },
    {
     "label": "Prize",
     "value": "Winners receive a {{prizeValue}} voucher. Every entry gets personal feedback."
    }
   ],
-  "totalOver": "Over the {{wordsMax}}-word limit: cut {{over}} words."
+  "totalOver": "Over the {{wordsMax}}-word limit: cut {{over}} words.",
+  "submitGroupHeading": "What to submit",
+  "keyDetailsHeading": "Key details"
  },
  "ucas": {
   "heading": "UCAS and careers",
@@ -3100,7 +3104,7 @@
    "Runs in the browser on a school Chromebook. No accounts. Nothing to install.",
    "Keeps working if the school Wi-Fi drops.",
    "One lesson: poll, guided simulations, then solo exploring.",
-   "The essay prize is optional follow-up work."
+   "The abstract prize is optional follow-up work."
   ],
   "curriculumHeading": "Curriculum links",
   "curriculum": [
@@ -3140,7 +3144,7 @@
   "dataLabel": "Data:",
   "licenceLabel": "Data licence:",
   "accessedLabel": "Figures as of",
-  "privacy": "This site has no sign-up, no cookies and no tracking. Your poll answers and essay draft are saved on this device only, and you can clear them at any time.",
+  "privacy": "This site has no sign-up, no cookies and no tracking. Your poll answers and abstract draft are saved on this device only, and you can clear them at any time.",
   "buildNote": "Draft build: every figure is a placeholder until the real analysis is run."
  },
  "sections": [
@@ -3240,8 +3244,8 @@
  "further": {
   "heading": "Take it further",
   "prize": {
-   "badge": "{{prizeValue}} essay prize",
-   "heading": "Found a pattern? Turn it into a {{prizeValue}} essay.",
+   "badge": "{{prizeValue}} abstract prize",
+   "heading": "Found a pattern? Turn it into a {{prizeValue}} abstract.",
    "body": "Write up to {{wordsMax}} words about what you discover. Every entry gets personal feedback. Winners get a {{prizeValue}} voucher.",
    "bodyAfterWork": "PLACEHOLDER: You have worked with real data. Now turn it into up to {{wordsMax}} words and a {{prizeValue}} voucher.",
    "cta": "See how to enter"
@@ -3422,7 +3426,7 @@
   "headingLead": "Bridging the gap",
   "pathHeading": "Your report, step by step",
   "skipHeading": "Or skip ahead",
-  "competitionTitle": "Essay competition",
+  "competitionTitle": "Abstract competition",
   "competitionPrize": "{{prizeValue}} prize",
   "exploreNote": "A free-roaming tool. Use it any time.",
   "graphicFrom": "School work",
@@ -3453,7 +3457,7 @@
    },
    {
     "id": "prize",
-    "label": "Essay competition",
+    "label": "Abstract competition",
     "to": "/prize"
    },
    {
@@ -3517,7 +3521,7 @@
   "email": "giulio.taggart@gmail.com"
  },
  "write": {
-  "prizeBanner": "Practising for the competition? Check the guidelines and word targets for the {{prizeValue}} Essay competition.",
+  "prizeBanner": "Practising for the competition? Check the guidelines and word targets for the {{prizeValue}} Abstract competition.",
   "prizeBannerLink": "See the competition",
   "heading": "Write your report",
   "intro": "A free space to practise writing up what you found. Your writing stays on this device.",

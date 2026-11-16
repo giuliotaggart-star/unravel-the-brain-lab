@@ -412,6 +412,21 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
                 {st.saved ? <Check className="size-3.5" /> : <Save className="size-3.5" />} {ui.abstract.save}
               </Button>
             </div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <Button
+                variant="go"
+                size="pillSm"
+                onClick={() => {
+                  const esc = abstract.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+                  const prev = store.get<string>("report") || "";
+                  store.set("report", prev + (prev ? "<p><br></p>" : "") + "<h2>" + cs.plainTitle.replace(/</g, "&lt;") + "</h2><p>" + esc + "</p>");
+                  navigate({ to: "/write" });
+                }}
+              >
+                {L.toWriter} <ArrowRight className="size-3.5" />
+              </Button>
+              <Button variant="gold" size="pillSm" onClick={() => navigate({ to: "/prize" })}>{fill(L.toPrize)} <ArrowRight className="size-3.5" /></Button>
+            </div>
             <p className="text-sm text-muted-foreground">{L.abstractNote}</p>
           </div>
         </ReadingBlock>
