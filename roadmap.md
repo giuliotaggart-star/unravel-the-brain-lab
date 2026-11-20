@@ -2,7 +2,7 @@
 
 ## Open
 - Poll collection address (Google Apps Script URL) — waiting on Giulio
-- Audit batches 3–5 (lab reorder, privacy/terms + menu, teachers/polish)
+- Audit batches 4–5 (privacy/terms + menu, teachers/polish)
 
 ## Done
 - Contact: real email giulio.taggart@gmail.com replaces the placeholder
@@ -16,3 +16,4 @@
 - [x] Fix overlap on data step 3 graphic
 - [x] Audit batch 1: real-data flag, poll science wording, citations, contrast, phone tabs
 - [x] Audit batch 2: topic intro merged into warm-up poll, hidden answers, confidence ratings, exit poll with reveal
+- [x] Audit batch 3: lab levels reordered (L2/3 → Sst → microglia), Gabitto citation on findings, age and APOE4 notes

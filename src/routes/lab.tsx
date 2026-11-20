@@ -14,7 +14,7 @@ export const Route = createFileRoute("/lab")({
       { title: "The lab: run a real investigation — Unravel" },
       { name: "description", content: "Three investigations at three levels. Commit to a hypothesis, then test it on real SEA-AD donor data." },
       { property: "og:title", content: "The lab: run a real investigation — Unravel" },
-      { property: "og:description", content: "Easy, medium and difficult investigations on Sst neurons, microglia and cortical-layer neurons." },
+      { property: "og:description", content: "Guided, intermediate and advanced investigations on cortical-layer neurons, Sst neurons and microglia." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

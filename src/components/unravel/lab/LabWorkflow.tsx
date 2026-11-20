@@ -374,9 +374,12 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
           <NumberedBlock n={3} label={ui.discussion.published}>
             <Rich as="p" text={D.published} vars={vars} />
             <a href={D.publishedUrl} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 break-all text-sm font-medium text-peri-ink hover:underline">
-              {D.publishedUrl} <ExternalLink className="size-3.5 shrink-0" /><span className="sr-only">{data.ui["newTab"]}</span>
+              {data.meta.citation || D.publishedUrl} <ExternalLink className="size-3.5 shrink-0" /><span className="sr-only">{data.ui["newTab"]}</span>
             </a>
             <p className="text-sm text-muted-foreground">{L.teachingNote}</p>
+            {D.ageNote && (
+              <p className="rounded-xl bg-coral-soft px-3 py-2 text-sm text-coral-ink"><strong>{L.ageNoteLabel}:</strong> {D.ageNote}</p>
+            )}
           </NumberedBlock>
         </ReadingBlock>
         <ReadingBlock delay={0.26}>
@@ -558,6 +561,7 @@ function CheckBlock({ cs, S, mode, setMode }: { cs: CaseStudy; S: LabStats; mode
         return g.n && top.n / g.n > 0.7 ? fill(L.lopsided, { group: g.name, kind: top.x, variable: ui.check[mode] }) : null;
       })
       .filter(Boolean);
+    const empty = [...new Set(S.Q.groups.flatMap((g) => (g.n ? kinds.filter((x) => !g.rows.some((r) => String(r.donor[k]) === x)).map((x) => (mode === "apoe" ? L.apoeEmpty : fill(L.emptyCell, { group: g.name, kind: x, variable: ui.check[mode] }))) : [])))];
     out = (
       <div className="space-y-3">
         <p className="flex flex-wrap gap-3 text-sm">
@@ -584,6 +588,7 @@ function CheckBlock({ cs, S, mode, setMode }: { cs: CaseStudy; S: LabStats; mode
           </table>
         </div>
         {lopsided.map((t) => <p key={t} className="rounded-xl bg-coral-soft px-3 py-2 text-sm text-coral-ink">{t}</p>)}
+        {empty.map((t) => <p key={t} className="rounded-xl bg-peri-soft px-3 py-2 text-sm text-peri-ink">{t}</p>)}
       </div>
     );
   }

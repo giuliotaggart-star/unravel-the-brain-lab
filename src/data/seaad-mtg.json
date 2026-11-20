@@ -465,7 +465,10 @@
       }
     },
     "toWriter": "Open in the report writer",
-    "toPrize": "Enter the {{prizeValue}} Abstract competition"
+    "toPrize": "Enter the {{prizeValue}} Abstract competition",
+    "emptyCell": "No donor in {{group}} is {{kind}}, so {{variable}} cannot be compared across every group.",
+    "apoeEmpty": "No Not AD or Low donor carries APOE4: all 25 carriers are Intermediate or High. So carriers cannot be compared at the low end; the empty boxes are real, not a bug.",
+    "ageNoteLabel": "Watch out: age"
   },
   "glossary": [
     {
@@ -2611,6 +2614,136 @@
   ],
   "caseStudies": [
     {
+      "id": "layers",
+      "title": "Neurons in different cortical layers",
+      "plainTitle": "Neurons that link brain areas",
+      "pickerLine": "Which neurons are missing where pathology is highest?",
+      "measurePhrase": "the share of neurons that are L2/3 IT neurons",
+      "views": [
+        {
+          "metric": "share-neurons",
+          "cellType": "l2-3-it"
+        }
+      ],
+      "grouping": "adnc",
+      "intro": {
+        "background": "Excitatory neurons pass signals on. In the upper layers of the cortex, a family called L2/3 IT neurons sends long connections from one area of the cortex to another.",
+        "known": "Alzheimer’s disease involves the loss of neurons and of the connections between brain areas. Not every type of neuron is affected equally.",
+        "gap": "Are these linking neurons among the ones that become rarer when pathology is high?"
+      },
+      "aims": {
+        "aim": "To find out whether L2/3 IT neurons make up a smaller share of neurons in donors with more Alzheimer’s pathology.",
+        "h0": "The share of neurons that are L2/3 IT neurons is the same in {{firstGroup}} donors and {{lastGroup}} donors.",
+        "question": "What do you predict for {{lastGroup}} donors compared with {{firstGroup}} donors?",
+        "h1": {
+          "up": "L2/3 IT neurons are a higher share of neurons in {{lastGroup}} donors.",
+          "same": "L2/3 IT neurons are the same share of neurons in both groups.",
+          "down": "L2/3 IT neurons are a lower share of neurons in {{lastGroup}} donors."
+        }
+      },
+      "methods": {
+        "participants": "{{donorTotal}} people donated their brains to research after they died. Pathologists scored each brain for amyloid plaques and tau tangles and placed it in one of four levels, from Not AD to High.",
+        "tissue": "Scientists took a small piece from the middle temporal gyrus, a region of the cortex on the side of the brain.",
+        "measure": "For each donor, we count the L2/3 IT neurons and divide by all of that donor’s neurons. The result is a percentage: the L2/3 IT share.",
+        "analysis": "Each donor gives one value. We compare the middle value (the median) in {{firstGroup}} donors with the median in {{lastGroup}} donors, using a Mann-Whitney U test, which compares two groups by rank. We call a difference significant if p is below 0.05.",
+        "check": {
+          "question": "In this study, what counts as one data point?",
+          "options": [
+            "One cell",
+            "One donor"
+          ],
+          "correct": "One donor",
+          "right": "Yes. Thousands of cells from one person are not independent. Counting each cell would make a weak result look strong.",
+          "wrong": "Not here. Cells from the same person are alike, so each donor is counted once."
+        }
+      },
+      "results": {
+        "look": "Each dot is one donor. Higher up means L2/3 IT neurons make up more of that person’s neurons.",
+        "shows": "The middle donor in {{lastGroup}} has a {{trend}} L2/3 IT share than the middle donor in {{firstGroup}}."
+      },
+      "discussion": {
+        "claim": {
+          "parts": [
+            "In this data, L2/3 IT neurons made up {{medianFirst}} of neurons in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors, which is",
+            {
+              "blank": "b1",
+              "options": [
+                "higher",
+                "lower",
+                "about the same"
+              ],
+              "correct": "lower",
+              "right": "Yes. The drop is clearest in the last group.",
+              "wrong": "Compare the first and last median lines again."
+            },
+            ". With p = {{pValue}}, this difference is ",
+            {
+              "blank": "b2",
+              "options": [
+                "statistically significant",
+                "not significant"
+              ],
+              "correct": "statistically significant",
+              "right": "Yes. The p-value is below 0.05.",
+              "wrong": "Check the p-value against 0.05."
+            },
+            "."
+          ]
+        },
+        "limits": {
+          "options": [
+            {
+              "statement": "Only one brain region was studied.",
+              "applies": true,
+              "reason": "Other regions may be affected earlier, later or differently."
+            },
+            {
+              "statement": "A smaller share does not prove these cells died.",
+              "applies": true,
+              "reason": "If other neurons became more common, this share would fall too."
+            },
+            {
+              "statement": "Donors in the {{lastGroup}} group may be older, so age could explain part of the difference.",
+              "applies": true,
+              "reason": "Use the Age band check to see how the groups compare."
+            },
+            {
+              "statement": "There are too few donors to compare any groups.",
+              "applies": false,
+              "reason": "There are {{donorTotal}} donors, with {{nFirst}} and {{nLast}} in the two groups compared."
+            }
+          ],
+          "correct": [
+            true,
+            true,
+            true,
+            false
+          ]
+        },
+        "published": "The research team reported that excitatory neurons are lost in the later phase of the disease.",
+        "publishedUrl": "https://doi.org/10.1038/s41593-024-01774-5",
+        "next": "Do the deeper-layer L5 neurons show the same drop?",
+        "nextPreset": {
+          "cellType": "l5-it",
+          "metric": "share-neurons",
+          "grouping": "adnc"
+        },
+        "ageNote": "Age is tangled with pathology: most High donors are aged 90 or over. Compare donors of the same age and the drop keeps its direction but is no longer clearly significant (aged 78–89: 31.8% vs 24.8%, p = 0.13; aged 90+: 37.6% vs 30.1%, p = 0.059), because each group is small."
+      },
+      "abstract": {
+        "background": "Alzheimer’s disease damages the connections between brain areas, but not every type of neuron is affected equally.",
+        "aim": "We tested whether {{measurePhrase}} differs between donors with no Alzheimer’s pathology and donors with high pathology, and predicted it would be {{hypothesis}}.",
+        "result": "Among {{donorTotal}} donors, the median was {{medianFirst}} in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
+        "conclusion": {
+          "supported": "This supports our hypothesis, although each donor was measured only once, after death.",
+          "contradicted": "This contradicts our hypothesis and suggests the opposite pattern.",
+          "differenceFound": "We predicted no difference, so this result was unexpected.",
+          "notSupported": "This does not support our hypothesis: the two groups overlapped too much to show a clear difference.",
+          "consistentNotProven": "This is consistent with no difference, but does not prove there is none."
+        }
+      }
+    },
+    {
       "id": "sst",
       "title": "Sst inhibitory interneurons",
       "plainTitle": "Neurons that calm the network",
@@ -2863,135 +2996,6 @@
       },
       "abstract": {
         "background": "TREM2 is a microglial gene linked to the risk of Alzheimer’s disease, but whether its activity changes with pathology is less clear.",
-        "aim": "We tested whether {{measurePhrase}} differs between donors with no Alzheimer’s pathology and donors with high pathology, and predicted it would be {{hypothesis}}.",
-        "result": "Among {{donorTotal}} donors, the median was {{medianFirst}} in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
-        "conclusion": {
-          "supported": "This supports our hypothesis, although each donor was measured only once, after death.",
-          "contradicted": "This contradicts our hypothesis and suggests the opposite pattern.",
-          "differenceFound": "We predicted no difference, so this result was unexpected.",
-          "notSupported": "This does not support our hypothesis: the two groups overlapped too much to show a clear difference.",
-          "consistentNotProven": "This is consistent with no difference, but does not prove there is none."
-        }
-      }
-    },
-    {
-      "id": "layers",
-      "title": "Neurons in different cortical layers",
-      "plainTitle": "Neurons that link brain areas",
-      "pickerLine": "Which neurons are missing where pathology is highest?",
-      "measurePhrase": "the share of neurons that are L2/3 IT neurons",
-      "views": [
-        {
-          "metric": "share-neurons",
-          "cellType": "l2-3-it"
-        }
-      ],
-      "grouping": "adnc",
-      "intro": {
-        "background": "Excitatory neurons pass signals on. In the upper layers of the cortex, a family called L2/3 IT neurons sends long connections from one area of the cortex to another.",
-        "known": "Alzheimer’s disease involves the loss of neurons and of the connections between brain areas. Not every type of neuron is affected equally.",
-        "gap": "Are these linking neurons among the ones that become rarer when pathology is high?"
-      },
-      "aims": {
-        "aim": "To find out whether L2/3 IT neurons make up a smaller share of neurons in donors with more Alzheimer’s pathology.",
-        "h0": "The share of neurons that are L2/3 IT neurons is the same in {{firstGroup}} donors and {{lastGroup}} donors.",
-        "question": "What do you predict for {{lastGroup}} donors compared with {{firstGroup}} donors?",
-        "h1": {
-          "up": "L2/3 IT neurons are a higher share of neurons in {{lastGroup}} donors.",
-          "same": "L2/3 IT neurons are the same share of neurons in both groups.",
-          "down": "L2/3 IT neurons are a lower share of neurons in {{lastGroup}} donors."
-        }
-      },
-      "methods": {
-        "participants": "{{donorTotal}} people donated their brains to research after they died. Pathologists scored each brain for amyloid plaques and tau tangles and placed it in one of four levels, from Not AD to High.",
-        "tissue": "Scientists took a small piece from the middle temporal gyrus, a region of the cortex on the side of the brain.",
-        "measure": "For each donor, we count the L2/3 IT neurons and divide by all of that donor’s neurons. The result is a percentage: the L2/3 IT share.",
-        "analysis": "Each donor gives one value. We compare the middle value (the median) in {{firstGroup}} donors with the median in {{lastGroup}} donors, using a Mann-Whitney U test, which compares two groups by rank. We call a difference significant if p is below 0.05.",
-        "check": {
-          "question": "In this study, what counts as one data point?",
-          "options": [
-            "One cell",
-            "One donor"
-          ],
-          "correct": "One donor",
-          "right": "Yes. Thousands of cells from one person are not independent. Counting each cell would make a weak result look strong.",
-          "wrong": "Not here. Cells from the same person are alike, so each donor is counted once."
-        }
-      },
-      "results": {
-        "look": "Each dot is one donor. Higher up means L2/3 IT neurons make up more of that person’s neurons.",
-        "shows": "The middle donor in {{lastGroup}} has a {{trend}} L2/3 IT share than the middle donor in {{firstGroup}}."
-      },
-      "discussion": {
-        "claim": {
-          "parts": [
-            "In this data, L2/3 IT neurons made up {{medianFirst}} of neurons in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors, which is",
-            {
-              "blank": "b1",
-              "options": [
-                "higher",
-                "lower",
-                "about the same"
-              ],
-              "correct": "lower",
-              "right": "Yes. The drop is clearest in the last group.",
-              "wrong": "Compare the first and last median lines again."
-            },
-            ". With p = {{pValue}}, this difference is ",
-            {
-              "blank": "b2",
-              "options": [
-                "statistically significant",
-                "not significant"
-              ],
-              "correct": "statistically significant",
-              "right": "Yes. The p-value is below 0.05.",
-              "wrong": "Check the p-value against 0.05."
-            },
-            "."
-          ]
-        },
-        "limits": {
-          "options": [
-            {
-              "statement": "Only one brain region was studied.",
-              "applies": true,
-              "reason": "Other regions may be affected earlier, later or differently."
-            },
-            {
-              "statement": "A smaller share does not prove these cells died.",
-              "applies": true,
-              "reason": "If other neurons became more common, this share would fall too."
-            },
-            {
-              "statement": "Donors in the {{lastGroup}} group may be older, so age could explain part of the difference.",
-              "applies": true,
-              "reason": "Use the Age band check to see how the groups compare."
-            },
-            {
-              "statement": "There are too few donors to compare any groups.",
-              "applies": false,
-              "reason": "There are {{donorTotal}} donors, with {{nFirst}} and {{nLast}} in the two groups compared."
-            }
-          ],
-          "correct": [
-            true,
-            true,
-            true,
-            false
-          ]
-        },
-        "published": "The research team reported that excitatory neurons are lost in the later phase of the disease.",
-        "publishedUrl": "https://doi.org/10.1038/s41593-024-01774-5",
-        "next": "Do the deeper-layer L5 neurons show the same drop?",
-        "nextPreset": {
-          "cellType": "l5-it",
-          "metric": "share-neurons",
-          "grouping": "adnc"
-        }
-      },
-      "abstract": {
-        "background": "Alzheimer’s disease damages the connections between brain areas, but not every type of neuron is affected equally.",
         "aim": "We tested whether {{measurePhrase}} differs between donors with no Alzheimer’s pathology and donors with high pathology, and predicted it would be {{hypothesis}}.",
         "result": "Among {{donorTotal}} donors, the median was {{medianFirst}} in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
         "conclusion": {

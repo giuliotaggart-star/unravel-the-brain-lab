@@ -55,6 +55,7 @@ export interface CaseStudy {
     limits: { options: LimitOption[]; correct: boolean[] };
     published: string;
     publishedUrl: string;
+    ageNote?: string;
     next: string;
     nextPreset: { cellType: string; metric: string; grouping: string };
   };
