@@ -1,9 +1,9 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { ArrowRight, Compass, Info, Menu, Trophy } from "lucide-react";
+import { ArrowRight, Compass, Menu, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { chapters, chapterIndex, groups, steps, type Chapter, type Group } from "@/lib/unravel/chapters";
+import { chapters, chapterIndex, groups, links, steps, type Chapter } from "@/lib/unravel/chapters";
 import { Thread } from "./Thread";
 import { data, fmtDate, isText, isUrl, ui } from "@/lib/unravel/data";
 import { store, useStored } from "@/lib/unravel/store";
@@ -41,53 +41,50 @@ function useScrollProgress() {
   return p;
 }
 
-const isGold = (g: Group) => g.id === "prize";
 
-/** The full site map: the four parts, with the practice steps under the first. Used by the menu and the About page. */
+/** The full site map: four groups; the lesson lists its numbered steps, the others their pages. Used by the menu and the home page. */
 export function SiteMap({ onPick, current }: { onPick?: () => void; current?: string }) {
+  const sub = "flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted";
   return (
     <ol className="space-y-2">
-      <li>
-        <Link
-          to="/about"
-          onClick={onPick}
-          className={cn(
-            "flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors",
-            current === "/about" ? "border-go/40 bg-go-soft" : "border-border bg-card hover:bg-muted",
-          )}
-        >
-          <Info className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-          <span className="font-semibold">{ui("about")}</span>
-        </Link>
-      </li>
-      {groups.map((g, i) => (
-        <li key={g.id}>
-          <Link
-            to={g.to}
-            onClick={onPick}
-            className={cn(
-              "flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors",
-              isGold(g) ? "border-gold/50 bg-gold-soft hover:bg-gold/25" : g.id === "practice" ? "border-go/30 bg-go-soft hover:bg-go/15" : "border-border bg-card hover:bg-muted",
-            )}
-          >
-            <span className={cn("font-mono text-xs", isGold(g) ? "text-gold-ink" : g.id === "practice" ? "text-go-ink" : "text-muted-foreground")}>{i + 1}</span>
-            <span className="font-semibold">{g.label}</span>
-            {isGold(g) && <Trophy className="ml-auto size-4 text-gold-ink" aria-hidden />}
-          </Link>
-          {g.id === "practice" && (
-            <ol className="ml-6 mt-1.5 space-y-0.5 border-l-2 border-go/25 pl-3">
-              {steps.map((st) => (
-                <li key={st.name}>
-                  <Link to={st.to} onClick={onPick} className={cn("flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted", current === st.to ? "font-semibold text-foreground" : "text-muted-foreground", st.standalone && "mt-1.5 border-t border-dashed border-border pt-2.5")}>
-                    {st.standalone ? <Compass className="size-3.5 text-peri-ink" aria-hidden /> : <span className="font-mono text-[0.7rem]">{st.n}</span>}
-                    {st.name}
-                  </Link>
-                </li>
-              ))}
-            </ol>
-          )}
-        </li>
-      ))}
+      {groups.map((g, i) => {
+        const lesson = g.id === "practice";
+        return (
+          <li key={g.id}>
+            <Link
+              to={g.to}
+              onClick={onPick}
+              className={cn("flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors", lesson ? "border-go/30 bg-go-soft hover:bg-go/15" : "border-border bg-card hover:bg-muted")}
+            >
+              <span className={cn("font-mono text-xs", lesson ? "text-go-ink" : "text-muted-foreground")}>{i + 1}</span>
+              <span className="font-semibold">{g.label}</span>
+            </Link>
+            {lesson ? (
+              <ol className="ml-6 mt-1.5 space-y-0.5 border-l-2 border-go/25 pl-3">
+                {steps.filter((st) => !st.standalone).map((st) => (
+                  <li key={st.name}>
+                    <Link to={st.to} onClick={onPick} className={cn(sub, current === st.to ? "font-semibold text-foreground" : "text-muted-foreground")}>
+                      <span className="font-mono text-[0.7rem]">{st.n}</span>
+                      {st.name}
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            ) : g.items && g.items.length > 0 ? (
+              <ul className="ml-6 mt-1.5 space-y-0.5 border-l-2 border-border pl-3">
+                {g.items.map((it) => (
+                  <li key={it.id}>
+                    <Link to={it.to} onClick={onPick} className={cn(sub, it.gold && "bg-gold-soft text-foreground hover:bg-gold/25", current === it.to ? "font-semibold text-foreground" : !it.gold && "text-muted-foreground")}>
+                      {it.id === "explore" ? <Compass className="size-3.5 text-peri-ink" aria-hidden /> : it.gold ? <Trophy className="size-3.5 text-gold-ink" aria-hidden /> : <span className="size-1.5 rounded-full bg-muted-foreground/40" aria-hidden />}
+                      {it.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </li>
+        );
+      })}
     </ol>
   );
 }
@@ -213,7 +210,10 @@ export function SiteFooter() {
               </button>
             </p>
           )}
-          {m.PLACEHOLDER && isText(f["buildNote"]) && <p className="inline-block rounded-lg bg-coral-soft px-3 py-2 text-coral-ink">{f["buildNote"]}</p>}
+          <p className="flex flex-wrap gap-x-4 gap-y-1">
+            <Link to="/privacy" className="font-medium text-peri-ink underline decoration-peri/30 underline-offset-2 hover:decoration-peri">{f["privacyLink"]}</Link>
+            <Link to="/terms" className="font-medium text-peri-ink underline decoration-peri/30 underline-offset-2 hover:decoration-peri">{f["termsLink"]}</Link>
+          </p>
         </div>
       </div>
     </footer>
@@ -258,7 +258,7 @@ export function ChapterOpener({ id, heading, intro, children }: { id: string; he
 export function ChapterPager({ id }: { id: string }) {
   const i = chapterIndex(id);
   const next: Chapter | undefined = chapters[i + 1];
-  const prize = groups.find(isGold);
+  const prize = links.find((g) => g.id === "prize");
   const link = "group inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground";
   return (
     <nav aria-label={ui("sections")} className="mx-auto mt-16 flex max-w-7xl justify-end px-4 sm:px-6 lg:px-8">

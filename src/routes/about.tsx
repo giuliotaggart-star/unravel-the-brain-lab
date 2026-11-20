@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Compass, GraduationCap, Landmark, Monitor, School, Trophy, Users } from "lucide-react";
 import { PageWrap } from "@/components/unravel/Shell";
-import { groups, steps } from "@/lib/unravel/chapters";
+import { links, steps } from "@/lib/unravel/chapters";
 import { data, fill } from "@/lib/unravel/data";
 
 export const Route = createFileRoute("/about")({
@@ -66,10 +66,10 @@ function About() {
   const a = (data as any).about;
   const numbered = steps.filter((s) => !s.standalone);
   const solo = steps.find((s) => s.standalone);
-  const prize = groups.find((g) => g.id === "prize");
-  const ucas = groups.find((g) => g.id === "ucas");
-  const teachers = groups.find((g) => g.id === "teachers");
-  const practice = groups.find((g) => g.id === "practice");
+  const prize = links.find((g) => g.id === "prize");
+  const ucas = links.find((g) => g.id === "ucas");
+  const teachers = links.find((g) => g.id === "teachers");
+  const practice = links.find((g) => g.id === "practice");
   return (
     <div className="pb-20">
       <div className="relative overflow-hidden border-b border-border bg-card">

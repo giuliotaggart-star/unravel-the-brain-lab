@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, Check, Trophy } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -106,6 +106,10 @@ function Prize() {
           )}
         </div>
         {p.submitPrivacy.map((x: string) => <p key={x} className="text-sm text-muted-foreground">{x}</p>)}
+        <p className="flex flex-wrap gap-x-4 text-sm font-medium">
+          <Link to="/terms" className="text-peri-ink underline underline-offset-2">{p.termsLink}</Link>
+          <Link to="/privacy" className="text-peri-ink underline underline-offset-2">{data.footer["privacyLink"]}</Link>
+        </p>
       </section>
       <PSec title={p.builderHeading}>
         <p>{p.builderIntro}</p>

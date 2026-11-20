@@ -1,7 +1,7 @@
 import { data } from "./data";
 
 export type ChapterPath = "/about" | "/background" | "/poll" | "/what-dementia-is" | "/data" | "/lab" | "/exit-poll" | "/explore";
-export type GroupPath = "/about" | "/background" | "/poll" | "/prize" | "/ucas" | "/teachers" | "/contact";
+export type GroupPath = "/about" | "/background" | "/poll" | "/prize" | "/ucas" | "/teachers" | "/contact" | "/explore" | "/write";
 
 const PATHS: Record<string, ChapterPath> = {
   about: "/about",
@@ -26,13 +26,16 @@ export interface Chapter {
   line?: string;
 }
 export interface Step { n: string; name: string; to: ChapterPath; ids: string[]; standalone: boolean }
-export interface Group { id: string; label: string; to: GroupPath }
+export interface GroupItem { id: string; label: string; to: GroupPath; gold?: boolean }
+export interface Group { id: string; label: string; to: GroupPath; items?: GroupItem[] }
 
 const J = (data as any).journey as { groups: Group[]; steps: { name: string; sections: string[]; standalone?: boolean }[] };
 
 // Numbered steps count 01, 02…; a standalone step (Solo explore) has no number.
 const num = (i: number) => (J.steps[i]!.standalone ? "" : String(J.steps.slice(0, i + 1).filter((s) => !s.standalone).length).padStart(2, "0"));
 export const groups: Group[] = J.groups;
+/** Every menu destination, groups and their sub-items, findable by id. */
+export const links: GroupItem[] = J.groups.flatMap((g) => [g, ...(g.items ?? [])]);
 
 export const steps: Step[] = J.steps.map((s, i) => ({ n: num(i), name: s.name, to: PATHS[s.sections[0]!]!, ids: s.sections, standalone: !!s.standalone }));
 

@@ -19,8 +19,10 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as FurtherRouteImport } from './routes/further'
 import { Route as LabRouteImport } from './routes/lab'
 import { Route as PollRouteImport } from './routes/poll'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PrizeRouteImport } from './routes/prize'
 import { Route as TeachersRouteImport } from './routes/teachers'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as UcasRouteImport } from './routes/ucas'
 import { Route as WhatDementiaIsRouteImport } from './routes/what-dementia-is'
 import { Route as WriteRouteImport } from './routes/write'
@@ -75,6 +77,11 @@ const PollRoute = PollRouteImport.update({
   path: '/poll',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrizeRoute = PrizeRouteImport.update({
   id: '/prize',
   path: '/prize',
@@ -83,6 +90,11 @@ const PrizeRoute = PrizeRouteImport.update({
 const TeachersRoute = TeachersRouteImport.update({
   id: '/teachers',
   path: '/teachers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UcasRoute = UcasRouteImport.update({
@@ -112,8 +124,10 @@ export interface FileRoutesByFullPath {
   '/further': typeof FurtherRoute
   '/lab': typeof LabRoute
   '/poll': typeof PollRoute
+  '/privacy': typeof PrivacyRoute
   '/prize': typeof PrizeRoute
   '/teachers': typeof TeachersRoute
+  '/terms': typeof TermsRoute
   '/ucas': typeof UcasRoute
   '/what-dementia-is': typeof WhatDementiaIsRoute
   '/write': typeof WriteRoute
@@ -129,8 +143,10 @@ export interface FileRoutesByTo {
   '/further': typeof FurtherRoute
   '/lab': typeof LabRoute
   '/poll': typeof PollRoute
+  '/privacy': typeof PrivacyRoute
   '/prize': typeof PrizeRoute
   '/teachers': typeof TeachersRoute
+  '/terms': typeof TermsRoute
   '/ucas': typeof UcasRoute
   '/what-dementia-is': typeof WhatDementiaIsRoute
   '/write': typeof WriteRoute
@@ -147,8 +163,10 @@ export interface FileRoutesById {
   '/further': typeof FurtherRoute
   '/lab': typeof LabRoute
   '/poll': typeof PollRoute
+  '/privacy': typeof PrivacyRoute
   '/prize': typeof PrizeRoute
   '/teachers': typeof TeachersRoute
+  '/terms': typeof TermsRoute
   '/ucas': typeof UcasRoute
   '/what-dementia-is': typeof WhatDementiaIsRoute
   '/write': typeof WriteRoute
@@ -166,8 +184,10 @@ export interface FileRouteTypes {
     | '/further'
     | '/lab'
     | '/poll'
+    | '/privacy'
     | '/prize'
     | '/teachers'
+    | '/terms'
     | '/ucas'
     | '/what-dementia-is'
     | '/write'
@@ -183,8 +203,10 @@ export interface FileRouteTypes {
     | '/further'
     | '/lab'
     | '/poll'
+    | '/privacy'
     | '/prize'
     | '/teachers'
+    | '/terms'
     | '/ucas'
     | '/what-dementia-is'
     | '/write'
@@ -200,8 +222,10 @@ export interface FileRouteTypes {
     | '/further'
     | '/lab'
     | '/poll'
+    | '/privacy'
     | '/prize'
     | '/teachers'
+    | '/terms'
     | '/ucas'
     | '/what-dementia-is'
     | '/write'
@@ -218,8 +242,10 @@ export interface RootRouteChildren {
   FurtherRoute: typeof FurtherRoute
   LabRoute: typeof LabRoute
   PollRoute: typeof PollRoute
+  PrivacyRoute: typeof PrivacyRoute
   PrizeRoute: typeof PrizeRoute
   TeachersRoute: typeof TeachersRoute
+  TermsRoute: typeof TermsRoute
   UcasRoute: typeof UcasRoute
   WhatDementiaIsRoute: typeof WhatDementiaIsRoute
   WriteRoute: typeof WriteRoute
@@ -297,6 +323,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PollRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/prize': {
       id: '/prize'
       path: '/prize'
@@ -309,6 +342,13 @@ declare module '@tanstack/react-router' {
       path: '/teachers'
       fullPath: '/teachers'
       preLoaderRoute: typeof TeachersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ucas': {
@@ -346,8 +386,10 @@ const rootRouteChildren: RootRouteChildren = {
   FurtherRoute: FurtherRoute,
   LabRoute: LabRoute,
   PollRoute: PollRoute,
+  PrivacyRoute: PrivacyRoute,
   PrizeRoute: PrizeRoute,
   TeachersRoute: TeachersRoute,
+  TermsRoute: TermsRoute,
   UcasRoute: UcasRoute,
   WhatDementiaIsRoute: WhatDementiaIsRoute,
   WriteRoute: WriteRoute,

@@ -56,7 +56,7 @@
     "unitMissing": "[unit missing]",
     "you": "you",
     "step": "Step",
-    "nextCase": "Next simulation",
+    "nextCase": "Next investigation",
     "tried": "tried",
     "copied": "Copied",
     "copySelected": "Selected — copy it with your device",
@@ -141,7 +141,7 @@
     "classCodeLabel": "Class code (optional)",
     "classCodeHint": "Your teacher may give you a code, like BIOL-12. Working alone? Leave it blank.",
     "submitLabel": "Send my answers",
-    "privacyShared": "Your answers, year group and class code go to the workshop organiser with a random code. No name. No email.",
+    "privacyShared": "Your answers, year group and class code go to the lesson organiser with a random code. No name. No email.",
     "yourAnswer": "Your answer",
     "correctAnswer": "Correct answer",
     "rightLabel": "Right",
@@ -314,7 +314,7 @@
       "Stress-test confounders",
       "University takeaway"
     ],
-    "chooseLabel": "Pick a simulation",
+    "chooseLabel": "Pick an investigation",
     "heading": "Run a real investigation",
     "intro": "Three questions. Real donors. You set the hypothesis, then the data answers.",
     "stepNames": [
@@ -3015,13 +3015,14 @@
     "value": "£50",
     "wordsMin": 300,
     "wordsMax": 300,
-    "intro": "Turn any finding from the Data Lab into a short scientific abstract.",
+    "intro": "Turn any finding from the lab into a short scientific abstract.",
     "rulesHeading": "Who can enter",
     "rules": [
+      "You must be aged 13 or over.",
       "Open to all pre-university students: Years 11 to 13, sixth form, college, or anyone on a gap year preparing to apply for their first undergraduate degree.",
       "You can enter from anywhere, as long as you have not started university yet.",
       "Free to enter, with one entry per person.",
-      "Entries are reviewed anonymously by university researchers against the marking criteria below, and the winner is contacted by email."
+      "Entries are judged with names hidden against the marking criteria below, and the winner is contacted by email."
     ],
     "builderHeading": "Need some help? Here is a framework to get you started.",
     "builderIntro": "Four boxes, one for each part of a scientific report. Your draft saves on this device only.",
@@ -3138,7 +3139,7 @@
     "keyDetailsHeading": "Key details",
     "brief": {
       "lead": "Submit a short scientific abstract based on a finding from the SEA-AD data (the Seattle Alzheimer’s Disease Brain Cell Atlas) on this site. Pick one focused question, explain what is already known, show what the data says, and say what it means.",
-      "lead2": "You do not need to run new experiments or collect your own data. Use the Data Lab or Solo explore, and do not present guesses as findings.",
+      "lead2": "You do not need to run new experiments or collect your own data. Use the lab or Solo explore, and do not present guesses as findings.",
       "includeHeading": "Your abstract should make clear:",
       "include": [
         {
@@ -3201,7 +3202,8 @@
       "afterHeading": "After the deadline",
       "after": "Entries are reviewed anonymously by university researchers. The winner is contacted by email, and every entry gets personal feedback.",
       "scoreTotalLabel": "Total"
-    }
+    },
+    "termsLink": "Read the full competition terms"
   },
   "ucas": {
     "heading": "UCAS and careers",
@@ -3242,7 +3244,7 @@
     "value": [
       "Runs in the browser on a school Chromebook. No accounts. Nothing to install.",
       "Keeps working if the school Wi-Fi drops.",
-      "One lesson: poll, guided simulations, then solo exploring.",
+      "One lesson: poll, the lab, then solo exploring.",
       "The abstract prize is optional follow-up work."
     ],
     "curriculumHeading": "Curriculum links",
@@ -3283,8 +3285,9 @@
     "dataLabel": "Data:",
     "licenceLabel": "Data licence:",
     "accessedLabel": "Figures as of",
-    "privacy": "This site has no sign-up, no cookies and no tracking. Your poll answers and abstract draft are saved on this device only, and you can clear them at any time.",
-    "buildNote": "Draft build: every figure is a placeholder until the real analysis is run."
+    "privacy": "No cookies, no names. Anonymous poll answers may be collected to measure the lesson; everything else stays on this device.",
+    "privacyLink": "Privacy notice",
+    "termsLink": "Competition terms"
   },
   "sections": [
     {
@@ -3573,7 +3576,7 @@
     "heading": "Bridging the gap: university research for A-level students",
     "cards": [
       {
-        "title": "Report Simulation",
+        "title": "The lesson",
         "body": "Interactively explore and simplify complex clinical papers."
       },
       {
@@ -3611,18 +3614,36 @@
     "groups": [
       {
         "id": "practice",
-        "label": "Guided reports",
+        "label": "The lesson",
         "to": "/poll"
       },
       {
-        "id": "prize",
-        "label": "Abstract competition",
-        "to": "/prize"
-      },
-      {
-        "id": "ucas",
-        "label": "Looking ahead",
-        "to": "/ucas"
+        "id": "further",
+        "label": "Go further",
+        "to": "/explore",
+        "items": [
+          {
+            "label": "Solo explore",
+            "to": "/explore",
+            "id": "explore"
+          },
+          {
+            "label": "Report writer",
+            "to": "/write",
+            "id": "write"
+          },
+          {
+            "label": "Abstract competition",
+            "to": "/prize",
+            "gold": true,
+            "id": "prize"
+          },
+          {
+            "label": "UCAS and careers",
+            "to": "/ucas",
+            "id": "ucas"
+          }
+        ]
       },
       {
         "id": "teachers",
@@ -3631,8 +3652,20 @@
       },
       {
         "id": "contact",
-        "label": "Contact us",
-        "to": "/contact"
+        "label": "About and contact",
+        "to": "/about",
+        "items": [
+          {
+            "label": "About",
+            "to": "/about",
+            "id": "about"
+          },
+          {
+            "label": "Contact",
+            "to": "/contact",
+            "id": "contact"
+          }
+        ]
       }
     ],
     "steps": [
@@ -3650,7 +3683,7 @@
         ]
       },
       {
-        "name": "The workshop",
+        "name": "The lab",
         "sections": [
           "lab"
         ]
@@ -3754,7 +3787,7 @@
       },
       {
         "part": "Aims and hypothesis",
-        "where": "The workshop",
+        "where": "The lab",
         "here": false
       },
       {
@@ -3764,12 +3797,12 @@
       },
       {
         "part": "Results",
-        "where": "The workshop",
+        "where": "The lab",
         "here": false
       },
       {
         "part": "Discussion",
-        "where": "The workshop",
+        "where": "The lab",
         "here": false
       },
       {
@@ -3793,6 +3826,110 @@
       {
         "term": "Alzheimer’s disease (AD)",
         "text": "the most common brain disease that causes dementia."
+      }
+    ]
+  },
+  "privacyPage": {
+    "kicker": "PRIVACY",
+    "title": "Privacy notice",
+    "intro": "What this site collects, why, and how to ask for it to be deleted. Written for students aged 13 and over, their parents and teachers.",
+    "updated": "Last updated 20 November 2026",
+    "sections": [
+      {
+        "heading": "Who we are",
+        "body": [
+          "Unravel is run by Giulio Taggart, a student at Imperial College London, as an independent education project. Contact: giulio.taggart@gmail.com."
+        ]
+      },
+      {
+        "heading": "What stays on your device",
+        "body": [
+          "Your poll answers, lab progress, saved findings and abstract draft are stored in your browser only. We never see them. Clear your browser data to remove them."
+        ]
+      },
+      {
+        "heading": "Anonymous poll answers",
+        "body": [
+          "If collection is switched on, the warm-up and exit polls send your answers, confidence ratings, year group, optional class code and a random code made on your device. They never include your name or email.",
+          "We use them only to measure whether the lesson helps, and report results as class or overall totals.",
+          "They are stored in a Google Sheet that only the organiser can open, and deleted by 31 August 2028."
+        ]
+      },
+      {
+        "heading": "Competition entries",
+        "body": [
+          "Entries are made through a Google Form, not this site. The form asks for your name, email, school, class code, how confident you feel about a STEM degree, and your abstract.",
+          "We use these only to judge the competition, contact the winner and, with your permission, publish winning entries with first name and school only. Entries are deleted 12 months after the winner is announced."
+        ]
+      },
+      {
+        "heading": "Other services",
+        "body": [
+          "The site's fonts are loaded from Google Fonts, which receives your device's IP address. Google's own privacy policy applies."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "body": [
+          "Under UK GDPR you can ask to see, correct or delete your data. Email giulio.taggart@gmail.com. Anonymous poll answers cannot be traced back to you, so they cannot be picked out for deletion. You can also complain to the Information Commissioner's Office (ico.org.uk)."
+        ]
+      },
+      {
+        "heading": "Age",
+        "body": [
+          "The site and competition are for people aged 13 and over. Students under 13 should not enter the competition."
+        ]
+      }
+    ]
+  },
+  "termsPage": {
+    "kicker": "ABSTRACT COMPETITION",
+    "title": "Competition terms",
+    "intro": "The rules for the Unravel abstract competition.",
+    "updated": "Last updated 20 November 2026",
+    "sections": [
+      {
+        "heading": "Who can enter",
+        "body": [
+          "Pre-university students aged 13 or over, from anywhere, who have not started a university degree. One entry per person. Entry is free."
+        ]
+      },
+      {
+        "heading": "How to enter",
+        "body": [
+          "Write an abstract of up to 300 words based on the lab or Solo explore, and submit it through the entry form linked on the competition page.",
+          "Closing date: 23:59 UK time on 28 February 2027. Late entries will not be judged."
+        ]
+      },
+      {
+        "heading": "Your own work",
+        "body": [
+          "Your abstract must be your own words. Entries written with AI tools, or copied, will be disqualified. If an entry looks AI-written, the judge may ask a short question about it before deciding."
+        ]
+      },
+      {
+        "heading": "Judging",
+        "body": [
+          "Entries are judged by Giulio Taggart with names hidden, against the published 50-mark scheme. The judge's decision is final. The winner is told by email within 4 weeks of the closing date."
+        ]
+      },
+      {
+        "heading": "The prize",
+        "body": [
+          "One winner receives a £50 Amazon voucher, paid for by Giulio Taggart. There is no cash alternative. If the winner is under 16, the voucher is sent through their school or a parent or guardian."
+        ]
+      },
+      {
+        "heading": "Your entry",
+        "body": [
+          "You keep the rights to your abstract. With your permission, we may publish winning or shortlisted entries with your first name and school only."
+        ]
+      },
+      {
+        "heading": "Data and contact",
+        "body": [
+          "How entry details are used is set out in the privacy notice. Questions: giulio.taggart@gmail.com."
+        ]
       }
     ]
   }
