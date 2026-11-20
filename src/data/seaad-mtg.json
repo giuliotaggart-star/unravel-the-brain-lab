@@ -3064,7 +3064,7 @@
     "submitGroupHeading": "What to submit",
     "keyDetailsHeading": "Key details",
     "brief": {
-      "lead": "Submit a short scientific abstract based on a finding from the SEA-AD data on this site. Pick one focused question, explain what is already known, show what the data says, and say what it means.",
+      "lead": "Submit a short scientific abstract based on a finding from the SEA-AD data (the Seattle Alzheimer’s Disease Brain Cell Atlas) on this site. Pick one focused question, explain what is already known, show what the data says, and say what it means.",
       "lead2": "You do not need to run new experiments or collect your own data. Use the Data Lab or Solo explore, and do not present guesses as findings.",
       "includeHeading": "Your abstract should make clear:",
       "include": [
