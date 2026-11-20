@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as BackgroundRouteImport } from './routes/background'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DataRouteImport } from './routes/data'
+import { Route as ExitPollRouteImport } from './routes/exit-poll'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as FurtherRouteImport } from './routes/further'
 import { Route as LabRouteImport } from './routes/lab'
@@ -47,6 +48,11 @@ const ContactRoute = ContactRouteImport.update({
 const DataRoute = DataRouteImport.update({
   id: '/data',
   path: '/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExitPollRoute = ExitPollRouteImport.update({
+  id: '/exit-poll',
+  path: '/exit-poll',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreRoute = ExploreRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/background': typeof BackgroundRoute
   '/contact': typeof ContactRoute
   '/data': typeof DataRoute
+  '/exit-poll': typeof ExitPollRoute
   '/explore': typeof ExploreRoute
   '/further': typeof FurtherRoute
   '/lab': typeof LabRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/background': typeof BackgroundRoute
   '/contact': typeof ContactRoute
   '/data': typeof DataRoute
+  '/exit-poll': typeof ExitPollRoute
   '/explore': typeof ExploreRoute
   '/further': typeof FurtherRoute
   '/lab': typeof LabRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/background': typeof BackgroundRoute
   '/contact': typeof ContactRoute
   '/data': typeof DataRoute
+  '/exit-poll': typeof ExitPollRoute
   '/explore': typeof ExploreRoute
   '/further': typeof FurtherRoute
   '/lab': typeof LabRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/background'
     | '/contact'
     | '/data'
+    | '/exit-poll'
     | '/explore'
     | '/further'
     | '/lab'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/background'
     | '/contact'
     | '/data'
+    | '/exit-poll'
     | '/explore'
     | '/further'
     | '/lab'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/background'
     | '/contact'
     | '/data'
+    | '/exit-poll'
     | '/explore'
     | '/further'
     | '/lab'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   BackgroundRoute: typeof BackgroundRoute
   ContactRoute: typeof ContactRoute
   DataRoute: typeof DataRoute
+  ExitPollRoute: typeof ExitPollRoute
   ExploreRoute: typeof ExploreRoute
   FurtherRoute: typeof FurtherRoute
   LabRoute: typeof LabRoute
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/data'
       fullPath: '/data'
       preLoaderRoute: typeof DataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exit-poll': {
+      id: '/exit-poll'
+      path: '/exit-poll'
+      fullPath: '/exit-poll'
+      preLoaderRoute: typeof ExitPollRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore': {
@@ -321,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   BackgroundRoute: BackgroundRoute,
   ContactRoute: ContactRoute,
   DataRoute: DataRoute,
+  ExitPollRoute: ExitPollRoute,
   ExploreRoute: ExploreRoute,
   FurtherRoute: FurtherRoute,
   LabRoute: LabRoute,

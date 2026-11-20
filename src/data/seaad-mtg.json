@@ -94,7 +94,7 @@
     }
   },
   "poll": {
-    "framing": "Six statements. Go with your gut.",
+    "framing": "Six statements, then three quick ratings. Go with your gut. The answers come at the end of the lesson.",
     "options": {
       "true": "True",
       "false": "False",
@@ -140,8 +140,8 @@
     ],
     "classCodeLabel": "Class code (optional)",
     "classCodeHint": "Your teacher may give you a code, like BIOL-12. Working alone? Leave it blank.",
-    "submitLabel": "See how I did",
-    "privacyShared": "Your six answers and class code go to the workshop organiser. No name. No email.",
+    "submitLabel": "Send my answers",
+    "privacyShared": "Your answers, year group and class code go to the workshop organiser with a random code. No name. No email.",
     "yourAnswer": "Your answer",
     "correctAnswer": "Correct answer",
     "rightLabel": "Right",
@@ -152,7 +152,76 @@
     "resultCta": "Keep going",
     "heading": "What do you already know about dementia?",
     "classCodeLink": "Have a class code?",
-    "scoreText": "{{score}} of {{total}}"
+    "scoreText": "{{score}} of {{total}}",
+    "confidenceHeading": "How much do you agree?",
+    "scale": [
+      "Strongly disagree",
+      "Disagree",
+      "Not sure",
+      "Agree",
+      "Strongly agree"
+    ],
+    "confidence": [
+      {
+        "id": "c1",
+        "statement": "I could explain what bioinformatics is"
+      },
+      {
+        "id": "c2",
+        "statement": "I feel confident writing up results from data, like a results section in a report"
+      },
+      {
+        "id": "c3",
+        "statement": "People like me could study biology or data science at university"
+      }
+    ],
+    "yearLabel": "Your year group",
+    "years": [
+      "Year 12",
+      "Year 13",
+      "Other"
+    ],
+    "nextLabel": "Next",
+    "thanksHeading": "Thanks, we’ll find out at the end of the lesson",
+    "thanksLine": "Your answers stay hidden for now. You will see them again in the exit poll.",
+    "thanksCta": "Go to What is dementia?",
+    "startNeeded": "You have not done the warm-up poll on this device, so there is no “before” to compare with. You can still take part.",
+    "exit": {
+      "heading": "What do you know now?",
+      "framing": "The same six statements and three ratings, then a few last questions. Then the answers.",
+      "r1": "Looking back, how confident were you before today about writing up results from data?",
+      "e1": "How useful was today?",
+      "e1Scale": [
+        "Not useful",
+        "A little",
+        "Somewhat",
+        "Useful",
+        "Very useful"
+      ],
+      "e2": "Has today changed how likely you are to consider a biology, biomedical or data science degree?",
+      "e2Options": [
+        "More likely",
+        "No change",
+        "Less likely"
+      ],
+      "e3": "What will you do next? (tick any)",
+      "e3Options": [
+        "Write about it for UCAS or a CV",
+        "Try Solo explore",
+        "Enter the competition",
+        "Read more",
+        "Nothing yet"
+      ],
+      "e4": "One thing you learned (optional, do not write your name)",
+      "submitLabel": "Reveal the answers",
+      "revealHeading": "The answers",
+      "beforeLabel": "Start",
+      "afterLabel": "Now",
+      "shiftHeading": "Your confidence, start to now",
+      "classNote": "Your teacher can share how the whole class changed.",
+      "retakeLabel": "Do the exit poll again",
+      "nextCta": "Go further"
+    }
   },
   "lab": {
     "donorTitle": "Donor {{donorId}}: {{value}}. Age {{age}}, {{sex}}.",
@@ -3233,13 +3302,13 @@
     },
     {
       "id": "poll",
-      "name": "What you think",
+      "name": "Warm-up poll",
       "tint": "peri",
       "glowX": 15,
       "glowY": 100,
       "kicker": "BACKGROUND · WHAT YOU ALREADY KNOW",
-      "title": "DEMENTIA POLL",
-      "line": "Test your knowledge"
+      "title": "Warm-up poll",
+      "line": "Every report starts with what is already known. First: what do you know?"
     },
     {
       "id": "pivot",
@@ -3270,6 +3339,16 @@
       "kicker": "RESULTS AND DISCUSSION",
       "title": "THE LAB",
       "line": "Run a real investigation"
+    },
+    {
+      "id": "exit",
+      "name": "Exit poll",
+      "tint": "peri",
+      "glowX": 50,
+      "glowY": 100,
+      "kicker": "DISCUSSION · WHAT YOU KNOW NOW",
+      "title": "Exit poll",
+      "line": "The same questions again. Then the answers."
     },
     {
       "id": "explore",
@@ -3529,7 +3608,7 @@
       {
         "id": "practice",
         "label": "Guided reports",
-        "to": "/background"
+        "to": "/poll"
       },
       {
         "id": "prize",
@@ -3554,9 +3633,8 @@
     ],
     "steps": [
       {
-        "name": "Understanding the topic",
+        "name": "Warm-up poll and background",
         "sections": [
-          "background",
           "poll",
           "pivot"
         ]
@@ -3571,6 +3649,12 @@
         "name": "The workshop",
         "sections": [
           "lab"
+        ]
+      },
+      {
+        "name": "Exit poll",
+        "sections": [
+          "exit"
         ]
       },
       {

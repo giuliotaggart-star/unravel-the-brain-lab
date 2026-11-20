@@ -1,7 +1,8 @@
 # Roadmap
 
 ## Open
-- (none)
+- Poll collection address (Google Apps Script URL) — waiting on Giulio
+- Audit batches 3–5 (lab reorder, privacy/terms + menu, teachers/polish)
 
 ## Done
 - Contact: real email giulio.taggart@gmail.com replaces the placeholder
@@ -13,3 +14,5 @@
 - Contact: full photo on the left, Imperial wordmark top-right, name and profile below, email at the foot of the text column
 - [x] Report writer page with tips (feedback agent later — not now)
 - [x] Fix overlap on data step 3 graphic
+- [x] Audit batch 1: real-data flag, poll science wording, citations, contrast, phone tabs
+- [x] Audit batch 2: topic intro merged into warm-up poll, hidden answers, confidence ratings, exit poll with reveal

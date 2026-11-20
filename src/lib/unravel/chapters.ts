@@ -1,6 +1,6 @@
 import { data } from "./data";
 
-export type ChapterPath = "/about" | "/background" | "/poll" | "/what-dementia-is" | "/data" | "/lab" | "/explore";
+export type ChapterPath = "/about" | "/background" | "/poll" | "/what-dementia-is" | "/data" | "/lab" | "/exit-poll" | "/explore";
 export type GroupPath = "/about" | "/background" | "/poll" | "/prize" | "/ucas" | "/teachers" | "/contact";
 
 const PATHS: Record<string, ChapterPath> = {
@@ -10,6 +10,7 @@ const PATHS: Record<string, ChapterPath> = {
   pivot: "/what-dementia-is",
   video: "/data",
   lab: "/lab",
+  exit: "/exit-poll",
   explore: "/explore",
 };
 

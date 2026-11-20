@@ -34,3 +34,4 @@ use the editor.
 - Donor statistics live in `src/lib/unravel/stats.ts`, ported unchanged from the original app so lab verdicts match the source.
 - Navigation: 5 groups from `journey` in the JSON live in the Menu sheet; practice steps are numbered except `standalone` ones (Solo explore); About is the hub, not a step.
 - Student progress (poll, lab, essay, findings) stays in localStorage; the only exception is poll results, which are sent to the optional `pollEndpoint` from the JSON config when set, with a notice shown, matching the site's no-tracking privacy promise.
+- Polls: the warm-up poll (/poll) hides answers; the exit poll (/exit-poll) reveals them and compares with the start. Both carry a random device id (`anonId`) via `src/lib/unravel/poll.ts` so rows pair up without names.
