@@ -90,7 +90,7 @@
     "playLabel": "Play the background video",
     "brainLabels": {
       "lobe": "Temporal lobe",
-      "sample": "Sample taken here"
+      "sample": "Sample: middle temporal gyrus"
     }
   },
   "poll": {
@@ -3373,7 +3373,7 @@
       "id": "cells-disease",
       "myth": "\"Dementia is just part of getting old.\"",
       "headline": "Alzheimer’s is a physical disease of brain cells.",
-      "body": "Your brain works because billions of [[neurons]] pass signals to each other. In Alzheimer’s disease, neurons slowly **stop working, lose their connections and die**. The damage begins long before any symptoms show. ==Pathologists can see this damage under a microscope and grade it==, from **Not AD** to **High**. That grade is called the [[pathology level]].",
+      "body": "Your brain works because billions of [[neurons]] pass signals to each other. In Alzheimer’s disease, neurons slowly **stop working, lose their connections and die**. The damage begins long before any symptoms show. ==Pathologists can see this damage under a microscope and grade it==, from **Not AD** (AD is short for **Alzheimer’s disease**) to **High**. That grade is called the [[pathology level]].",
       "graphic": {
         "levels": [
           "Not AD",
@@ -3466,7 +3466,7 @@
       "alt": "A side view of the brain."
     },
     {
-      "caption": "Pathologists graded each brain’s [[pathology level]]: **Not AD, Low, Intermediate or High**.",
+      "caption": "Pathologists graded each brain’s [[pathology level]]: **Not AD** (no Alzheimer’s disease), **Low, Intermediate** or **High**.",
       "alt": "Four columns, one for each pathology level, filling with the real number of donors."
     },
     {
@@ -3696,6 +3696,16 @@
     "cta": "Get started",
     "topicLabel": "Our topic",
     "topic": "Alzheimer's disease and dementia",
-    "outlineToggle": "See all 6 parts of your report"
+    "outlineToggle": "See all 6 parts of your report",
+    "terms": [
+      {
+        "term": "Dementia",
+        "text": "a set of symptoms, like memory loss and confusion, that get worse over time."
+      },
+      {
+        "term": "Alzheimer’s disease (AD)",
+        "text": "the most common brain disease that causes dementia."
+      }
+    ]
   }
 }

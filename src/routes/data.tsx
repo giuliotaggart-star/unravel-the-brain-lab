@@ -43,9 +43,10 @@ function Scene({ step }: { step: number }) {
           <text x={250} y={244} fontSize={12} fontWeight={600} fill="var(--coral-ink)">{labels.lobe}</text>
           {step === 2 && (
             <>
-              <motion.rect width={34} height={26} rx={5} fill="var(--coral)" initial={{ x: 200, y: 180 }} animate={{ x: 316, y: 40 }} transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }} />
-              <motion.path d="M217 192 C 260 150, 300 90, 330 66" fill="none" stroke="var(--coral)" strokeDasharray="3 6" strokeWidth={2} initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1 }} />
-              <text x={300} y={28} fontSize={12} fontWeight={600} fill="var(--foreground)">{labels.sample}</text>
+              <circle cx={214} cy={196} r={16} fill="var(--coral)" stroke="var(--card)" strokeWidth={3} />
+              <line x1={214} y1={180} x2={300} y2={70} stroke="var(--coral)" strokeWidth={2} />
+              <rect x={230} y={30} width={185} height={40} rx={10} fill="var(--card)" stroke="var(--coral)" strokeWidth={2} />
+              <text x={322} y={55} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--foreground)">{labels.sample}</text>
             </>
           )}
         </motion.g>

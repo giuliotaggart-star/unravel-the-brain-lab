@@ -27,6 +27,9 @@ function Background() {
         <div className="mt-6 inline-flex max-w-3xl flex-col gap-1 rounded-2xl border-2 border-go bg-go-soft px-6 py-4">
           <span className="kicker text-go">{b.topicLabel}</span>
           <strong className="font-display-tight text-2xl text-go sm:text-3xl">{b.topic}</strong>
+          <ul className="mt-3 space-y-1.5 border-t border-go/20 pt-3">
+            {b.terms?.map((t: any) => <li key={t.term}><strong>{t.term}:</strong> {t.text}</li>)}
+          </ul>
         </div>
       </ChapterOpener>
       <PageWrap className="mt-12 space-y-14">
