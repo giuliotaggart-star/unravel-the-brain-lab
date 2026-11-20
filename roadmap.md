@@ -3,7 +3,8 @@
 ## Open
 - Poll collection address (Google Apps Script URL) — waiting on Giulio
 - Audit batch 5 (teachers/polish)
-- Confirm competition judges and prize type (terms drafted as Giulio judges, £50 Amazon voucher)
+- Prize voucher type undecided — keep wording generic ("a £50 voucher"), never name a retailer
+- Remove the Imperial wordmark from About and Contact; plain text attribution instead (no brand permission)
 
 ## Done
 - Contact: real email giulio.taggart@gmail.com replaces the placeholder

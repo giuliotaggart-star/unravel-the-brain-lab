@@ -34,6 +34,8 @@ function Teachers() {
         </ul>
       </PSec>
       <PSec title={t.sensitivityHeading}><p>{t.sensitivity}</p></PSec>
+      <PSec title={t.safeguardHeading}><p>{t.safeguard}</p></PSec>
+      <PSec title={t.accessHeading}><p>{t.access}</p></PSec>
       <PSec title={t.packHeading}>
         <p>{t.packBody}</p>
         {isUrl(cfg["teacherFormUrl"]) ? (

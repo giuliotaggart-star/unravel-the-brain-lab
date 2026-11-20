@@ -12,7 +12,7 @@ export const Route = createFileRoute("/prize")({
   head: () => ({
     meta: [
       { title: "Abstract competition: £50 prize — Unravel" },
-      { name: "description", content: "Write a short scientific report of up to 300 words on real SEA-AD data. Every entry gets personal feedback." },
+      { name: "description", content: "Write a short scientific report of up to 300 words on real SEA-AD data. Every entry gets short written feedback." },
       { property: "og:title", content: "Abstract competition: £50 prize — Unravel" },
       { property: "og:description", content: "Introduction, methods, results, discussion: write your report on real Alzheimer's data." },
       { property: "og:type", content: "website" },

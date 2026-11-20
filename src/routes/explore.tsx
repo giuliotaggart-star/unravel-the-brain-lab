@@ -125,6 +125,7 @@ function Explore() {
                     <>
                       {Number.isFinite(d) && <p><span className="kicker">{lab.dLabel}</span> {num(d, 2)} {lab.effectUnit}. {size}. {fill(lab.dNote, vars)}</p>}
                       {Q.mw && <p><span className="kicker">{lab.uLabel}</span> {num(Q.mw.u, 1)}. <span className="kicker">{lab.uPLabel}</span> {Q.mw.p < 0.001 ? "< 0.001" : num(Q.mw.p, 3)}. {fill(lab.uNote, vars)}</p>}
+                      {Q.mw && isText(lab.manyTestsNote) && <p className="text-muted-foreground">{lab.manyTestsNote}</p>}
                     </>
                   ) : <p>{fill(lab.tooFewNote, { ...vars, minDonors: String(minDonors()) })}</p>}
                   <p><span className="kicker">{lab.sizesLabel}</span> {fill(lab.sizesNote, vars)}</p>

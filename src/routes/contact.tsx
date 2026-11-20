@@ -34,15 +34,8 @@ function Contact() {
               decoding="async"
             />
 
-            {/* Imperial logo at the top, name and profile below it */}
+            {/* Name and profile below the photo: plain text, no Imperial brand assets */}
             <div className="flex flex-col gap-5 bg-card p-6 sm:p-8">
-              <img
-                src={`${import.meta.env.BASE_URL}imperial-wordmark.png`}
-                alt="Imperial College London"
-                className="h-auto w-full max-w-[320px]"
-                loading="lazy"
-                decoding="async"
-              />
               <div>
                 <p className="font-display-tight text-2xl font-semibold text-go-ink sm:text-3xl">{c.name}</p>
                 <p className="mt-1.5 text-base leading-snug text-muted-foreground sm:text-lg">{c.role}</p>
