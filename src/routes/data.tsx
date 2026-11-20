@@ -44,9 +44,9 @@ function Scene({ step }: { step: number }) {
           {step === 2 && (
             <>
               <circle cx={214} cy={196} r={16} fill="var(--coral)" stroke="var(--card)" strokeWidth={3} />
-              <line x1={214} y1={180} x2={300} y2={70} stroke="var(--coral)" strokeWidth={2} />
-              <rect x={230} y={30} width={185} height={40} rx={10} fill="var(--card)" stroke="var(--coral)" strokeWidth={2} />
-              <text x={322} y={55} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--foreground)">{labels.sample}</text>
+              <line x1={202} y1={206} x2={150} y2={232} stroke="var(--coral)" strokeWidth={2} />
+              <rect x={20} y={222} width={185} height={30} rx={8} fill="var(--card)" stroke="var(--coral)" strokeWidth={2} />
+              <text x={112} y={241} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--foreground)">{labels.sample}</text>
             </>
           )}
         </motion.g>

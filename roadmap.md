@@ -12,3 +12,4 @@
 - About: Imperial line quieter (slim rule + smaller wordmark) but still visible
 - Contact: full photo on the left, Imperial wordmark top-right, name and profile below, email at the foot of the text column
 - [x] Report writer page with tips (feedback agent later — not now)
+- [x] Fix overlap on data step 3 graphic
