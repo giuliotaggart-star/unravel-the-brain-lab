@@ -1,6 +1,6 @@
 {
   "meta": {
-    "PLACEHOLDER": true,
+    "PLACEHOLDER": false,
     "placeholderNotice": "PLACEHOLDER DATA. Every number on this site is made up so the pages could be built before the real analysis is run. Nothing here is a finding. Text marked PLACEHOLDER is waiting for a subject expert.",
     "title": "Unravel",
     "dataset": "SEA-AD — middle temporal gyrus (snRNA-seq, final nuclei)",
@@ -16,7 +16,7 @@
       "unit": "cells"
     },
     "citation": "Gabitto et al. (2024) Nature Neuroscience",
-    "citationUrl": "",
+    "citationUrl": "https://doi.org/10.1038/s41593-024-01774-5",
     "licence": "Allen Institute Terms of Use — non-commercial",
     "licenceUrl": "https://alleninstitute.org/terms-of-use/",
     "accessed": "2026-11-14",
@@ -105,7 +105,7 @@
         "id": "q1",
         "statement": "Dementia is a disease of the brain",
         "correct": "true",
-        "why": "Dementia is caused by diseases that damage brain cells."
+        "why": "Dementia is caused by diseases that damage the brain, so the national survey counts this as true."
       },
       {
         "id": "q2",
@@ -115,9 +115,9 @@
       },
       {
         "id": "q3",
-        "statement": "Dementia is a normal process of ageing",
+        "statement": "Dementia is part of the normal process of ageing",
         "correct": "false",
-        "why": "Most older people never get it. Age raises the risk but does not cause it."
+        "why": "Age raises the risk, but dementia is caused by disease, and most older people do not have it."
       },
       {
         "id": "q4",
@@ -133,9 +133,9 @@
       },
       {
         "id": "q6",
-        "statement": "People who eat healthily and exercise are less likely to get dementia",
+        "statement": "Some cases of dementia could be prevented or delayed",
         "correct": "true",
-        "why": "A healthy lifestyle lowers the risk. It does not remove it."
+        "why": "Nearly half could be, by tackling 14 risk factors such as high blood pressure, smoking and inactivity (Lancet Commission 2024)."
       }
     ],
     "classCodeLabel": "Class code (optional)",
@@ -1368,7 +1368,7 @@
       "id": "sst",
       "label": "Sst",
       "plainLabel": "GABA inhibitory neurons",
-      "colour": "#FBE9CF",
+      "colour": "#D9922E",
       "plain": "Sst neurons"
     },
     {
@@ -2556,7 +2556,7 @@
       "grouping": "adnc",
       "intro": {
         "background": "Neurons do not only switch each other on. Some switch others off, which keeps brain activity balanced. One family of these inhibitory neurons is called Sst neurons.",
-        "known": "In Alzheimer’s disease, some brain networks become overactive. Researchers suspect that losing inhibitory neurons could be part of the reason.",
+        "known": "In Alzheimer’s disease, some brain networks become overactive. Researchers suspect that losing inhibitory neurons could be part of the reason (Palop and Mucke 2016).",
         "gap": "If that is right, Sst neurons should be rarer in brains with more Alzheimer’s pathology. Is that what the data shows?"
       },
       "aims": {
@@ -3373,7 +3373,7 @@
       "id": "cells-disease",
       "myth": "\"Dementia is just part of getting old.\"",
       "headline": "Alzheimer’s is a physical disease of brain cells.",
-      "body": "Your brain works because billions of [[neurons]] pass signals to each other. In Alzheimer’s disease, neurons slowly **stop working, lose their connections and die**. The damage begins long before any symptoms show. ==Pathologists can see this damage under a microscope and grade it==, from **Not AD** (AD is short for **Alzheimer’s disease**) to **High**. That grade is called the [[pathology level]].",
+      "body": "Your brain works because billions of [[neurons]] pass signals to each other. In Alzheimer’s disease, neurons slowly **stop working, lose their connections and die**. The damage begins long before any symptoms show (Bateman et al. 2012). ==Pathologists can see this damage under a microscope and grade it==, from **Not AD** (AD is short for **Alzheimer’s disease**) to **High**. That grade is called the [[pathology level]].",
       "graphic": {
         "levels": [
           "Not AD",

@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, Compass, Info, Menu, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
@@ -176,6 +176,7 @@ const ExtLink = ({ href, children }: { href?: string; children: ReactNode }) =>
   );
 
 export function SiteFooter() {
+  const navigate = useNavigate();
   const m = data.meta;
   const f = data.footer;
   const [poll] = useStored<any>("poll", null);
@@ -205,7 +206,7 @@ export function SiteFooter() {
                 className="font-medium text-peri-ink underline decoration-peri/30 underline-offset-2 hover:decoration-peri"
                 onClick={() => {
                   store.del("poll");
-                  window.location.assign("/poll");
+                  void navigate({ to: "/poll" });
                 }}
               >
                 {data.poll.retakeLabel}

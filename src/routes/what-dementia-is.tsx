@@ -49,17 +49,17 @@ function Pivot() {
     <div>
       <ChapterOpener id="pivot" />
       <PageWrap className="mt-10">
-        <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+        <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[280px_1fr]">
           <nav aria-label={data.sections.find((s) => s.id === "pivot")?.name} className="lg:sticky lg:top-24 lg:self-start">
-            <ol className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+            <ol className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:flex lg:flex-col">
               {items.map((x, k) => (
-                <li key={x.id} className="shrink-0 lg:shrink">
+                <li key={x.id} className="min-w-0">
                   <button
                     type="button"
                     onClick={() => go(k)}
                     aria-current={k === i ? "step" : undefined}
                     className={cn(
-                      "flex w-56 items-start gap-3 rounded-2xl border p-3 text-left transition-all lg:w-full",
+                      "flex w-full items-start gap-3 rounded-2xl border p-3 text-left transition-all lg:w-full",
                       k === i ? "border-border bg-card shadow-card" : "border-transparent text-muted-foreground hover:bg-card/70 hover:text-foreground",
                     )}
                   >
