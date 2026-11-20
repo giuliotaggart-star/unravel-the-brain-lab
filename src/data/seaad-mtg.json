@@ -3639,8 +3639,8 @@
     ]
   },
   "background": {
-    "heading": "Every scientific report starts with a literature review",
-    "intro": "A literature review is a check of the research already published on a topic. In this guided report, our topic is Alzheimer's disease and dementia.",
+    "heading": "Every report starts with a literature review",
+    "intro": "A literature review is a check of what has already been published on a topic.",
     "whyHeading": "Why it matters",
     "why": [
       {
@@ -3692,7 +3692,10 @@
     ],
     "hereLabel": "You are here",
     "nextHeading": "Background check: what do you already know?",
-    "nextLine": "First, find out what you already know. Then we will fill in the gaps.",
-    "cta": "Take the dementia poll"
+    "nextLine": "Start with a quick poll: what do you already know?",
+    "cta": "Get started",
+    "topicLabel": "Our topic",
+    "topic": "Alzheimer's disease and dementia",
+    "outlineToggle": "See all 6 parts of your report"
   }
 }
