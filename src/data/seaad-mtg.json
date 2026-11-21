@@ -43,7 +43,7 @@
     "essayFormUrl": "https://docs.google.com/forms/d/e/1FAIpQLSf3-0eaPeJhtPOQra47jLyX3BR_6feb7q3SCcFeWyLYCVXOtg/viewform",
     "teacherFormUrl": "",
     "teacherPackUrl": "",
-    "contact": "giulio.taggart@gmail.com",
+    "contact": "unravel.outreach@gmail.com",
     "essayDeadline": "28 February 2027"
   },
   "ui": {
@@ -3246,12 +3246,12 @@
       "Choose a short code for the class, for example BIOL-12, and write it on the whiteboard.",
       "Students type it into the optional box under the warm-up poll.",
       "No names are collected: answers are grouped by the code only.",
-      "After the lesson, email giulio.taggart@gmail.com with your code to ask for your class’s results. This works once poll collection is switched on."
+      "After the lesson, email unravel.outreach@gmail.com with your code to ask for your class’s results. This works once poll collection is switched on."
     ],
     "safeguardHeading": "Safeguarding",
     "safeguard": "I do not contact students directly. All contact goes through the school, and the site collects no names.",
     "accessHeading": "Accessibility",
-    "access": "Every control is a normal button or menu, so keyboards and screen readers can reach it. If something is hard to use, email giulio.taggart@gmail.com and I will fix it."
+    "access": "Every control is a normal button or menu, so keyboards and screen readers can reach it. If something is hard to use, email unravel.outreach@gmail.com and I will fix it."
   },
   "footer": {
     "dataLabel": "Data:",
@@ -3688,7 +3688,7 @@
       "I want to help equip students for the transition into scientific writing and show them the power of computational Biology."
     ],
     "emailLabel": "Email",
-    "email": "giulio.taggart@gmail.com"
+    "email": "unravel.outreach@gmail.com"
   },
   "write": {
     "prizeBanner": "Practising for the competition? Check the guidelines and word targets for the {{prizeValue}} Abstract competition.",
@@ -3810,7 +3810,7 @@
       {
         "heading": "Who we are",
         "body": [
-          "Unravel is run by Giulio Taggart, a student at Imperial College London, as an independent education project. Contact: giulio.taggart@gmail.com."
+          "Unravel is run by Giulio Taggart, a student at Imperial College London, as an independent education project. Contact: unravel.outreach@gmail.com."
         ]
       },
       {
@@ -3843,7 +3843,7 @@
       {
         "heading": "Your rights",
         "body": [
-          "Under UK GDPR you can ask to see, correct or delete your data. Email giulio.taggart@gmail.com. Anonymous poll answers cannot be traced back to you, so they cannot be picked out for deletion. You can also complain to the Information Commissioner's Office (ico.org.uk)."
+          "Under UK GDPR you can ask to see, correct or delete your data. Email unravel.outreach@gmail.com. Anonymous poll answers cannot be traced back to you, so they cannot be picked out for deletion. You can also complain to the Information Commissioner's Office (ico.org.uk)."
         ]
       },
       {
@@ -3900,7 +3900,7 @@
       {
         "heading": "Data and contact",
         "body": [
-          "How entry details are used is set out in the privacy notice. Questions: giulio.taggart@gmail.com."
+          "How entry details are used is set out in the privacy notice. Questions: unravel.outreach@gmail.com."
         ]
       }
     ]

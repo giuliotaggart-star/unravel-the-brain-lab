@@ -4,10 +4,10 @@
 - Poll collection address (Google Apps Script URL) — waiting on Giulio
 - Prize voucher type undecided — keep wording generic ("a £50 voucher"), never name a retailer
 - Giulio to read and approve drafted copy: UCAS founder note, new For teachers lines, Solo explore "why it matters"
-- Contact email is a personal Gmail (giulio.taggart@gmail.com) — audit recommends a project email before launch
 - Privacy notice: state how long entries and poll rows are kept
 
 ## Done
+- Contact email is now the project inbox unravel.outreach@gmail.com everywhere (contact page, teachers, privacy, terms)
 - Lesson navigation: one purple Next button at completion; duplicate Skip ahead links hidden on both polls, What is dementia and the data walkthrough
 - Confidence ratings are now required in both polls (and the "looking back" rating in the exit poll); the send button stays disabled with a short hint until they are answered
 - Teacher page: OCR Module 6 now points to 6.1.1 Cellular control; Edexcel A (Salters-Nuffield, 9BN0) Topic 8 Grey Matter added
