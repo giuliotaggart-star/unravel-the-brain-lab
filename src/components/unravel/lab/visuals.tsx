@@ -67,59 +67,6 @@ export function IntroVisual({ cs }: { cs: CaseStudy }) {
 }
 
 /** Step 3: Donors → Tissue → Nuclei → One value per donor. */
-export function MethodsPipeline({ S, cs }: { S: LabStats; cs: CaseStudy }) {
-  const reduced = useReducedMotion();
-  const labels: string[] = LUI().methods.pipeline;
-  const col = cellColourVar(cs.views[0]!.cellType);
-  const part = (i: number) => ({ initial: { opacity: 0, y: reduced ? 0 : 10 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay: reduced ? 0 : i * 0.7 } });
-  const nuc = Array.from({ length: 56 }, (_, i) => ({ x: 486 + (i % 7) * 20, y: 120 + Math.floor(i / 7) * 20, hit: (i * 7 + 3) % 5 === 0 }));
-  const label = (x: number, t: string | undefined) => (
-    <text x={x} y={396} textAnchor="middle" fontSize={13} letterSpacing={1.3} fontFamily="var(--font-mono)" fill="var(--foreground)">
-      {String(t ?? "").toUpperCase()}
-    </text>
-  );
-  const chev = (x: number) => <path d={`M${x - 7} 200 L${x + 7} 214 L${x - 7} 228`} fill="none" stroke="var(--muted-foreground)" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />;
-  let y = 40;
-  return (
-    <svg viewBox="0 0 830 420" className="h-full w-full" role="img" aria-label={labels.join(", ")}>
-      <motion.g {...part(0)}>
-        {S.Q.groups.map((g) => {
-          const y0 = y;
-          y += Math.ceil(g.n / 12) * 15 + 28;
-          return (
-            <g key={g.name}>
-              <text x={14} y={y0} fontSize={11} letterSpacing={1} fontFamily="var(--font-mono)" fill="var(--muted-foreground)">{`${g.name} · ${g.n}`.toUpperCase()}</text>
-              {Array.from({ length: g.n }, (_, k) => (
-                <circle key={k} cx={20 + (k % 12) * 16} cy={y0 + 12 + Math.floor(k / 12) * 15} r={5} fill="var(--peri)" fillOpacity={0.75} />
-              ))}
-            </g>
-          );
-        })}
-        {label(112, labels[0])}
-      </motion.g>
-      <motion.g {...part(1)}>
-        {chev(228)}
-        <rect x={276} y={168} width={110} height={88} rx={12} fill="var(--peri-soft)" stroke="var(--peri)" strokeWidth={2.5} />
-        {label(331, labels[1])}
-      </motion.g>
-      <motion.g {...part(2)}>
-        {chev(432)}
-        {nuc.map((n, i) => (
-          <motion.circle key={i} r={n.hit ? 7 : 5.5} style={{ fill: n.hit ? col : "var(--muted-foreground)" }} fillOpacity={n.hit ? 1 : 0.35} initial={{ cx: 331, cy: 212, opacity: 0 }} animate={{ cx: n.x, cy: n.y, opacity: 1 }} transition={{ duration: reduced ? 0 : 0.7, delay: reduced ? 0 : 1.4 + i * 0.01 }} />
-        ))}
-        {label(546, labels[2])}
-      </motion.g>
-      <motion.g {...part(3)}>
-        {chev(660)}
-        <line x1={690} y1={90} x2={690} y2={330} stroke="var(--foreground)" strokeOpacity={0.4} strokeWidth={2} />
-        <line x1={690} y1={330} x2={820} y2={330} stroke="var(--foreground)" strokeOpacity={0.4} strokeWidth={2} />
-        <motion.circle r={10} style={{ fill: col }} initial={{ cx: 600, cy: 212, opacity: 0 }} animate={{ cx: 760, cy: 230, opacity: 1 }} transition={{ duration: reduced ? 0 : 0.9, delay: reduced ? 0 : 2.6, ease: [0.65, 0, 0.35, 1] }} />
-        {label(755, labels[3])}
-      </motion.g>
-    </svg>
-  );
-}
-
 function Arrow({ dir }: { dir: "up" | "down" | "same" | null }) {
   if (!dir) return <span className="block size-7 rounded-md border border-dashed border-border" />;
   const [x1, y1, x2, y2] = dir === "up" ? [6, 21, 22, 7] : dir === "down" ? [6, 7, 22, 21] : [5, 14, 23, 14];
@@ -133,6 +80,54 @@ function Arrow({ dir }: { dir: "up" | "down" | "same" | null }) {
 }
 
 /** What you predicted and what was observed: two small glyph boxes above the plot, never arrows over the data. */
+
+/** Methods: how the rank test works, on made-up numbers so the real result stays hidden until Results. */
+export function StatsIllustration() {
+  const reduced = useReducedMotion();
+  const M = LUI().methods;
+  const steps: string[] = M.illustrationSteps;
+  const groups: string[] = M.illustrationGroups;
+  const A = [5, 7, 8, 10, 11, 12], B = [1, 2, 3, 4, 6, 9];
+  const x = (v: number) => 110 + (v - 1) * 58;
+  const part = (i: number) => ({ initial: { opacity: 0, y: reduced ? 0 : 8 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay: reduced ? 0 : i * 0.8 } });
+  const mono = { fontFamily: "var(--font-mono)", letterSpacing: 1 } as const;
+  const head = (y: number, t: string | undefined) => <text x={20} y={y} fontSize={15} fontWeight={600} fill="var(--foreground)">{t}</text>;
+  const med = (vals: number[]) => { const v = [...vals].sort((p, q) => p - q); return (v[2]! + v[3]!) / 2; };
+  const row = (vals: number[], y: number, fill: string, name: string | undefined) => (
+    <g>
+      <text x={20} y={y + 5} fontSize={12} {...mono} fill="var(--muted-foreground)">{String(name ?? "").toUpperCase()}</text>
+      <line x1={x(1) - 20} x2={x(12) + 20} y1={y} y2={y} stroke="var(--border)" strokeWidth={2} />
+      {vals.map((v) => <circle key={v} cx={x(v)} cy={y} r={10} fill={fill} />)}
+      <line x1={x(med(vals))} x2={x(med(vals))} y1={y - 20} y2={y + 20} stroke="var(--foreground)" strokeWidth={3} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 830 420" className="h-full w-full" role="img" aria-label={[M.illustration, ...steps].join(". ")}>
+      <text x={20} y={22} fontSize={11} {...mono} fill="var(--muted-foreground)">{String(M.illustration ?? "").toUpperCase()}</text>
+      <motion.g {...part(0)}>
+        {head(60, steps[0])}
+        {row(A, 100, "var(--peri)", groups[0])}
+        {row(B, 150, "var(--coral)", groups[1])}
+      </motion.g>
+      <motion.g {...part(1)}>
+        {head(215, steps[1])}
+        <line x1={x(1) - 20} x2={x(12) + 20} y1={255} y2={255} stroke="var(--border)" strokeWidth={2} />
+        {Array.from({ length: 12 }, (_, k) => k + 1).map((r) => (
+          <g key={r}>
+            <circle cx={x(r)} cy={255} r={10} fill={A.includes(r) ? "var(--peri)" : "var(--coral)"} />
+            <text x={x(r)} y={288} textAnchor="middle" fontSize={12} {...mono} fill="var(--muted-foreground)">{r}</text>
+          </g>
+        ))}
+      </motion.g>
+      <motion.g {...part(2)}>
+        {head(345, steps[2])}
+        <path d={`M${x(1) - 12} 365 L${x(1) - 12} 375 L${x(6) + 12} 375 L${x(6) + 12} 365`} fill="none" stroke="var(--coral)" strokeWidth={3} />
+        <text x={(x(1) + x(6)) / 2} y={402} textAnchor="middle" fontSize={13} fill="var(--coral-ink)">{M.illustrationNote}</text>
+      </motion.g>
+    </svg>
+  );
+}
+
 export function PredictionIndicator({ predicted, observed }: { predicted: "up" | "down" | "same" | null; observed: "up" | "down" | "same" | null }) {
   const ui = LUI();
   const match = predicted && observed && predicted === observed;

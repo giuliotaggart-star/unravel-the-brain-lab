@@ -43,8 +43,6 @@ export interface CaseStudy {
   intro: { background: string; known: string; gap: string };
   aims: { aim: string; h0: string; question: string; h1: { up: string; same: string; down: string } };
   methods: {
-    participants: string;
-    tissue: string;
     measure: string;
     analysis: string;
     check: { question: string; options: string[]; correct: string; right: string; wrong: string };

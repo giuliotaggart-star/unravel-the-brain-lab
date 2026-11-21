@@ -13,7 +13,7 @@ import { foldWords, labAbstract, labResample, labStats, labVars, labVerdictKey, 
 import { store, useReducedMotion } from "@/lib/unravel/store";
 import type { CaseStudy, ClaimBlank } from "@/lib/unravel/types";
 import { cn } from "@/lib/utils";
-import { IntroVisual, MethodsPipeline, PredictionIndicator } from "./visuals";
+import { IntroVisual, PredictionIndicator, StatsIllustration } from "./visuals";
 
 export type CheckMode = "none" | "age" | "sex" | "apoe" | "resample";
 export interface LabState {
@@ -256,25 +256,44 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
 
   if (i === 2) {
     const M = cs.methods, ck = M.check;
-    const keys = ["participants", "tissue", "measure", "analysis"] as const;
-    visual = <div className="aspect-[830/420] w-full"><MethodsPipeline S={S} cs={cs} /></div>;
+    const blocks = [
+      { k: "data", text: L.methodsData },
+      { k: "measure", text: M.measure },
+      { k: "analysis", text: M.analysis },
+    ];
+    const SB = L.statsBasics?.[level];
+    visual = <div className="aspect-[830/420] w-full"><StatsIllustration /></div>;
     reading = (
       <>
-        {keys.map((k, j) => (
-          <ReadingBlock key={k} delay={j * 0.12}>
-            <NumberedBlock n={j + 1} label={ui.methods[k]}><Rich as="p" text={M[k]} vars={vars} /></NumberedBlock>
+        {blocks.map((b, j) => (
+          <ReadingBlock key={b.k} delay={j * 0.12}>
+            <NumberedBlock n={j + 1} label={ui.methods[b.k]}><Rich as="p" text={b.text} vars={vars} /></NumberedBlock>
           </ReadingBlock>
         ))}
-        <ReadingBlock delay={0.5}>
+        {SB && (
+          <ReadingBlock delay={0.4}>
+            <div className="space-y-3 rounded-2xl border border-peri/25 bg-peri-soft/40 p-4">
+              <p className="font-bold text-peri-ink">{SB.heading}</p>
+              <dl className="space-y-2.5">
+                {SB.items.map((it: { term: string; text: string }) => (
+                  <div key={it.term}><dt className="font-semibold">{it.term}</dt><dd className="leading-relaxed text-foreground/85">{it.text}</dd></div>
+                ))}
+              </dl>
+              {SB.recap && <p className="text-sm text-muted-foreground">{SB.recap}</p>}
+            </div>
+          </ReadingBlock>
+        )}
+        {easy && <ReadingBlock delay={0.5}>
           <div className="space-y-3 rounded-2xl border border-coral/30 bg-coral-soft/50 p-4">
             <p className="font-semibold">{ck.question}</p>
             <Segmented label={ck.question} options={trim(ck.options, ck.correct).map((o) => ({ id: o, label: o }))} value={st.methodsPick} onChange={(id) => setSt((s) => ({ ...s, methodsPick: id, methodsOk: s.methodsOk || id === ck.correct }))} />
             {st.methodsPick && <Feedback good={st.methodsPick === ck.correct}>{st.methodsPick === ck.correct ? ck.right : ck.wrong}</Feedback>}
           </div>
-        </ReadingBlock>
+        </ReadingBlock>}
       </>
     );
-    pill = { label: ui.pills.run, dim: !st.methodsOk, onClick: () => { if (st.methodsOk) next(); else toast(ck.question); } };
+    const ready = !easy || st.methodsOk;
+    pill = { label: ui.pills.run, dim: !ready, onClick: () => { if (ready) next(); else toast(ck.question); } };
   }
 
   if (i === 3) {

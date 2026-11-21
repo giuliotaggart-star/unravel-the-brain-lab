@@ -387,8 +387,7 @@
         "down": "Lower"
       },
       "methods": {
-        "participants": "Participants",
-        "tissue": "Tissue",
+        "data": "Data",
         "measure": "Measure",
         "analysis": "Analysis",
         "pipeline": [
@@ -396,7 +395,19 @@
           "Tissue",
           "Nuclei",
           "One value per donor"
-        ]
+        ],
+        "stats": "Stats basics",
+        "illustration": "How the test works: an illustration, not your data",
+        "illustrationSteps": [
+          "1. Two groups of donors",
+          "2. Line them all up, lowest to highest",
+          "3. Does one group sit lower?"
+        ],
+        "illustrationGroups": [
+          "Group A",
+          "Group B"
+        ],
+        "illustrationNote": "Group B has 5 of the 6 lowest ranks"
       },
       "check": {
         "label": "Check",
@@ -504,7 +515,55 @@
         "results",
         "discussion"
       ]
-    }
+    },
+    "methodsData": "The same {{donorTotal}} donors you met in The data, each graded from Not AD to High. Here you compare {{nFirst}} {{firstGroup}} donors with {{nLast}} {{lastGroup}} donors.",
+    "statsBasics": [
+      {
+        "heading": "Stats basics: three ideas you need",
+        "items": [
+          {
+            "term": "Median",
+            "text": "The middle donor when you line them all up. One unusual donor cannot drag it far, unlike the mean (average)."
+          },
+          {
+            "term": "Mann-Whitney U test",
+            "text": "Lines up every donor from both groups, lowest to highest, and checks whether one group sits lower (or higher) more often than chance would explain. It works even when the data are not a neat bell curve."
+          },
+          {
+            "term": "p-value",
+            "text": "If there were really no difference, how often would chance alone give a gap at least this big? If p is below 0.05 (1 in 20), we call the difference significant."
+          }
+        ]
+      },
+      {
+        "heading": "New idea: weak evidence",
+        "recap": "Still using: the median, the Mann-Whitney U test and p below 0.05.",
+        "items": [
+          {
+            "term": "Not significant is not the same as no difference",
+            "text": "A p-value of 0.05 or above means chance cannot be ruled out. With small groups, a real difference can still miss 0.05."
+          },
+          {
+            "term": "Hidden factors (confounders)",
+            "text": "Something linked to both pathology and your measure, such as age, can create a difference on its own. You will check for this in the Discussion."
+          }
+        ]
+      },
+      {
+        "heading": "New idea: many tests",
+        "recap": "Still using: the median, the Mann-Whitney U test, p below 0.05, weak evidence and hidden factors.",
+        "items": [
+          {
+            "term": "False alarms",
+            "text": "Run 20 tests where nothing real is going on, and about 1 will give p below 0.05 by chance. That is why a gene you made no prediction about is only a lead."
+          },
+          {
+            "term": "Significant is not the same as big",
+            "text": "With many donors, a tiny difference can be significant. Always look at how big the change is, not only at p."
+          }
+        ]
+      }
+    ]
   },
   "glossary": [
     {
@@ -2674,10 +2733,8 @@
         }
       },
       "methods": {
-        "participants": "{{donorTotal}} people donated their brains to research after they died. Pathologists scored each brain for amyloid plaques and tau tangles and placed it in one of four levels, from Not AD to High.",
-        "tissue": "Scientists took a small piece from the middle temporal gyrus, a region of the cortex on the side of the brain.",
         "measure": "For each donor, we count the L2/3 IT neurons and divide by all of that donor’s neurons. The result is a percentage: the L2/3 IT share.",
-        "analysis": "Each donor gives one value. We compare the middle value (the median) in {{firstGroup}} donors with the median in {{lastGroup}} donors, using a Mann-Whitney U test, which compares two groups by rank. We call a difference significant if p is below 0.05.",
+        "analysis": "Each donor gives one value. We compare the medians of the two groups, then use a Mann-Whitney U test to see whether the difference could be down to chance.",
         "check": {
           "question": "In this study, what counts as one data point?",
           "options": [
@@ -2804,10 +2861,8 @@
         }
       },
       "methods": {
-        "participants": "{{donorTotal}} people donated their brains to research after they died. Pathologists scored each brain for amyloid plaques and tau tangles and placed it in one of four levels, from Not AD to High.",
-        "tissue": "Scientists took a small piece from the middle temporal gyrus, a region of the cortex on the side of the brain.",
         "measure": "For each donor, we count the Sst neurons and divide by all of that donor’s neurons. The result is a percentage: the Sst share.",
-        "analysis": "Each donor gives one value. We compare the middle value (the median) in {{firstGroup}} donors with the median in {{lastGroup}} donors, using a Mann-Whitney U test, which compares two groups by rank. We call a difference significant if p is below 0.05.",
+        "analysis": "Each donor gives one value. We compare the medians of the two groups, then use a Mann-Whitney U test to see whether the difference could be down to chance.",
         "check": {
           "question": "In this study, what counts as one data point?",
           "options": [
@@ -2937,10 +2992,8 @@
         }
       },
       "methods": {
-        "participants": "{{donorTotal}} people donated their brains to research after they died. Pathologists scored each brain for amyloid plaques and tau tangles and placed it in one of four levels, from Not AD to High.",
-        "tissue": "Scientists took a small piece from the middle temporal gyrus, a region of the cortex on the side of the brain.",
         "measure": "A gene is active when a cell copies it into mRNA messages. For each donor, we count the TREM2 messages in their microglia, out of every million messages counted in those cells. The unit is counts per million.",
-        "analysis": "Each donor gives one value. We compare the middle value (the median) in {{firstGroup}} donors with the median in {{lastGroup}} donors, using a Mann-Whitney U test, which compares two groups by rank. We call a difference significant if p is below 0.05.",
+        "analysis": "Each donor gives one value. We compare the medians of the two groups, then use a Mann-Whitney U test to see whether the difference could be down to chance.",
         "check": {
           "question": "In this study, what counts as one data point?",
           "options": [
