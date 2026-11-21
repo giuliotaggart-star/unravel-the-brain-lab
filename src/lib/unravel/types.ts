@@ -97,6 +97,7 @@ export interface UnravelData {
   sections: any[];
   pivot: Dict;
   explore: any;
+  writing: any;
   further: any;
   insights: Insight[];
   dataSteps: { caption: string; alt: string }[];

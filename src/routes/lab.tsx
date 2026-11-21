@@ -22,15 +22,10 @@ export const Route = createFileRoute("/lab")({
   component: LabPage,
 });
 
-/** Difficulty is a design layer over the three investigations, in their data order. */
-const LEVELS = [
-  { level: "Level 1", diff: "Easy", mode: "Guided", bars: 1 },
-  { level: "Level 2", diff: "Medium", mode: "Intermediate", bars: 2 },
-  { level: "Level 3", diff: "Difficult", mode: "Advanced", bars: 3 },
-];
-
 function LabPage() {
   const L = LAB();
+  /** Difficulty is a design layer over the three investigations, in their data order. */
+  const LEVELS: { level: string; diff: string; learn: string }[] = L.levels;
   const ui = LUI();
   const cases = data.caseStudies;
   const reduced = useReducedMotion();
@@ -79,7 +74,8 @@ function LabPage() {
                   onClick={() => open(on ? null : c.id)}
                   whileHover={reduced ? {} : { y: -3 }}
                   className={cn(
-                    "card-surface relative flex h-full w-full flex-col overflow-hidden p-6 text-left transition-[box-shadow,border-color] duration-300",
+                    "card-surface relative flex h-full w-full flex-col overflow-hidden text-left transition-[box-shadow,border-color] duration-300",
+                    sel ? "p-4" : "p-6",
                     on ? "border-coral shadow-lift ring-2 ring-coral/25" : "hover:shadow-lift",
                     sel && !on && "opacity-75 hover:opacity-100",
                   )}
@@ -89,22 +85,21 @@ function LabPage() {
                     <span className="flex items-center gap-2">
                       <span className="rounded-full bg-muted px-2.5 py-1 font-mono text-[0.68rem] uppercase tracking-wider text-foreground">{lv.level}</span>
                       <span className="text-sm font-semibold">{lv.diff}</span>
-                      <span className="text-sm text-muted-foreground">· {lv.mode}</span>
                     </span>
                     <span className="flex gap-0.5" aria-hidden>
                       {[1, 2, 3].map((b) => (
-                        <span key={b} className={cn("w-1.5 rounded-full", b <= lv.bars ? "bg-coral" : "bg-muted")} style={{ height: 6 + b * 4 }} />
+                        <span key={b} className={cn("w-1.5 rounded-full", b <= i + 1 ? "bg-coral" : "bg-muted")} style={{ height: 6 + b * 4 }} />
                       ))}
                     </span>
                   </span>
-                  <span className="mt-6 flex items-center gap-3">
-                    <span className="font-display-tight text-4xl font-medium text-muted-foreground/60">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="size-3 rounded-full" style={{ background: col }} aria-hidden />
-                  </span>
-                  <span className="font-display-tight mt-2 text-2xl font-medium leading-tight">{c.plainTitle}</span>
-                  <span className="mt-1 font-mono text-xs tracking-wide text-muted-foreground">{c.title}</span>
-                  <span className="mt-4 flex-1 leading-relaxed text-foreground/80">{c.pickerLine}</span>
-                  <span className="mt-5 flex items-center justify-between">
+                  <span className={cn("font-display-tight font-medium leading-tight", sel ? "mt-2 text-lg" : "mt-5 text-2xl")}>{c.plainTitle}</span>
+                  {!sel && (
+                    <>
+                      <span className="mt-3 leading-relaxed text-foreground/80">{c.pickerLine}</span>
+                      <span className="mt-4 flex-1 border-t border-border pt-3 text-sm leading-relaxed text-muted-foreground">{lv.learn}</span>
+                    </>
+                  )}
+                  <span className={cn("flex items-center justify-between", sel ? "mt-2" : "mt-5")}>
                     {st?.finished && st.verdict ? (
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-good-soft px-3 py-1 text-xs font-semibold text-good">
                         <Check className="size-3.5" /> {ui.verdictWords[st.verdict]}
@@ -139,6 +134,11 @@ function LabPage() {
                   <div>
                     <p className="kicker">{LEVELS[idx]?.level} · {LEVELS[idx]?.diff}</p>
                     <h2 className="font-display-tight mt-1 text-3xl font-medium sm:text-4xl">{cs.plainTitle}</h2>
+                    {L.levelUp?.[idx] && (
+                      <p className="mt-3 max-w-2xl rounded-xl border border-peri/25 bg-peri-soft/60 px-4 py-2.5 text-sm leading-relaxed">
+                        <strong className="text-peri-ink">{L.levelUpLabel}:</strong> {L.levelUp[idx]}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <LabWorkflow

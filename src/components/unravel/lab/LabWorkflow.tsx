@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, Copy, ExternalLink, Lightbulb, Lock, Save, Table2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Copy, ExternalLink, HelpCircle, Lightbulb, Lock, PenLine, Save, Table2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -114,6 +114,8 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
   const i = st.step;
   const isLast = index === total - 1;
   const easy = index === 0;
+  /** 0 easy, 1 medium, 2 hard: extras appear as the level rises; writing help fades. */
+  const level = Math.min(index, 2);
   /** Easy level: keep the right answer plus one wrong one, in their original order. */
   const trim = (opts: string[], correct: string) => (easy ? opts.filter((o) => o === correct || o === opts.find((x) => x !== correct)) : opts);
   const [table, setTable] = useState(false);
@@ -199,7 +201,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
         <ReadingBlock delay={0.1}>
           <NumberedBlock n={2} label={ui.aims.h0}>
             <Rich as="p" text={cs.aims.h0} vars={vars} />
-            <p className="text-sm text-muted-foreground">{L.h0Explainer}</p>
+            {level < 2 && <p className="text-sm text-muted-foreground">{L.h0Explainer}</p>}
           </NumberedBlock>
         </ReadingBlock>
         <ReadingBlock delay={0.2}>
@@ -325,7 +327,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
     const abstract = labAbstract(cs, S, st.hyp, key);
     reading = (
       <>
-        <ReadingBlock><CheckBlock cs={cs} S={S} mode={st.check} setMode={(m) => setSt((s) => ({ ...s, check: m }))} /></ReadingBlock>
+        {level > 0 && <ReadingBlock><CheckBlock cs={cs} S={S} level={level} mode={st.check} setMode={(m) => setSt((s) => ({ ...s, check: m }))} /></ReadingBlock>}
         <ReadingBlock delay={0.08}>
           <NumberedBlock n={1} label={ui.discussion.conclusion}>
             <Claim easy={easy} parts={D.claim.parts} vars={vars} values={st.claim} onPick={(b, v) => setSt((s) => ({ ...s, claim: { ...s.claim, [b]: v } }))} />
@@ -382,7 +384,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
             )}
           </NumberedBlock>
         </ReadingBlock>
-        <ReadingBlock delay={0.26}>
+        {level === 2 && <ReadingBlock delay={0.26}>
           <NumberedBlock n={4} label={ui.discussion.next}>
             <button
               type="button"
@@ -392,7 +394,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
               {D.next} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </button>
           </NumberedBlock>
-        </ReadingBlock>
+        </ReadingBlock>}
         <ReadingBlock delay={0.32}>
           <div className="space-y-3 rounded-2xl border border-border bg-surface p-5">
             <p className="kicker">{L.abstractTitle}</p>
@@ -428,7 +430,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
               >
                 {L.toWriter} <ArrowRight className="size-3.5" />
               </Button>
-              <Button variant="gold" size="pillSm" onClick={() => navigate({ to: "/prize" })}>{fill(L.toPrize)} <ArrowRight className="size-3.5" /></Button>
+              {level === 2 && <Button variant="gold" size="pillSm" onClick={() => navigate({ to: "/prize" })}>{fill(L.toPrize)} <ArrowRight className="size-3.5" /></Button>}
             </div>
             <p className="text-sm text-muted-foreground">{L.abstractNote}</p>
           </div>
@@ -445,17 +447,12 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
     };
   }
 
-  const learned: string | undefined = easy ? L.easyLearned?.[i] : undefined;
-  if (learned)
+  const part: string | undefined = L.writeUp?.steps?.[i];
+  if (part)
     reading = (
       <>
         {reading}
-        <ReadingBlock delay={0.6}>
-          <div className="flex gap-3 rounded-2xl border-2 border-go/25 bg-go-soft/60 p-4">
-            <Lightbulb className="mt-0.5 size-5 shrink-0 text-go" />
-            <div><p className="font-bold text-go-ink">{L.easyLearnedLabel}</p><p className="mt-1 leading-relaxed">{learned}</p></div>
-          </div>
-        </ReadingBlock>
+        <ReadingBlock delay={0.6}><WriteUp id={part} level={level} /></ReadingBlock>
       </>
     );
 
@@ -527,7 +524,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
 }
 
 /* ---------- Discussion: try to break the result ---------- */
-function CheckBlock({ cs, S, mode, setMode }: { cs: CaseStudy; S: LabStats; mode: CheckMode; setMode: (m: CheckMode) => void }) {
+function CheckBlock({ cs, S, level, mode, setMode }: { cs: CaseStudy; S: LabStats; level: number; mode: CheckMode; setMode: (m: CheckMode) => void }) {
   const ui = LUI();
   const L = LAB();
   const reduced = useReducedMotion();
@@ -595,7 +592,7 @@ function CheckBlock({ cs, S, mode, setMode }: { cs: CaseStudy; S: LabStats; mode
   return (
     <div className="space-y-3 rounded-2xl border border-border bg-surface p-4">
       <p className="kicker">{ui.check.label}</p>
-      <Segmented label={ui.check.label} options={(["none", "age", "sex", "apoe", "resample"] as CheckMode[]).map((id) => ({ id, label: ui.check[id] }))} value={mode} onChange={setMode} />
+      <Segmented label={ui.check.label} options={((level < 2 ? ["none", "age", "sex"] : ["none", "age", "sex", "apoe", "resample"]) as CheckMode[]).map((id) => ({ id, label: ui.check[id] }))} value={mode} onChange={setMode} />
       <p className="text-sm text-muted-foreground">{L.checkInvite}</p>
       <AnimatePresence mode="wait">
         {out && <motion.div key={mode} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>{out}</motion.div>}
@@ -644,6 +641,58 @@ function Claim({ easy, parts, vars, values, onPick }: { easy?: boolean; parts: (
           </Feedback>
         ) : null,
       )}
+    </div>
+  );
+}
+
+/* ---------- writing help for each report part: lots at Easy, a tip and a question at Medium, questions only at Hard ---------- */
+export function WriteUp({ id, level }: { id: string; level: number }) {
+  const W = data.writing;
+  const L = LAB();
+  const sec = W?.sections?.find((x: { id: string }) => x.id === id);
+  if (!sec) return null;
+  const label: string = L.writeUp?.labels?.[level] ?? "";
+  if (level === 0) {
+    const e = sec.easy;
+    return (
+      <div className="space-y-3 rounded-2xl border-2 border-go/25 bg-go-soft/60 p-4">
+        {e.learned && (
+          <div className="flex gap-3">
+            <Lightbulb className="mt-0.5 size-5 shrink-0 text-go" />
+            <div><p className="font-bold text-go-ink">{L.writeUp.learnedLabel}</p><p className="mt-1 leading-relaxed">{e.learned}</p></div>
+          </div>
+        )}
+        <div className="flex gap-3 border-t border-go/15 pt-3">
+          <PenLine className="mt-0.5 size-5 shrink-0 text-go" />
+          <div className="space-y-2">
+            <p className="font-bold text-go-ink">{label}</p>
+            <ul className="list-disc space-y-1 pl-5 leading-relaxed">{e.tips.map((t: string) => <li key={t}>{t}</li>)}</ul>
+            {e.starter && <p className="text-sm text-muted-foreground"><span className="font-semibold text-foreground">{L.writeUp.starterLabel}:</span> <em>{e.starter}</em></p>}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (level === 1) {
+    const m = sec.medium;
+    return (
+      <div className="flex gap-3 rounded-2xl border border-go/25 bg-go-soft/40 p-4">
+        <PenLine className="mt-0.5 size-5 shrink-0 text-go" />
+        <div className="space-y-1.5">
+          <p className="font-bold text-go-ink">{label}</p>
+          <p className="leading-relaxed">{m.tip}</p>
+          <p className="flex gap-2 leading-relaxed text-peri-ink"><HelpCircle className="mt-0.5 size-4 shrink-0" />{m.question}</p>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="flex gap-3 rounded-2xl border border-peri/25 bg-peri-soft/40 p-4">
+      <HelpCircle className="mt-0.5 size-5 shrink-0 text-peri-ink" />
+      <div className="space-y-1.5">
+        <p className="font-bold text-peri-ink">{label}</p>
+        <ul className="list-disc space-y-1 pl-5 leading-relaxed">{sec.hard.questions.map((q: string) => <li key={q}>{q}</li>)}</ul>
+      </div>
     </div>
   );
 }

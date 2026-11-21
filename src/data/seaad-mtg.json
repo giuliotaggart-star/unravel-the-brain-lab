@@ -81,7 +81,7 @@
   "video": {
     "src": "assets/video/data-journey.mp4",
     "poster": "assets/video/data-journey.jpg",
-    "heading": "Where the data comes from",
+    "heading": "",
     "nextLabel": "Next",
     "finalLabel": "Enter the lab",
     "footnote": "{{cellsTotal}} cells from {{donorTotal}} donors.",
@@ -114,7 +114,7 @@
         "id": "q2",
         "statement": "Dementia is a mental illness",
         "correct": "false",
-        "why": "It comes from physical damage to the brain, not from a mental health condition."
+        "why": "Dementia is caused by physical disease of the brain. It can affect mood and behaviour, but it is not a mental illness like depression."
       },
       {
         "id": "q3",
@@ -138,7 +138,7 @@
         "id": "q6",
         "statement": "Some cases of dementia could be prevented or delayed",
         "correct": "true",
-        "why": "Nearly half could be, by tackling 14 risk factors such as high blood pressure, smoking and inactivity (Lancet Commission 2024)."
+        "why": "Nearly half of cases are linked to 14 risk factors that can be changed, such as high blood pressure, smoking and inactivity (Lancet Commission 2024)."
       }
     ],
     "classCodeLabel": "Class code (optional)",
@@ -320,21 +320,13 @@
     ],
     "chooseLabel": "Pick an investigation",
     "heading": "Run a real investigation",
-    "intro": "Three questions. Real donors. You set the hypothesis, then the data answers.",
+    "intro": "Three investigations, from easy to hard. Each one takes you through the five parts of a scientific report: Introduction, Aims, Methods, Results and Discussion. Then you get your abstract.",
     "stepNames": [
       "Introduction",
       "Aims",
       "Methods",
       "Results",
       "Discussion"
-    ],
-    "easyLearnedLabel": "What you just learned",
-    "easyLearned": [
-      "Every report opens by saying what is already known and what is still missing: the gap your study fills.",
-      "A hypothesis is a prediction you commit to before looking at the data, so the data can prove you wrong.",
-      "Methods say who was studied, what was measured and how, so anyone could repeat your work.",
-      "Results describe what the data shows. Each dot is one person, and the line marks the middle value.",
-      "A discussion says what the result means, and is honest about what it cannot prove."
     ],
     "h0Explainer": "The starting assumption that there is no difference. The data has to give us a reason to drop it.",
     "predictingNull": "You are predicting the null hypothesis.",
@@ -473,7 +465,46 @@
     "emptyCell": "No donor in {{group}} is {{kind}}, so {{variable}} cannot be compared across every group.",
     "apoeEmpty": "No Not AD or Low donor carries APOE4: all 25 carriers are Intermediate or High. So carriers cannot be compared at the low end; the empty boxes are real, not a bug.",
     "ageNoteLabel": "Watch out: age",
-    "manyTestsNote": "Try many comparisons and about 1 in 20 will look significant by chance."
+    "manyTestsNote": "Try many comparisons and about 1 in 20 will look significant by chance.",
+    "levels": [
+      {
+        "level": "Level 1",
+        "diff": "Easy",
+        "learn": "Learn the five parts of a report, one step at a time. Lots of help."
+      },
+      {
+        "level": "Level 2",
+        "diff": "Medium",
+        "learn": "Adds: a result that is not clear-cut, and checking for a hidden factor. Less help."
+      },
+      {
+        "level": "Level 3",
+        "diff": "Hard",
+        "learn": "Adds: a second gene you did not predict, and testing your own result. Questions instead of help."
+      }
+    ],
+    "levelUpLabel": "New in this level",
+    "levelUp": [
+      "",
+      "Some results are not clear-cut. You will judge weak evidence and check whether age or sex could explain a difference.",
+      "You will look at a second gene you made no prediction about, and try to break your own result."
+    ],
+    "writeUp": {
+      "labels": [
+        "How to write this part",
+        "Writing tip",
+        "Before you write, ask yourself"
+      ],
+      "learnedLabel": "What you just learned",
+      "starterLabel": "Try starting with",
+      "steps": [
+        "introduction",
+        "aims",
+        "methods",
+        "results",
+        "discussion"
+      ]
+    }
   },
   "glossary": [
     {
@@ -2618,7 +2649,7 @@
       "id": "layers",
       "title": "Neurons in different cortical layers",
       "plainTitle": "Neurons that link brain areas",
-      "pickerLine": "Which neurons are missing where pathology is highest?",
+      "pickerLine": "Are these neurons rarer where pathology is highest?",
       "measurePhrase": "the share of neurons that are L2/3 IT neurons",
       "views": [
         {
@@ -2706,7 +2737,7 @@
             {
               "statement": "Donors in the {{lastGroup}} group may be older, so age could explain part of the difference.",
               "applies": true,
-              "reason": "Use the Age band check to see how the groups compare."
+              "reason": "Most High donors are aged 90 or over. The age note under The published study shows what happens when donors of the same age are compared."
             },
             {
               "statement": "There are too few donors to compare any groups.",
@@ -2734,7 +2765,7 @@
       "abstract": {
         "background": "Alzheimer’s disease damages the connections between brain areas, but not every type of neuron is affected equally.",
         "aim": "We tested whether {{measurePhrase}} differs between donors with no Alzheimer’s pathology and donors with high pathology, and predicted it would be {{hypothesis}}.",
-        "result": "Among {{donorTotal}} donors, the median was {{medianFirst}} in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
+        "result": "Comparing {{nFirst}} {{firstGroup}} donors with {{nLast}} {{lastGroup}} donors, the median was {{medianFirst}} and {{medianLast}} ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
         "conclusion": {
           "supported": "This supports our hypothesis, although each donor was measured only once, after death.",
           "contradicted": "This contradicts our hypothesis and suggests the opposite pattern.",
@@ -2759,7 +2790,7 @@
       "grouping": "adnc",
       "intro": {
         "background": "Neurons do not only switch each other on. Some switch others off, which keeps brain activity balanced. One family of these inhibitory neurons is called Sst neurons.",
-        "known": "In Alzheimer’s disease, some brain networks become overactive. Researchers suspect that losing inhibitory neurons could be part of the reason (Palop and Mucke 2016).",
+        "known": "In Alzheimer’s disease, some brain networks become overactive. Researchers suspect that problems with inhibitory neurons could be part of the reason (Palop and Mucke 2016).",
         "gap": "If that is right, Sst neurons should be rarer in brains with more Alzheimer’s pathology. Is that what the data shows?"
       },
       "aims": {
@@ -2851,7 +2882,7 @@
             false
           ]
         },
-        "published": "The research team reported that Sst neurons are among the first neurons lost as the disease begins.",
+        "published": "The research team reported a loss of Sst neurons early in the disease.",
         "publishedUrl": "https://doi.org/10.1038/s41593-024-01774-5",
         "next": "Does the Sst share also fall with tau stage?",
         "nextPreset": {
@@ -2863,7 +2894,7 @@
       "abstract": {
         "background": "Inhibitory Sst neurons help keep brain activity balanced, and their loss has been proposed as an early event in Alzheimer’s disease.",
         "aim": "We tested whether {{measurePhrase}} differs between donors with no Alzheimer’s pathology and donors with high pathology, and predicted it would be {{hypothesis}}.",
-        "result": "Among {{donorTotal}} donors, the median was {{medianFirst}} in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
+        "result": "Comparing {{nFirst}} {{firstGroup}} donors with {{nLast}} {{lastGroup}} donors, the median was {{medianFirst}} and {{medianLast}} ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
         "conclusion": {
           "supported": "This supports our hypothesis, although each donor was measured only once, after death.",
           "contradicted": "This contradicts our hypothesis and suggests the opposite pattern.",
@@ -2998,7 +3029,7 @@
       "abstract": {
         "background": "TREM2 is a microglial gene linked to the risk of Alzheimer’s disease, but whether its activity changes with pathology is less clear.",
         "aim": "We tested whether {{measurePhrase}} differs between donors with no Alzheimer’s pathology and donors with high pathology, and predicted it would be {{hypothesis}}.",
-        "result": "Among {{donorTotal}} donors, the median was {{medianFirst}} in {{firstGroup}} donors and {{medianLast}} in {{lastGroup}} donors ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
+        "result": "Comparing {{nFirst}} {{firstGroup}} donors with {{nLast}} {{lastGroup}} donors, the median was {{medianFirst}} and {{medianLast}} ({{foldWords}}; Mann-Whitney U test, p = {{pValue}}).",
         "conclusion": {
           "supported": "This supports our hypothesis, although each donor was measured only once, after death.",
           "contradicted": "This contradicts our hypothesis and suggests the opposite pattern.",
@@ -3298,7 +3329,7 @@
       "tint": "rose",
       "glowX": 85,
       "glowY": 100,
-      "kicker": "BACKGROUND · LITERATURE REVIEW",
+      "kicker": "Background · what is already known",
       "title": "What is dementia?",
       "line": ""
     },
@@ -3308,7 +3339,7 @@
       "tint": "cream",
       "glowX": 80,
       "glowY": 0,
-      "kicker": "Methods · real brain donor data",
+      "kicker": "Methods · where the data comes from",
       "title": "Where the data comes from",
       "line": "Behind every chart in your report is real human brain tissue. Here is how researchers turned brain donations into the single-cell data you will analyse."
     },
@@ -3318,9 +3349,9 @@
       "tint": "coral",
       "glowX": 20,
       "glowY": 0,
-      "kicker": "RESULTS AND DISCUSSION",
-      "title": "THE LAB",
-      "line": "Run a real investigation"
+      "kicker": "Your investigation",
+      "title": "The lab",
+      "line": ""
     },
     {
       "id": "exit",
@@ -3328,7 +3359,7 @@
       "tint": "peri",
       "glowX": 50,
       "glowY": 100,
-      "kicker": "DISCUSSION · WHAT YOU KNOW NOW",
+      "kicker": "What you know now",
       "title": "Exit poll",
       "line": "The same questions again. Then the answers."
     },
@@ -3434,7 +3465,7 @@
       "id": "cells-disease",
       "myth": "\"Dementia is just part of getting old.\"",
       "headline": "Alzheimer’s is a physical disease of brain cells.",
-      "body": "Your brain works because billions of [[neurons]] pass signals to each other. In Alzheimer’s disease, neurons slowly **stop working, lose their connections and die**. The damage begins long before any symptoms show (Bateman et al. 2012). ==Pathologists can see this damage under a microscope and grade it==, from **Not AD** (AD is short for **Alzheimer’s disease**) to **High**. That grade is called the [[pathology level]].",
+      "body": "Your brain works because billions of [[neurons]] pass signals to each other. In Alzheimer’s disease, neurons slowly **stop working, lose their connections and die**. Changes in the brain can start many years before any symptoms show (Bateman et al. 2012). ==Pathologists can see this damage under a microscope and grade it==, from **Not AD** (AD is short for **Alzheimer’s disease**) to **High**. That grade is called the [[pathology level]].",
       "graphic": {
         "levels": [
           "Not AD",
@@ -3447,7 +3478,7 @@
       "knot": {
         "label": "Unravel this",
         "title": "What do pathologists actually see?",
-        "body": "Clumps of two proteins that should not be there, called amyloid and tau. The more clumps, and the further they have spread, the higher the pathology level. Every chart in the lab sorts donors by this grade.",
+        "body": "Clumps of two proteins, amyloid and tau. Healthy brains make both, but in Alzheimer’s they build up and clump together. The more clumps, and the further they have spread, the higher the pathology level. Every investigation in the lab sorts donors by this grade.",
         "steps": [
           {
             "scene": "plaque",
@@ -3477,7 +3508,7 @@
           {
             "plain": "Inhibitory neurons",
             "sci": "Sst",
-            "job": "Switch other neurons off, keeping activity balanced.",
+            "job": "Quieten other neurons, keeping activity balanced.",
             "cellType": "sst"
           },
           {
@@ -3504,8 +3535,8 @@
     {
       "id": "one-at-a-time",
       "myth": "\"Scientists already know exactly how Alzheimer’s damages the brain.\"",
-      "headline": "Nobody knows yet which cells go first.",
-      "body": "Which cells are damaged **first**? Do immune cells **protect** the brain or make things worse? These are open questions that researchers are working on now. To answer them, they had to stop grinding tissue into one average. ==They started reading cells one at a time.== This is called [[single-cell sequencing]].",
+      "headline": "Which cells are hit first is still an open question.",
+      "body": "Which cells are damaged **first**? Do immune cells **protect** the brain or make things worse? These are open questions that researchers are working on now. To answer them, researchers needed to stop grinding tissue into one average. ==They started reading cells one at a time.== This is called [[single-cell sequencing]].",
       "graphic": {
         "labels": [
           "Tissue ground up: one average",
@@ -3697,8 +3728,8 @@
     "prizeBanner": "Practising for the competition? Check the guidelines and word targets for the {{prizeValue}} Abstract competition.",
     "prizeBannerLink": "See the competition",
     "heading": "Write your report",
-    "intro": "A free space to practise writing up what you found. Your writing stays on this device.",
-    "placeholder": "Start with your question, then what the data showed…",
+    "intro": "Write up what you found, one part at a time. The guide shows how scientists write each part. Your writing stays on this device.",
+    "placeholder": "Tap “Add the report headings” to get the structure, then write each part in your own words…",
     "font": "Font",
     "fonts": [
       {
@@ -3723,16 +3754,7 @@
     "clear": "Clear",
     "copy": "Copy text",
     "back": "Back to Solo explore",
-    "words": "{{count}} words",
-    "tipsHeading": "Key tips",
-    "tips": [
-      "Start with your question: which measure, which cell type, which grouping.",
-      "Say what the data showed in one clear sentence, using the median.",
-      "Give the numbers: how many donors, and how big the difference was.",
-      "Be careful with words: the data shows a link, not proof of a cause.",
-      "Finish with what it might mean and one thing you would test next.",
-      "Short sentences. One idea per paragraph."
-    ]
+    "words": "{{count}} words"
   },
   "background": {
     "heading": "Every report starts with a literature review",
@@ -3905,6 +3927,207 @@
         "body": [
           "How entry details are used is set out in the privacy notice. Questions: unravel.outreach@gmail.com."
         ]
+      }
+    ]
+  },
+  "writing": {
+    "heading": "Writing guide",
+    "intro": "How university scientists write each part. Same levels as the lab: Easy gives the most tips, Medium a tip and a question, Hard only questions.",
+    "levels": [
+      "Easy",
+      "Medium",
+      "Hard"
+    ],
+    "addHeadings": "Add the report headings",
+    "addHeadingsDone": "Headings added. Fill in each part in your own words.",
+    "styleHeading": "Good scientific style",
+    "style": [
+      "Short sentences. One idea per paragraph.",
+      "Present tense for what is already known; past tense for what you did and found.",
+      "Careful words: the data “suggests” or “is linked to”, never “proves”.",
+      "Give numbers with their units, and say how many donors.",
+      "Write every idea in your own words, and name the source of any fact you use."
+    ],
+    "sources": "Based on university study guides, including the University of Melbourne (lab reports), Aberystwyth University (scientific reports) and Sheffield Hallam University (language for reports).",
+    "sections": [
+      {
+        "id": "title",
+        "name": "Title",
+        "easy": {
+          "tips": [
+            "Say what you studied in one line: the cell type, the measure and the groups.",
+            "Keep it under 15 words. No question marks."
+          ],
+          "starter": "The share of … neurons in donors with and without Alzheimer’s pathology"
+        },
+        "medium": {
+          "tip": "Name the cell type and the comparison.",
+          "question": "Could someone guess your result just from your title?"
+        },
+        "hard": {
+          "questions": [
+            "Would a scientist searching for this topic find your report from its title?"
+          ]
+        }
+      },
+      {
+        "id": "abstract",
+        "name": "Abstract",
+        "easy": {
+          "learned": "An abstract is a short summary of the whole report. It comes first but is written last.",
+          "tips": [
+            "One or two sentences for each part: background, aim, result, conclusion.",
+            "Include your key numbers: the medians and the p-value.",
+            "Write it last, once you know your result."
+          ],
+          "starter": "… is linked to Alzheimer’s disease, but … We tested whether … The median was … (p = …). This suggests …"
+        },
+        "medium": {
+          "tip": "Background, aim, result, conclusion. Keep it under 150 words.",
+          "question": "If someone read only your abstract, would they know what you found?"
+        },
+        "hard": {
+          "questions": [
+            "Which single number matters most, and is it in your abstract?",
+            "Does your conclusion claim more than your result shows?"
+          ]
+        }
+      },
+      {
+        "id": "introduction",
+        "name": "Introduction",
+        "easy": {
+          "learned": "Every report opens by saying what is already known and what is still missing: the gap your study fills.",
+          "tips": [
+            "Go from general to specific: the disease, then the cells, then your question.",
+            "Back up each fact with its source, for example (Gabitto et al. 2024).",
+            "Write facts that are already known in the present tense."
+          ],
+          "starter": "Alzheimer’s disease is … Less is known about … This study asks whether …"
+        },
+        "medium": {
+          "tip": "End your introduction with the gap: the thing that has not been checked yet.",
+          "question": "Which fact from What is dementia? would you put first, and why?"
+        },
+        "hard": {
+          "questions": [
+            "What does a reader need to know before your question makes sense?",
+            "Which earlier finding are you building on, and who found it?"
+          ]
+        }
+      },
+      {
+        "id": "aims",
+        "name": "Aim and hypothesis",
+        "easy": {
+          "learned": "A hypothesis is a prediction you commit to before looking at the data, so the data can prove you wrong.",
+          "tips": [
+            "In a university report, the aim and hypothesis are the last lines of the Introduction.",
+            "Make the hypothesis testable: name the measure, the two groups and the direction.",
+            "Decide it before you look at the data."
+          ],
+          "starter": "The aim of this study was to … We predicted that … would be lower in … than in …"
+        },
+        "medium": {
+          "tip": "A good hypothesis can be proved wrong. Name the measure, the two groups and the direction.",
+          "question": "What result would show your hypothesis was wrong?"
+        },
+        "hard": {
+          "questions": [
+            "What is your null hypothesis, in one sentence?",
+            "Why did you predict that direction? Which background fact led you there?"
+          ]
+        }
+      },
+      {
+        "id": "methods",
+        "name": "Methods",
+        "easy": {
+          "learned": "Methods say who was studied, what was measured and how, so anyone could repeat your work.",
+          "tips": [
+            "Write in the past tense: say what was done.",
+            "Cover who, what and how: the donors, the measure and the test.",
+            "Give enough detail for someone else to repeat it."
+          ],
+          "starter": "Brain tissue from … donors was … For each donor, we … The groups were compared using …"
+        },
+        "medium": {
+          "tip": "Past tense, with enough detail to repeat. Say why each donor counts once.",
+          "question": "If you left out the statistical test, could someone repeat your work?"
+        },
+        "hard": {
+          "questions": [
+            "Could a classmate repeat your study from your Methods alone?",
+            "Which choice in your method could change your result?"
+          ]
+        }
+      },
+      {
+        "id": "results",
+        "name": "Results",
+        "easy": {
+          "learned": "Results describe what the data shows. Each dot is one person, and the line marks the middle value.",
+          "tips": [
+            "Say what you found, but save what it means for the Discussion.",
+            "Give the numbers: both medians, how many donors and the p-value.",
+            "Point to your chart: “as shown in Figure 1”."
+          ],
+          "starter": "The median was … in … donors and … in … donors (p = …), as shown in Figure 1."
+        },
+        "medium": {
+          "tip": "Report numbers, not opinions. If p is 0.05 or above, say the difference was not significant.",
+          "question": "Which three numbers does a reader need to see to believe your result?"
+        },
+        "hard": {
+          "questions": [
+            "Did you report the result you did not expect as clearly as the one you did?",
+            "Is anything in your Results really an interpretation that belongs in the Discussion?"
+          ]
+        }
+      },
+      {
+        "id": "discussion",
+        "name": "Discussion",
+        "easy": {
+          "learned": "A discussion says what the result means, and is honest about what it cannot prove.",
+          "tips": [
+            "Start by saying whether your hypothesis was supported.",
+            "Use careful words: “suggests” or “is linked to”, not “proves”.",
+            "Give at least one limitation and one next step."
+          ],
+          "starter": "These results suggest that … However, … A next step would be to …"
+        },
+        "medium": {
+          "tip": "Compare your result with the published study. Do they agree?",
+          "question": "Apart from Alzheimer’s, what else could explain the difference you saw?"
+        },
+        "hard": {
+          "questions": [
+            "What is the strongest reason to doubt your own result?",
+            "What one new study would settle it?",
+            "How does your result fit with what you learned in What is dementia?"
+          ]
+        }
+      },
+      {
+        "id": "references",
+        "name": "References",
+        "easy": {
+          "tips": [
+            "List every source you mentioned, in the same style each time.",
+            "Give authors, year, title, journal and a link."
+          ],
+          "starter": "Gabitto, M. I. et al. (2024) Nature Neuroscience 27, 2366–2383."
+        },
+        "medium": {
+          "tip": "Every fact you did not find yourself needs a source.",
+          "question": "Is every source in your text also in your list?"
+        },
+        "hard": {
+          "questions": [
+            "Did you read the sources you cite, or only a summary of them?"
+          ]
+        }
       }
     ]
   }
