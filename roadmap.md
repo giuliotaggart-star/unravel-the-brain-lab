@@ -2,11 +2,14 @@
 
 ## Open
 - Poll collection address (Google Apps Script URL) — waiting on Giulio
-- Audit batch 5 (teachers/polish)
 - Prize voucher type undecided — keep wording generic ("a £50 voucher"), never name a retailer
-- Remove the Imperial wordmark from About and Contact; plain text attribution instead (no brand permission)
+- Giulio to read and approve drafted copy: UCAS founder note, new For teachers lines, Solo explore "why it matters"
+- Contact email is a personal Gmail (giulio.taggart@gmail.com) — audit recommends a project email before launch
+- Privacy notice: state how long entries and poll rows are kept
 
 ## Done
+- Home headline: Giulio chose to keep "A taste of university science" as the big line
+- Audit batch 5: teacher-page accuracy, safeguarding and accessibility sections, UCAS notes instead of a pasteable sentence, Solo explore multiple-comparisons caution, generic voucher wording, all placeholder text removed
 - Contact: real email giulio.taggart@gmail.com replaces the placeholder
 - Solo explore: "Write up what you found" is now its own full-width lavender band section, set well below the track options
 - About: thread now runs from the school badge into the university badge (continuous, drawn underneath both)
@@ -20,3 +23,4 @@
 - [x] Audit batch 2: topic intro merged into warm-up poll, hidden answers, confidence ratings, exit poll with reveal
 - [x] Audit batch 3: lab levels reordered (L2/3 → Sst → microglia), Gabitto citation on findings, age and APOE4 notes
 - [x] Audit batch 4: privacy notice, competition terms, 4-group menu, consistent naming (the lesson / the lab)
+- [x] Imperial wordmark removed from About and Contact; plain text attribution instead (no brand permission)
