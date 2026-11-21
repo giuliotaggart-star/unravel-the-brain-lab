@@ -221,7 +221,7 @@ export function SiteFooter() {
 }
 
 /** Chapter opener: a numbered kicker, the editorial title and one line under it. */
-export function ChapterOpener({ id, heading, intro, children }: { id: string; heading?: ReactNode; intro?: ReactNode; children?: ReactNode }) {
+export function ChapterOpener({ id, heading, intro, children, compact }: { id: string; heading?: ReactNode; intro?: ReactNode; children?: ReactNode; compact?: boolean }) {
   const i = chapterIndex(id);
   const c = chapters[i]!;
   return (
@@ -239,8 +239,8 @@ export function ChapterOpener({ id, heading, intro, children }: { id: string; he
             <span className="h-px flex-1 bg-border" aria-hidden />
             <span className="kicker hidden sm:inline">{c.name}</span>
           </div>
-          {c.title && <p className="font-display-tight mt-6 text-[clamp(2.5rem,7vw,5.5rem)] font-medium leading-[0.95] text-foreground">{c.title}</p>}
-          {c.line && <p className="mt-3 text-lg text-muted-foreground sm:text-xl">{c.line}</p>}
+          {!compact && c.title && <p className="font-display-tight mt-6 text-[clamp(2.5rem,7vw,5.5rem)] font-medium leading-[0.95] text-foreground">{c.title}</p>}
+          {!compact && c.line && <p className="mt-3 text-lg text-muted-foreground sm:text-xl">{c.line}</p>}
           {(heading || intro) && (
             <div className="mt-10 max-w-3xl space-y-3">
               {heading && <h1 className="font-display-tight text-3xl font-medium leading-tight sm:text-4xl">{heading}</h1>}

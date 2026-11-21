@@ -94,7 +94,10 @@
     }
   },
   "poll": {
-    "framing": "Six statements, then three quick ratings. Go with your gut. The answers come at the end of the lesson.",
+    "framing": "Go with your gut. The answers come at the end of the lesson.",
+    "topicKicker": "Today’s topic",
+    "topicLine": "First, a 2-minute warm-up poll: six statements and three quick ratings. There are no marks. The answers come at the end of the lesson.",
+    "startLabel": "Start the warm-up poll",
     "options": {
       "true": "True",
       "false": "False",
@@ -103,9 +106,9 @@
     "items": [
       {
         "id": "q1",
-        "statement": "Dementia is a disease of the brain",
+        "statement": "Dementia is caused by diseases that damage the brain",
         "correct": "true",
-        "why": "Dementia is caused by diseases that damage the brain, so the national survey counts this as true."
+        "why": "Dementia is a set of symptoms, not one disease. It is caused by diseases, such as Alzheimer’s, that damage brain cells. That is why it is not a mental illness or a normal part of ageing."
       },
       {
         "id": "q2",
@@ -150,7 +153,7 @@
     "backLabel": "Back",
     "ofLabel": "Statement {{n}} of {{total}}",
     "resultCta": "Keep going",
-    "heading": "What do you already know about dementia?",
+    "heading": "Warm-up poll",
     "classCodeLink": "Have a class code?",
     "scoreText": "{{score}} of {{total}}",
     "confidenceHeading": "How much do you agree?",
@@ -3285,7 +3288,7 @@
       "tint": "peri",
       "glowX": 15,
       "glowY": 100,
-      "kicker": "BACKGROUND · WHAT YOU ALREADY KNOW",
+      "kicker": "Background",
       "title": "Warm-up poll",
       "line": "Every report starts with what is already known. First: what do you know?"
     },
@@ -3642,7 +3645,7 @@
     ],
     "steps": [
       {
-        "name": "Warm-up poll and background",
+        "name": "Background",
         "sections": [
           "poll",
           "pivot"

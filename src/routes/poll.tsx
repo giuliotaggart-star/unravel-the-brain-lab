@@ -23,15 +23,18 @@ export const Route = createFileRoute("/poll")({
   component: PollPage,
 });
 
-export function TopicBox() {
-  const b = (data as any).background;
+/* Screen 1: just today's topic. No definitions here: they would give away poll answers. */
+function TopicIntro({ onStart }: { onStart: () => void }) {
+  const poll = data.poll;
+  const topic = (data as any).background.topic;
   return (
-    <div className="mt-6 inline-flex max-w-3xl flex-col gap-1 rounded-2xl border-2 border-go bg-go-soft px-6 py-4">
-      <span className="kicker text-go">{b.topicLabel}</span>
-      <strong className="font-display-tight text-2xl text-go sm:text-3xl">{b.topic}</strong>
-      <ul className="mt-3 space-y-1.5 border-t border-go/20 pt-3">
-        {b.terms?.map((t: any) => <li key={t.term}><strong>{t.term}:</strong> {t.text}</li>)}
-      </ul>
+    <div className="mt-10 max-w-3xl">
+      <p className="kicker text-go">{poll.topicKicker}</p>
+      <h1 className="font-display-tight mt-3 text-[clamp(2.75rem,9vw,5.5rem)] font-medium leading-[0.95] text-go">{topic}</h1>
+      <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{poll.topicLine}</p>
+      <Button variant="go" size="pill" className="mt-8 h-12 px-8" onClick={onStart}>
+        {poll.startLabel} <ArrowRight className="size-4" />
+      </Button>
     </div>
   );
 }
@@ -43,7 +46,7 @@ function PollPage() {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [conf, setConf] = useState<Record<string, number>>({});
   const [year, setYear] = useState("");
-  const [phase, setPhase] = useState<"ask" | "rate">("ask");
+  const [phase, setPhase] = useState<"topic" | "ask" | "rate">("topic");
   const [code, setCode] = useState("");
   const [codeOpen, setCodeOpen] = useState(false);
   const reduced = useReducedMotion();
@@ -61,9 +64,13 @@ function PollPage() {
 
   return (
     <div>
-      <ChapterOpener id="poll" heading={poll.heading} intro={poll.framing}>
-        <TopicBox />
-      </ChapterOpener>
+      {ready && !submitted && phase === "topic" ? (
+        <ChapterOpener id="poll" compact>
+          <TopicIntro onStart={() => { setPhase("ask"); window.scrollTo({ top: 0, behavior: "auto" }); }} />
+        </ChapterOpener>
+      ) : (
+        <ChapterOpener id="poll" compact heading={poll.heading} intro={submitted ? undefined : poll.framing} />
+      )}
       <PageWrap className="mt-12">
         <div className="mx-auto max-w-3xl">
           {!ready ? (
@@ -77,7 +84,7 @@ function PollPage() {
                   <Link to="/what-dementia-is">{poll.nextLabel} <ArrowRight className="size-4" /></Link>
               </Button>
             </motion.div>
-          ) : phase === "ask" ? (
+          ) : phase === "topic" ? null : phase === "ask" ? (
             <StatementSteps items={items} answers={answers} onAnswer={(id, a) => setAnswers((x) => ({ ...x, [id]: a }))} onDone={() => setPhase("rate")} />
           ) : (
             <motion.form initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} noValidate onSubmit={submit} className="card-surface space-y-8 px-6 py-10 sm:px-10">
