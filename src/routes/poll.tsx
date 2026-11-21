@@ -74,7 +74,7 @@ function PollPage() {
               <h2 className="font-display-tight text-3xl font-medium">{poll.thanksHeading}</h2>
               <p className="max-w-lg text-muted-foreground">{poll.thanksLine}</p>
               <Button asChild variant="go" size="pill" className="mt-2">
-                <Link to="/what-dementia-is">{poll.thanksCta} <ArrowRight className="size-4" /></Link>
+                  <Link to="/what-dementia-is">{poll.nextLabel} <ArrowRight className="size-4" /></Link>
               </Button>
             </motion.div>
           ) : phase === "ask" ? (
@@ -108,7 +108,7 @@ function PollPage() {
           )}
         </div>
       </PageWrap>
-      <ChapterPager id="poll" />
+      {ready && !submitted && <ChapterPager id="poll" />}
     </div>
   );
 }
