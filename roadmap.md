@@ -8,6 +8,9 @@
 - Privacy notice: state how long entries and poll rows are kept
 
 ## Done
+- Confidence ratings are now required in both polls (and the "looking back" rating in the exit poll); the send button stays disabled with a short hint until they are answered
+- Teacher page: OCR Module 6 now points to 6.1.1 Cellular control; Edexcel A (Salters-Nuffield, 9BN0) Topic 8 Grey Matter added
+- About: "practise" (verb) spelling fixed
 - Home headline: Giulio chose to keep "A taste of university science" as the big line
 - Audit batch 5: teacher-page accuracy, safeguarding and accessibility sections, UCAS notes instead of a pasteable sentence, Solo explore multiple-comparisons caution, generic voucher wording, all placeholder text removed
 - Contact: real email giulio.taggart@gmail.com replaces the placeholder

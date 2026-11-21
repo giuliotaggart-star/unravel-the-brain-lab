@@ -40,8 +40,11 @@ function ExitPage() {
   const [phase, setPhase] = useState<"ask" | "rate">("ask");
   const reduced = useReducedMotion();
 
+  const ratingsDone = poll.confidence.every((c: { id: string }) => conf[c.id] != null) && r1 != null;
+
   const submit = (ev: React.FormEvent) => {
     ev.preventDefault();
+    if (!ratingsDone) return;
     const row: ExitPoll = { kind: "exit", at: new Date().toISOString(), anonId: anonId(), classCode: start?.classCode ?? "", answers: { ...answers }, conf: { ...conf }, r1, e1, e2, e3, e4: e4.trim().slice(0, 140), score: scoreOf(items, answers) };
     setDone(row);
     sendPoll(row);
@@ -51,6 +54,7 @@ function ExitPage() {
     setDone(null);
     setAnswers({});
     setConf({});
+    setR1(null);
     setPhase("ask");
   };
 
@@ -90,8 +94,9 @@ function ExitPage() {
                     <button type="button" onClick={() => setPhase("ask")} className="inline-flex items-center gap-1.5 text-sm font-medium text-peri-ink hover:underline">
                       <ArrowLeft className="size-4" /> {poll.backLabel}
                     </button>
-                    <Button type="submit" variant="go" size="pill" className="h-12 px-8">{ex.submitLabel}</Button>
+                    <Button type="submit" variant="go" size="pill" className="h-12 px-8" disabled={!ratingsDone} aria-describedby={ratingsDone ? undefined : "ratings-needed"}>{ex.submitLabel}</Button>
                   </div>
+                  {!ratingsDone && <p id="ratings-needed" className="text-right text-sm text-muted-foreground">{poll.ratingsNeeded}</p>}
                 </motion.form>
               )}
             </>

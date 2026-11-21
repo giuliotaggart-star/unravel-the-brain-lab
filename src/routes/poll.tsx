@@ -48,8 +48,11 @@ function PollPage() {
   const [codeOpen, setCodeOpen] = useState(false);
   const reduced = useReducedMotion();
 
+  const ratingsDone = poll.confidence.every((c: { id: string }) => conf[c.id] != null);
+
   const submit = (ev: React.FormEvent) => {
     ev.preventDefault();
+    if (!ratingsDone) return;
     const row: StartPoll = { kind: "start", at: new Date().toISOString(), anonId: anonId(), classCode: code.trim().slice(0, 24), year, answers: { ...answers }, conf: { ...conf }, score: scoreOf(items, answers) };
     setSubmitted(row);
     sendPoll(row);
@@ -98,8 +101,9 @@ function PollPage() {
                 <button type="button" onClick={() => setPhase("ask")} className="inline-flex items-center gap-1.5 text-sm font-medium text-peri-ink hover:underline">
                   <ArrowLeft className="size-4" /> {poll.backLabel}
                 </button>
-                <Button type="submit" variant="go" size="pill" className="h-12 px-8">{poll.submitLabel}</Button>
+                <Button type="submit" variant="go" size="pill" className="h-12 px-8" disabled={!ratingsDone} aria-describedby={ratingsDone ? undefined : "ratings-needed"}>{poll.submitLabel}</Button>
               </div>
+              {!ratingsDone && <p id="ratings-needed" className="text-right text-sm text-muted-foreground">{poll.ratingsNeeded}</p>}
             </motion.form>
           )}
         </div>

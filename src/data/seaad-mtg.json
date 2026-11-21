@@ -154,6 +154,7 @@
     "classCodeLink": "Have a class code?",
     "scoreText": "{{score}} of {{total}}",
     "confidenceHeading": "How much do you agree?",
+    "ratingsNeeded": "Answer every rating above to continue.",
     "scale": [
       "Strongly disagree",
       "Disagree",
@@ -3222,7 +3223,14 @@
         "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/biology-a-h020-h420-from-2015/",
         "topics": [
           "Module 5: Communication, homeostasis and energy (neuronal communication)",
-          "Module 6: Genetics, evolution and ecosystems (manipulating genomes)"
+          "Module 6: Genetics, evolution and ecosystems (6.1.1 Cellular control: gene expression)"
+        ]
+      },
+      {
+        "spec": "Edexcel A level Biology A (Salters-Nuffield) (9BN0)",
+        "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/biology-a-2015.html",
+        "topics": [
+          "Topic 8: Grey Matter (the nervous system, the brain and brain disorders)"
         ]
       }
     ],
@@ -3557,7 +3565,7 @@
     "exploreNote": "A free-roaming tool. Use it any time.",
     "graphicFrom": "School work",
     "graphicTo": "University",
-    "introLead": "Unravel offers school students the opportunity to practice writing university reports in biology, specifically",
+    "introLead": "Unravel offers school students the opportunity to practise writing university reports in biology, specifically",
     "introTerm": "bioinformatics",
     "termExplainer": "A fancy word for working with biology data.",
     "breakdown": "We break down every step of a scientific report, from data collection to analysis and interpretation.",
