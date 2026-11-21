@@ -120,7 +120,7 @@ function Pivot() {
                   {last ? (
                     <Button asChild variant="go" size="pill">
                       <Link to="/data">
-                        {it.nextLabel ?? data.pivot["nextLabel"]} <ArrowRight className="size-4" />
+                        {data.pivot["nextLabel"]} <ArrowRight className="size-4" />
                       </Link>
                     </Button>
                   ) : (
@@ -134,7 +134,7 @@ function Pivot() {
           </div>
         </div>
       </PageWrap>
-      <ChapterPager id="pivot" />
+      {!last && <ChapterPager id="pivot" />}
     </div>
   );
 }

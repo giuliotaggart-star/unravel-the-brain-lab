@@ -157,7 +157,7 @@ function DataJourney() {
                 {last ? (
                   <Button asChild variant="go" size="pill">
                     <Link to="/lab">
-                      {v.finalLabel} <ArrowRight className="size-4" />
+                      {v.nextLabel} <ArrowRight className="size-4" />
                     </Link>
                   </Button>
                 ) : (
@@ -171,7 +171,7 @@ function DataJourney() {
         </div>
         <p className="mt-4 text-sm text-muted-foreground">{fill(v.footnote)}</p>
       </PageWrap>
-      <ChapterPager id="video" />
+      {!last && <ChapterPager id="video" />}
     </div>
   );
 }

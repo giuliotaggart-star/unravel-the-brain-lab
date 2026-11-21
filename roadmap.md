@@ -8,6 +8,7 @@
 - Privacy notice: state how long entries and poll rows are kept
 
 ## Done
+- Lesson navigation: one purple Next button at completion; duplicate Skip ahead links hidden on both polls, What is dementia and the data walkthrough
 - Confidence ratings are now required in both polls (and the "looking back" rating in the exit poll); the send button stays disabled with a short hint until they are answered
 - Teacher page: OCR Module 6 now points to 6.1.1 Cellular control; Edexcel A (Salters-Nuffield, 9BN0) Topic 8 Grey Matter added
 - About: "practise" (verb) spelling fixed

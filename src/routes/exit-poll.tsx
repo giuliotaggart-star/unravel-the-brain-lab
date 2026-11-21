@@ -103,7 +103,7 @@ function ExitPage() {
           )}
         </div>
       </PageWrap>
-      <ChapterPager id="exit" />
+      {ready && startReady && !done && <ChapterPager id="exit" />}
     </div>
   );
 }
@@ -168,7 +168,7 @@ function Reveal({ start, end, items, onAgain }: { start: StartPoll | null; end: 
       )}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Button variant="soft" size="pill" onClick={onAgain}><RotateCcw className="size-4" /> {ex.retakeLabel}</Button>
-        <Button asChild variant="go" size="pill"><Link to="/explore">{ex.nextCta} <ArrowRight className="size-4" /></Link></Button>
+        <Button asChild variant="go" size="pill"><Link to="/explore">{poll.nextLabel} <ArrowRight className="size-4" /></Link></Button>
       </div>
     </motion.div>
   );
