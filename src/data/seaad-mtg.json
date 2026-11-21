@@ -563,7 +563,10 @@
           }
         ]
       }
-    ]
+    ],
+    "cardStart": "Start",
+    "cardContinue": "Continue",
+    "cardHere": "You are here"
   },
   "glossary": [
     {

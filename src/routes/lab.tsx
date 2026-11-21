@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { LabWorkflow, LAB_NEW, type LabState } from "@/components/unravel/lab/LabWorkflow";
 import { ChapterOpener, ChapterPager, PageWrap } from "@/components/unravel/Shell";
-import { cellColourVar, data, LAB, LUI } from "@/lib/unravel/data";
+import { data, LAB, LUI } from "@/lib/unravel/data";
 import { store, useReducedMotion } from "@/lib/unravel/store";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +21,13 @@ export const Route = createFileRoute("/lab")({
   }),
   component: LabPage,
 });
+
+/** Difficulty colours: green, purple, red. Gold stays reserved for the competition. */
+const TONES = [
+  { card: "border-good/40 bg-good-soft/50", ring: "ring-good/25 border-good", ink: "text-good", bar: "bg-good", chip: "bg-good/15 text-good", solid: "bg-good" },
+  { card: "border-peri/40 bg-peri-soft/50", ring: "ring-peri/25 border-peri", ink: "text-peri-ink", bar: "bg-peri", chip: "bg-peri/15 text-peri-ink", solid: "bg-peri" },
+  { card: "border-coral/40 bg-coral-soft/50", ring: "ring-coral/25 border-coral", ink: "text-coral-ink", bar: "bg-coral", chip: "bg-coral/15 text-coral-ink", solid: "bg-coral" },
+];
 
 function LabPage() {
   const L = LAB();
@@ -65,7 +72,9 @@ function LabPage() {
             const st = states[c.id];
             const on = c.id === sel;
             const lv = LEVELS[i] ?? LEVELS[LEVELS.length - 1]!;
-            const col = cellColourVar(c.views[0]!.cellType);
+            const tone = TONES[Math.min(i, TONES.length - 1)]!;
+            const done = !!(st?.finished && st.verdict);
+            const started = !!st && st.max > 0;
             return (
               <li key={c.id}>
                 <motion.button
@@ -73,45 +82,42 @@ function LabPage() {
                   aria-pressed={on}
                   onClick={() => open(on ? null : c.id)}
                   whileHover={reduced ? {} : { y: -3 }}
+                  whileTap={reduced ? {} : { scale: 0.98 }}
                   className={cn(
-                    "card-surface relative flex h-full w-full flex-col overflow-hidden text-left transition-[box-shadow,border-color] duration-300",
-                    sel ? "p-4" : "p-6",
-                    on ? "border-coral shadow-lift ring-2 ring-coral/25" : "hover:shadow-lift",
-                    sel && !on && "opacity-75 hover:opacity-100",
+                    "relative flex h-full w-full flex-col rounded-3xl border-[3px] text-left shadow-card transition-[box-shadow,background-color,opacity] duration-300",
+                    sel ? "p-4" : "p-5 sm:p-6",
+                    tone.card,
+                    on ? cn("shadow-lift ring-4", tone.ring) : "hover:shadow-lift",
+                    sel && !on && "opacity-70 hover:opacity-100",
                   )}
                 >
-                  <span className="absolute inset-x-0 top-0 h-1.5" style={{ background: col }} />
-                  <span className="flex items-center justify-between gap-3">
-                    <span className="flex items-center gap-2">
-                      <span className="rounded-full bg-muted px-2.5 py-1 font-mono text-[0.68rem] uppercase tracking-wider text-foreground">{lv.level}</span>
-                      <span className="text-sm font-semibold">{lv.diff}</span>
+                  <span className="flex items-start justify-between gap-3">
+                    <span className="min-w-0">
+                      <span className={cn("block font-mono text-xs font-semibold uppercase tracking-widest", tone.ink)}>{lv.level}</span>
+                      <span className={cn("font-display-tight block font-semibold uppercase leading-none tracking-tight", tone.ink, sel ? "mt-1 text-3xl" : "mt-1.5 text-5xl")}>{lv.diff}</span>
                     </span>
-                    <span className="flex gap-0.5" aria-hidden>
+                    <span className="flex shrink-0 items-end gap-1 pt-1" aria-hidden>
                       {[1, 2, 3].map((b) => (
-                        <span key={b} className={cn("w-1.5 rounded-full", b <= i + 1 ? "bg-coral" : "bg-muted")} style={{ height: 6 + b * 4 }} />
+                        <span key={b} className={cn("w-2 rounded-full", b <= i + 1 ? tone.bar : "bg-foreground/10")} style={{ height: 8 + b * 6 }} />
                       ))}
                     </span>
                   </span>
-                  <span className={cn("font-display-tight font-medium leading-tight", sel ? "mt-2 text-lg" : "mt-5 text-2xl")}>{c.plainTitle}</span>
-                  {!sel && (
-                    <>
-                      <span className="mt-3 leading-relaxed text-foreground/80">{c.pickerLine}</span>
-                      <span className="mt-4 flex-1 border-t border-border pt-3 text-sm leading-relaxed text-muted-foreground">{lv.learn}</span>
-                    </>
-                  )}
-                  <span className={cn("flex items-center justify-between", sel ? "mt-2" : "mt-5")}>
-                    {st?.finished && st.verdict ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-good-soft px-3 py-1 text-xs font-semibold text-good">
-                        <Check className="size-3.5" /> {ui.verdictWords[st.verdict]}
+                  <span className={cn("font-medium leading-snug text-foreground", sel ? "mt-2 text-sm" : "mt-4 text-base")}>{c.plainTitle}</span>
+                  {!sel && <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{lv.learn}</span>}
+                  <span className={cn("flex flex-wrap items-center gap-2", sel ? "mt-3" : "mt-5")}>
+                    {done ? (
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-good-soft px-3 py-1.5 text-sm font-semibold text-good">
+                        <Check className="size-4" /> {ui.verdictWords[st!.verdict!]}
                       </span>
-                    ) : st && st.max > 0 ? (
-                      <span className="font-mono text-xs text-muted-foreground">{`${data.ui["step"]} ${st.step + 1} / ${L.stepNames.length}`}</span>
+                    ) : on ? (
+                      <span className={cn("inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold", tone.chip)}>
+                        {L.cardHere}{started ? ` · ${data.ui["step"]} ${st!.step + 1} / ${L.stepNames.length}` : ""}
+                      </span>
                     ) : (
-                      <span />
+                      <span className={cn("inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold text-primary-foreground", tone.solid)}>
+                        {started ? `${L.cardContinue} · ${data.ui["step"]} ${st!.step + 1} / ${L.stepNames.length}` : L.cardStart} <ArrowRight className="size-4" />
+                      </span>
                     )}
-                    <span className={cn("inline-flex size-8 items-center justify-center rounded-full border transition-colors", on ? "border-coral bg-coral text-primary-foreground" : "border-border")} aria-hidden>
-                      {on ? <Check className="size-4" /> : "→"}
-                    </span>
                   </span>
                 </motion.button>
               </li>
