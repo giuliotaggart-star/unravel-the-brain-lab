@@ -566,7 +566,36 @@
     ],
     "cardStart": "Start",
     "cardContinue": "Continue",
-    "cardHere": "You are here"
+    "cardHere": "You are here",
+    "curious": {
+      "label": "For the curious: the full numbers",
+      "tips": [
+        "Only two things matter for your report here: which way the value moved, and how strong the evidence is. The rest is detail.",
+        "Strong reports pick the one or two numbers that test the hypothesis. Open the full numbers and decide which ones earn a place in your write-up.",
+        "Every number is shown. Your job is to choose: which figures actually test your hypothesis, and which would just pad the report?"
+      ]
+    },
+    "methodsPipeline": {
+      "heading": "How we get from brains to a result",
+      "items": [
+        {
+          "term": "1. Sample",
+          "text": "{{donorTotal}} people who donated their brains after death, grouped by how much Alzheimer’s pathology (ADNC) a pathologist found."
+        },
+        {
+          "term": "2. Sequencing",
+          "text": "Single-nucleus RNA sequencing (snRNA-seq) reads the mRNA messages inside each cell nucleus, so every cell can be sorted into a cell type and counted."
+        },
+        {
+          "term": "3. Summarise per donor",
+          "text": "All of one person’s cells become one number (a share or a median). Cells from one person are not independent, so pooling millions of cells would make chance look like a real effect."
+        },
+        {
+          "term": "4. Statistical test",
+          "text": "A Mann-Whitney U test ranks every donor from lowest to highest and asks whether one group sits lower than chance would allow. It uses ranks, not raw values, so a few extreme donors cannot dominate."
+        }
+      ]
+    }
   },
   "glossary": [
     {

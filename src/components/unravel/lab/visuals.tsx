@@ -91,11 +91,11 @@ export function StatsIllustration() {
   const x = (v: number) => 110 + (v - 1) * 58;
   const part = (i: number) => ({ initial: { opacity: 0, y: reduced ? 0 : 8 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay: reduced ? 0 : i * 0.8 } });
   const mono = { fontFamily: "var(--font-mono)", letterSpacing: 1 } as const;
-  const head = (y: number, t: string | undefined) => <text x={20} y={y} fontSize={15} fontWeight={600} fill="var(--foreground)">{t}</text>;
+  const head = (y: number, t: string | undefined) => <text x={20} y={y} fontSize={21} fontWeight={600} fill="var(--foreground)">{t}</text>;
   const med = (vals: number[]) => { const v = [...vals].sort((p, q) => p - q); return (v[2]! + v[3]!) / 2; };
   const row = (vals: number[], y: number, fill: string, name: string | undefined) => (
     <g>
-      <text x={20} y={y + 5} fontSize={12} {...mono} fill="var(--muted-foreground)">{String(name ?? "").toUpperCase()}</text>
+      <text x={20} y={y + 5} fontSize={17} {...mono} fill="var(--muted-foreground)">{String(name ?? "").toUpperCase()}</text>
       <line x1={x(1) - 20} x2={x(12) + 20} y1={y} y2={y} stroke="var(--border)" strokeWidth={2} />
       {vals.map((v) => <circle key={v} cx={x(v)} cy={y} r={10} fill={fill} />)}
       <line x1={x(med(vals))} x2={x(med(vals))} y1={y - 20} y2={y + 20} stroke="var(--foreground)" strokeWidth={3} />
@@ -103,7 +103,7 @@ export function StatsIllustration() {
   );
   return (
     <svg viewBox="0 0 830 420" className="h-full w-full" role="img" aria-label={[M.illustration, ...steps].join(". ")}>
-      <text x={20} y={22} fontSize={11} {...mono} fill="var(--muted-foreground)">{String(M.illustration ?? "").toUpperCase()}</text>
+      <text x={20} y={22} fontSize={16} {...mono} fill="var(--muted-foreground)">{String(M.illustration ?? "").toUpperCase()}</text>
       <motion.g {...part(0)}>
         {head(60, steps[0])}
         {row(A, 100, "var(--peri)", groups[0])}
@@ -115,14 +115,14 @@ export function StatsIllustration() {
         {Array.from({ length: 12 }, (_, k) => k + 1).map((r) => (
           <g key={r}>
             <circle cx={x(r)} cy={255} r={10} fill={A.includes(r) ? "var(--peri)" : "var(--coral)"} />
-            <text x={x(r)} y={288} textAnchor="middle" fontSize={12} {...mono} fill="var(--muted-foreground)">{r}</text>
+            <text x={x(r)} y={288} textAnchor="middle" fontSize={17} {...mono} fill="var(--muted-foreground)">{r}</text>
           </g>
         ))}
       </motion.g>
       <motion.g {...part(2)}>
         {head(345, steps[2])}
         <path d={`M${x(1) - 12} 365 L${x(1) - 12} 375 L${x(6) + 12} 375 L${x(6) + 12} 365`} fill="none" stroke="var(--coral)" strokeWidth={3} />
-        <text x={(x(1) + x(6)) / 2} y={402} textAnchor="middle" fontSize={13} fill="var(--coral-ink)">{M.illustrationNote}</text>
+        <text x={(x(1) + x(6)) / 2} y={408} textAnchor="middle" fontSize={19} fill="var(--coral-ink)">{M.illustrationNote}</text>
       </motion.g>
     </svg>
   );

@@ -41,7 +41,7 @@ const CONF_KEY: Record<Exclude<CheckMode, "none" | "resample">, string> = { age:
 const TINTS = ["var(--coral)", "var(--peri)", "var(--cell-sst)"];
 
 /* ---------- readout strip: the two medians, the change in words, the donors compared, the evidence meter ---------- */
-function Readouts({ S, show }: { S: LabStats; show: boolean }) {
+function Readouts({ S, show, essential = false }: { S: LabStats; show: boolean; essential?: boolean }) {
   const ui = LUI();
   const unit = shortUnitSafe(S.Q.unit);
   const lit = { tooFew: 0, none: 1, suggestive: 2, detected: 3 }[S.evidence];
@@ -51,15 +51,16 @@ function Readouts({ S, show }: { S: LabStats; show: boolean }) {
     { label: ui.readout.change, value: <span className="text-lg leading-tight">{foldWords(S.Q.fold)}</span> },
     { label: ui.readout.donors, value: String(S.first.n + S.last.n) },
   ];
+  const shown = essential ? cells.filter((c) => c.label === ui.readout.change) : cells;
   return (
-    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-5">
-      {cells.map((c, i) => (
+    <div className={cn("grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border", essential ? "sm:grid-cols-2" : "sm:grid-cols-5")}>
+      {shown.map((c, i) => (
         <motion.div key={c.label} className="bg-card p-3.5" initial={false} animate={{ opacity: show ? 1 : 0.35 }} transition={{ delay: show ? 0.15 * i : 0 }}>
           <p className="kicker text-[0.65rem] leading-tight">{c.label}</p>
           <p className="font-display-tight mt-1.5 text-2xl font-medium tabular-nums">{show ? c.value : "–"}</p>
         </motion.div>
       ))}
-      <motion.div className="col-span-2 bg-card p-3.5 sm:col-span-1" initial={false} animate={{ opacity: show ? 1 : 0.35 }} transition={{ delay: show ? 0.6 : 0 }}>
+      <motion.div className={cn("bg-card p-3.5", essential ? "col-span-1" : "col-span-2 sm:col-span-1")} initial={false} animate={{ opacity: show ? 1 : 0.35 }} transition={{ delay: show ? 0.6 : 0 }}>
         <p className="kicker text-[0.65rem]">{ui.evidence.label}</p>
         <div className="mt-2 flex items-center gap-1" role="img" aria-label={show ? ui.evidence[S.evidence] : ""}>
           {[0, 1, 2].map((i) => (
@@ -171,7 +172,21 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
       </div>
       {table ? <StatsTable Q={viewS.Q} /> : <DonorPlot Q={viewS.Q} colour={cellColourVar(viewS.view.cellType)} tint={tint} revealed={revealed} delay={st.revealed ? 0 : 0.2} />}
       {revealed && <p className="text-xs leading-relaxed text-muted-foreground">{L.dotNote}</p>}
-      {i >= 3 && <Readouts S={viewS} show={showVerdict || st.revealed} />}
+      {i >= 3 && (level < 2 ? (
+        <>
+          <Readouts S={viewS} show={showVerdict || st.revealed} essential />
+          <p className="rounded-xl border border-gold/40 bg-gold-soft/40 px-3 py-2 text-sm leading-relaxed"><Lightbulb className="mr-1.5 inline size-4 text-gold-ink" />{L.curious?.tips?.[level]}</p>
+          <details className="group rounded-2xl border border-border bg-card p-3">
+            <summary className="cursor-pointer text-sm font-semibold text-peri-ink">{L.curious?.label}</summary>
+            <div className="mt-3"><Readouts S={viewS} show={showVerdict || st.revealed} /></div>
+          </details>
+        </>
+      ) : (
+        <>
+          <Readouts S={viewS} show={showVerdict || st.revealed} />
+          <p className="text-sm leading-relaxed text-muted-foreground"><Lightbulb className="mr-1.5 inline size-4" />{L.curious?.tips?.[2]}</p>
+        </>
+      ))}
     </div>
   );
 
@@ -270,6 +285,18 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
             <NumberedBlock n={j + 1} label={ui.methods[b.k]}><Rich as="p" text={b.text} vars={vars} /></NumberedBlock>
           </ReadingBlock>
         ))}
+        {L.methodsPipeline && (
+          <ReadingBlock delay={0.3}>
+            <div className="space-y-3 rounded-2xl border border-border bg-card p-4">
+              <p className="font-bold">{L.methodsPipeline.heading}</p>
+              <dl className="space-y-2.5">
+                {L.methodsPipeline.items.map((it: { term: string; text: string }) => (
+                  <div key={it.term}><dt className="font-semibold text-peri-ink">{it.term}</dt><dd className="leading-relaxed text-foreground/85"><Rich as="span" text={it.text} vars={vars} /></dd></div>
+                ))}
+              </dl>
+            </div>
+          </ReadingBlock>
+        )}
         {SB && (
           <ReadingBlock delay={0.4}>
             <div className="space-y-3 rounded-2xl border border-peri/25 bg-peri-soft/40 p-4">
@@ -471,7 +498,7 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
     reading = (
       <>
         {reading}
-        <ReadingBlock delay={0.6}><WriteUp id={part} level={level} /></ReadingBlock>
+        <ReadingBlock delay={0.6}><div className="lg:hidden"><WriteUp id={part} level={level} /></div></ReadingBlock>
       </>
     );
 
@@ -516,7 +543,10 @@ export function LabWorkflow({ cs, index, total, st, setSt, onClose, onNextCase }
             className="grid lg:grid-cols-[1.2fr_1fr]"
           >
             <section aria-label={cs.plainTitle} className="min-w-0 border-b border-border bg-surface/60 p-5 sm:p-8 lg:border-b-0 lg:border-r">
-              <div className="lg:sticky lg:top-24">{visual}</div>
+              <div className="lg:sticky lg:top-24 lg:space-y-6">
+                {visual}
+                {part && <div className="hidden lg:block"><WriteUp id={part} level={level} /></div>}
+              </div>
             </section>
             <section className="min-w-0 p-5 sm:p-8">
               <p className="mb-6 flex items-baseline gap-3">
