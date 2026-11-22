@@ -176,7 +176,7 @@
       },
       {
         "id": "c3",
-        "statement": "People like me could study biology or data science at university"
+        "statement": "I could study biology or data science at university"
       }
     ],
     "yearLabel": "Your year group",
@@ -331,7 +331,7 @@
     "h0Explainer": "The starting assumption that there is no difference. The data has to give us a reason to drop it.",
     "predictingNull": "You are predicting the null hypothesis.",
     "lockWarning": "Choose a hypothesis first",
-    "lockedNote": "Locked. A hypothesis chosen after seeing the data is not a test.",
+    "lockedNote": "Hypothesis locked. Predicting before you look keeps the test fair, as in A-level practicals. Real genomics studies also explore data without a fixed prediction, but they then test those leads separately.",
     "checkInvite": "Good researchers try to break their own result.",
     "lopsided": "Most donors in {{group}} are {{kind}}. {{variable}} and pathology are tangled together here.",
     "resample": "The direction held in {{held}} of 200 reshuffles.",
@@ -343,15 +343,15 @@
     "verdicts": {
       "supported": {
         "decision": "Reject the null hypothesis.",
-        "body": "The data support your hypothesis: the value is {{trend}} in {{lastGroup}} donors."
+        "body": "The data support your hypothesis: the value is {{trend}} in donors graded {{lastGroup}} pathology."
       },
       "contradicted": {
         "decision": "Reject the null hypothesis.",
-        "body": "The data go against your hypothesis: the value is {{trend}} in {{lastGroup}} donors, the opposite of what you predicted. That is a real result, and a useful one."
+        "body": "The data go against your hypothesis: the value is {{trend}} in donors graded {{lastGroup}} pathology, the opposite of what you predicted. That is a real result, and a useful one."
       },
       "differenceFound": {
         "decision": "Reject the null hypothesis.",
-        "body": "You predicted no difference, but the data show one: the value is {{trend}} in {{lastGroup}} donors."
+        "body": "You predicted no difference, but the data show one: the value is {{trend}} in donors graded {{lastGroup}} pathology."
       },
       "notSupported": {
         "decision": "Cannot reject the null hypothesis.",
@@ -516,7 +516,7 @@
         "discussion"
       ]
     },
-    "methodsData": "The same {{donorTotal}} donors you met in The data, each graded from Not AD to High. Here you compare {{nFirst}} {{firstGroup}} donors with {{nLast}} {{lastGroup}} donors.",
+    "methodsData": "The same {{donorTotal}} donors from our dataset, each graded from Not AD (no Alzheimer’s pathology) to High (the most pathology). Here you compare {{nFirst}} donors graded {{firstGroup}} with {{nLast}} donors graded {{lastGroup}}.",
     "statsBasics": [
       {
         "heading": "Stats basics: three ideas you need",
@@ -2797,7 +2797,7 @@
             {
               "statement": "Donors in the {{lastGroup}} group may be older, so age could explain part of the difference.",
               "applies": true,
-              "reason": "Most High donors are aged 90 or over. The age note under The published study shows what happens when donors of the same age are compared."
+              "reason": "Most donors with high pathology are aged 90 or over. The age note in the published-study section shows what happens when donors of the same age are compared."
             },
             {
               "statement": "There are too few donors to compare any groups.",
@@ -2820,7 +2820,7 @@
           "metric": "share-neurons",
           "grouping": "adnc"
         },
-        "ageNote": "Age is tangled with pathology: most High donors are aged 90 or over. Compare donors of the same age and the drop keeps its direction but is no longer clearly significant (aged 78–89: 31.8% vs 24.8%, p = 0.13; aged 90+: 37.6% vs 30.1%, p = 0.059), because each group is small."
+        "ageNote": "Age is tangled with pathology: most donors with high pathology are aged 90 or over. Compare donors of the same age and the drop keeps its direction but is no longer clearly significant (aged 78–89: 31.8% vs 24.8%, p = 0.13; aged 90+: 37.6% vs 30.1%, p = 0.059), because each group is small."
       },
       "abstract": {
         "background": "Alzheimer’s disease damages the connections between brain areas, but not every type of neuron is affected equally.",
@@ -3012,7 +3012,7 @@
         "look": "Each dot is one donor. Higher up means more TREM2 messages in that person’s microglia.",
         "shows": "The middle donor in {{lastGroup}} is {{trend}} compared with the middle donor in {{firstGroup}}.",
         "exploratory": "You did not set a hypothesis for APOE, so this result is exploratory. It is a lead worth testing in new data, not a confirmed finding. Researchers keep the two kinds apart, because looking at many genes makes it easy to find a pattern by chance.",
-        "exploratoryShows": "APOE activity in microglia is {{trend}} in {{lastGroup}} donors than in {{firstGroup}} donors."
+        "exploratoryShows": "APOE activity in microglia is {{trend}} in donors graded {{lastGroup}} pathology than in {{firstGroup}} donors."
       },
       "discussion": {
         "claim": {
@@ -3639,7 +3639,7 @@
     "cards": [
       {
         "title": "The lesson",
-        "body": "Interactively explore and simplify complex clinical papers."
+        "body": "Work through a real scientific report in order: background first, then data, methods, results and discussion, ending with an abstract."
       },
       {
         "title": "Bioinformatics & Data",
@@ -3866,7 +3866,7 @@
     ],
     "hereLabel": "You are here",
     "nextHeading": "Background check: what do you already know?",
-    "nextLine": "Start with a quick poll: what do you already know?",
+    "nextLine": "Every scientific report follows the same 6 parts and starts with the background. We do the same: first, a quick poll on what you already know.",
     "cta": "Get started",
     "topicLabel": "Our topic",
     "topic": "Alzheimer's disease and dementia",
