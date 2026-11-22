@@ -26,12 +26,29 @@ export const Route = createFileRoute("/poll")({
 /* Screen 1: just today's topic. No definitions here: they would give away poll answers. */
 function TopicIntro({ onStart }: { onStart: () => void }) {
   const poll = data.poll;
-  const topic = (data as any).background.topic;
+  const bg = (data as any).background;
+  const topic = bg.topic;
   return (
     <div className="mt-10 max-w-3xl">
       <p className="kicker text-go">{poll.topicKicker}</p>
       <h1 className="font-display-tight mt-3 text-[clamp(2.75rem,9vw,5.5rem)] font-medium leading-[0.95] text-go">{topic}</h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{poll.topicLine}</p>
+      <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground">{bg.nextLine}</p>
+      <div className="card-surface mt-6 max-w-xl px-5 py-5">
+        <p className="kicker text-go">{bg.outlineHeading}</p>
+        <ol className="mt-3 space-y-2">
+          {bg.outline.map((o: { part: string; where: string; here: boolean }, i: number) => (
+            <li key={o.part} className={o.here ? "flex items-start gap-3 rounded-xl bg-go/10 p-2" : "flex items-start gap-3 p-2"}>
+              <span className={o.here ? "flex size-7 shrink-0 items-center justify-center rounded-lg bg-go font-mono text-xs text-primary-foreground" : "flex size-7 shrink-0 items-center justify-center rounded-lg bg-muted font-mono text-xs"}>{i + 1}</span>
+              <span className="text-sm leading-snug">
+                <strong className="font-semibold">{o.part}</strong>
+                {o.here && <span className="ml-2 rounded-full bg-go px-2 py-0.5 text-xs font-medium text-primary-foreground">{bg.hereLabel}</span>}
+                <span className="block text-muted-foreground">{o.where}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p className="mt-6 max-w-xl text-muted-foreground">{poll.topicLine}</p>
       <Button variant="go" size="pill" className="mt-8 h-12 px-8" onClick={onStart}>
         {poll.startLabel} <ArrowRight className="size-4" />
       </Button>
