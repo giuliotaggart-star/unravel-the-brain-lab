@@ -23,35 +23,43 @@ export const Route = createFileRoute("/poll")({
   component: PollPage,
 });
 
-/* Screen 1: just today's topic. No definitions here: they would give away poll answers. */
+/* Introduce the report structure and topic without giving away poll answers. */
 function TopicIntro({ onStart }: { onStart: () => void }) {
   const poll = data.poll;
   const bg = (data as any).background;
-  const topic = bg.topic;
   return (
-    <div className="mt-10 max-w-3xl">
-      <p className="kicker text-go">{poll.topicKicker}</p>
-      <h1 className="font-display-tight mt-3 text-[clamp(2.75rem,9vw,5.5rem)] font-medium leading-[0.95] text-go">{topic}</h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground">{bg.nextLine}</p>
-      <div className="card-surface mt-6 max-w-xl px-5 py-5">
-        <p className="kicker text-go">{bg.outlineHeading}</p>
-        <ol className="mt-3 space-y-2">
-          {bg.outline.map((o: { part: string; where: string; here: boolean }, i: number) => (
-            <li key={o.part} className={o.here ? "flex items-start gap-3 rounded-xl bg-go/10 p-2" : "flex items-start gap-3 p-2"}>
-              <span className={o.here ? "flex size-7 shrink-0 items-center justify-center rounded-lg bg-go font-mono text-xs text-primary-foreground" : "flex size-7 shrink-0 items-center justify-center rounded-lg bg-muted font-mono text-xs"}>{i + 1}</span>
-              <span className="text-sm leading-snug">
-                <strong className="font-semibold">{o.part}</strong>
-                {o.here && <span className="ml-2 rounded-full bg-go px-2 py-0.5 text-xs font-medium text-primary-foreground">{bg.hereLabel}</span>}
-                <span className="block text-muted-foreground">{o.where}</span>
-              </span>
-            </li>
-          ))}
-        </ol>
+    <div className="mt-10">
+      <h1 className="font-display-tight text-4xl font-medium leading-tight tracking-normal text-go sm:text-5xl">{poll.introHeading}</h1>
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">{poll.introLine}</p>
+      <div className="mt-8 grid items-start gap-6 md:grid-cols-[1.15fr_1fr] lg:gap-10">
+        <div className="card-surface px-5 py-6 sm:px-6">
+          <h2 className="font-display-tight text-2xl font-medium tracking-normal text-go">{bg.outlineHeading}</h2>
+          <ol className="mt-4 space-y-2">
+            {bg.outline.map((o: { part: string; here: boolean }, i: number) => (
+              <li key={o.part} className={o.here ? "flex items-start gap-3 rounded-lg bg-go/10 p-3" : "flex items-start gap-3 p-3"}>
+                <span className={o.here ? "flex size-7 shrink-0 items-center justify-center rounded-lg bg-go font-mono text-xs text-primary-foreground" : "flex size-7 shrink-0 items-center justify-center rounded-lg bg-muted font-mono text-xs"}>{i + 1}</span>
+                <span className="flex min-h-7 flex-wrap items-center gap-x-2 gap-y-1 text-sm leading-snug">
+                  <strong className="font-semibold">{o.part}</strong>
+                  {o.here && <span className="rounded-full bg-go px-2 py-0.5 text-xs font-medium text-primary-foreground">{bg.hereLabel}</span>}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="min-w-0">
+          <div className="rounded-lg border border-go/20 bg-peri-soft px-6 py-8 sm:px-8">
+            <p className="kicker text-go">{poll.topicKicker}</p>
+            <div className="mt-5 flex items-start gap-3">
+              <ArrowRight className="mt-2 size-6 shrink-0 text-go" aria-hidden />
+              <h2 className="font-display-tight text-3xl font-medium leading-tight tracking-normal text-go lg:text-4xl">{poll.introTopic}</h2>
+            </div>
+          </div>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground">{poll.topicLine}</p>
+          <Button variant="go" size="pill" className="mt-6 min-h-12 max-w-full whitespace-normal px-6" onClick={onStart}>
+            {poll.startLabel} <ArrowRight className="size-4 shrink-0" />
+          </Button>
+        </div>
       </div>
-      <p className="mt-6 max-w-xl text-muted-foreground">{poll.topicLine}</p>
-      <Button variant="go" size="pill" className="mt-8 h-12 px-8" onClick={onStart}>
-        {poll.startLabel} <ArrowRight className="size-4" />
-      </Button>
     </div>
   );
 }
@@ -132,7 +140,7 @@ function PollPage() {
           )}
         </div>
       </PageWrap>
-      {ready && !submitted && <ChapterPager id="poll" />}
+      {ready && !submitted && phase !== "topic" && <ChapterPager id="poll" />}
     </div>
   );
 }

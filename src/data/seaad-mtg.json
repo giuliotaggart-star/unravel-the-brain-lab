@@ -96,6 +96,9 @@
   "poll": {
     "framing": "Go with your gut. The answers come at the end of the lesson.",
     "topicKicker": "Today’s topic",
+    "introHeading": "Reviewing a topic",
+    "introLine": "A scientific report starts with the background: reviewing what researchers already know. That’s where we begin, before working through the other parts of your report.",
+    "introTopic": "Alzheimer’s disease",
     "topicLine": "First, a 2-minute warm-up poll: six statements and three quick ratings. There are no marks. The answers come at the end of the lesson.",
     "startLabel": "Start the warm-up poll",
     "options": {
