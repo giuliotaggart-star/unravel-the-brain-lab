@@ -3859,13 +3859,21 @@
   },
   "contact": {
     "kicker": "Contact us",
-    "heading": "The student behind Unravel",
-    "intro": "Unravel was built by a student at Imperial College London.",
+    "heading": "The people behind Unravel",
+    "intro": "Meet the founder and co-founder of Unravel.",
     "name": "Giulio Taggart",
+    "founderTitle": "Founder",
     "role": "Final-year Biological Sciences BSc student at Imperial College London.",
+    "coFounder": {
+      "name": "Solly McNay",
+      "title": "Co-founder",
+      "photoLabel": "Solly McNay",
+      "photo": ""
+    },
+    "missionHeading": "Our shared mission",
     "bio": [
-      "I built Unravel because of two main things that I was not prepared for at university. One, learning how to write scientific reports. Two, understanding that a degree in Biology does not mean a career in the lab.",
-      "I want to help equip students for the transition into scientific writing and show them the power of computational Biology."
+      "We built Unravel to help with two things students may not feel prepared for at university: learning how to write scientific reports, and understanding that a degree in Biology does not mean a career in the lab.",
+      "We want to help equip students for the transition into scientific writing and show them the power of computational Biology."
     ],
     "emailLabel": "Email",
     "email": "unravel.outreach@gmail.com"

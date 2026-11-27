@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
+- Contact profiles use a two-column photo layout with one shared mission below; profile text and optional photo URLs stay in the central JSON so authors can update both people together.
 - All site copy and data are read from `src/data/seaad-mtg.json` through `src/lib/unravel/data.ts`; components never hardcode content, so the authors can edit one file.
 - Donor statistics live in `src/lib/unravel/stats.ts`, ported unchanged from the original app so lab verdicts match the source.
 - Navigation: 5 groups from `journey` in the JSON live in the Menu sheet; practice steps are numbered except `standalone` ones (Solo explore); About is the hub, not a step.

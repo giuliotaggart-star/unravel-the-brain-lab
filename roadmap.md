@@ -7,6 +7,7 @@
 - Privacy notice: state how long entries and poll rows are kept
 
 ## Done
+- Contact: Giulio (Founder) and Solly (Co-founder) side by side with a shared mission; Solly’s photo space awaits upload.
 - Lesson opening: reviewing a topic first, six report parts, an Alzheimer’s-only topic spotlight and a warm-up poll button
 - Contact email is now the project inbox unravel.outreach@gmail.com everywhere (contact page, teachers, privacy, terms)
 - Lesson navigation: one purple Next button at completion; duplicate Skip ahead links hidden on both polls, What is dementia and the data walkthrough
