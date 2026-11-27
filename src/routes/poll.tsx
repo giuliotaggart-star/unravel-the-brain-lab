@@ -30,6 +30,7 @@ function TopicIntro({ onStart }: { onStart: () => void }) {
   return (
     <div className="mt-10">
       <h1 className="font-display-tight text-4xl font-medium leading-tight tracking-normal text-go sm:text-5xl">{poll.introHeading}</h1>
+      <p className="mt-2 text-lg font-medium text-go">{poll.introSubtitle}</p>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">{poll.introLine}</p>
       <div className="mt-8 grid items-start gap-6 md:grid-cols-[1.15fr_1fr] lg:gap-10">
         <div className="card-surface px-5 py-6 sm:px-6">
