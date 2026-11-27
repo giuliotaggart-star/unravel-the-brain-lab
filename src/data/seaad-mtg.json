@@ -3676,7 +3676,7 @@
       }
     ],
     "cta": "Practice now",
-    "headingLead": "Bridging the gap",
+    "headingLead": "Bridging the gap to university research",
     "pathHeading": "Your report, step by step",
     "skipHeading": "Or skip ahead",
     "competitionTitle": "Abstract competition",
@@ -3688,7 +3688,7 @@
     "introTerm": "bioinformatics",
     "termExplainer": "A fancy word for working with biology data.",
     "breakdown": "We break down every step of a scientific report, from data collection to analysis and interpretation.",
-    "benefitsHeading": "The benefits",
+    "benefitsHeading": "What students take away",
     "points": [
       "Early exposure to bioinformatics, simplified",
       "Building your data analysis skills from the ground up",
@@ -3699,7 +3699,74 @@
     "ucasNote": "Where this could take you next.",
     "builtByOrg": ", a student at Imperial College London",
     "builtByLead": "Built by",
-    "builtByLink": "Giulio Taggart"
+    "builtByLink": "Giulio Taggart",
+    "kicker": "An off-the-shelf research simulation",
+    "heroLead": [
+      "School science teaches what is already known. University research asks you to investigate what isn't. ",
+      "Unravel is a free, interactive research project on dementia",
+      " that teaches students to ",
+      "write up scientific research like a university scientist",
+      ", while they handle real data from donated brain tissue."
+    ],
+    "missionBox": [
+      {
+        "label": "The problem",
+        "text": "Disadvantaged students rarely get help bridging the gap to university, especially in writing up scientific research."
+      },
+      {
+        "label": "The solution",
+        "text": "A self-contained 60–90 minute research project, ready for Royal Institution Masterclasses, school science clubs or independent study. Free, with no setup and no student logins."
+      }
+    ],
+    "pillarsHeading": "How it works",
+    "pillars": [
+      {
+        "icon": "data",
+        "title": "Real brain data",
+        "points": [
+          "84 donated human brains from the Seattle Alzheimer's Disease Brain Cell Atlas (SEA-AD)",
+          "Gene activity measured inside single cells",
+          "Real published numbers, not a toy simulation"
+        ]
+      },
+      {
+        "icon": "stats",
+        "title": "From numbers to evidence",
+        "points": [
+          "Group donors by how much Alzheimer's damage their brain showed",
+          "Compare donor medians across cell types",
+          "Test the difference with a Mann-Whitney test"
+        ]
+      },
+      {
+        "icon": "write",
+        "title": "Writing it up",
+        "core": "The core skill",
+        "points": [
+          "Start from the background, like a literature review",
+          "Make a prediction before you look",
+          "Weigh the limits honestly and write a university-style abstract"
+        ]
+      }
+    ],
+    "benefits": [
+      {
+        "title": "University science, demystified",
+        "text": "Follow the same steps as an undergraduate research project."
+      },
+      {
+        "title": "Something real for UCAS and interviews",
+        "text": "Talk with depth about analysing real single-cell brain data."
+      },
+      {
+        "title": "Critical thinking over right answers",
+        "text": "Real data is messy: spot confounders, small samples and uncertainty."
+      },
+      {
+        "title": "Ready for Masterclasses and classrooms",
+        "text": "Runs in one 60–90 minute session or at your own pace."
+      }
+    ]
   },
   "journey": {
     "groups": [

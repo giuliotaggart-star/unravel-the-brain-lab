@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Compass, GraduationCap, Landmark, Monitor, School, Trophy, Users } from "lucide-react";
+import { ArrowRight, BarChart3, Check, Compass, Microscope, PenLine, GraduationCap, Landmark, Monitor, School, Trophy, Users } from "lucide-react";
 import { PageWrap } from "@/components/unravel/Shell";
 import { links, steps } from "@/lib/unravel/chapters";
 import { data, fill } from "@/lib/unravel/data";
@@ -81,8 +81,11 @@ function About() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h1 className="font-display-tight font-medium leading-[1.05] text-go-ink">
-              <span className="block text-[clamp(2.4rem,6vw,4.5rem)]">{a.headingLead}</span>
+            <span className="inline-block rounded-full bg-peri-soft px-4 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-go-ink">
+              {a.kicker}
+            </span>
+            <h1 className="mt-5 font-display-tight font-medium leading-[1.05] text-go-ink">
+              <span className="block text-[clamp(2.2rem,5.5vw,4.2rem)]">{a.headingLead}</span>
             </h1>
           </motion.div>
 
@@ -91,26 +94,75 @@ function About() {
             <BridgeGraphic from={a.graphicFrom} to={a.graphicTo} />
           </div>
 
-          <div className="mx-auto mt-10 max-w-2xl">
+          <div className="mx-auto mt-10 max-w-3xl">
             <p className="text-lg leading-relaxed sm:text-xl">
-              {a.introLead} <strong className="font-semibold text-go-ink">{a.introTerm}</strong>.
+              {a.heroLead[0]}
+              <strong className="font-semibold text-go-ink">{a.heroLead[1]}</strong>
+              {a.heroLead[2]}
+              <strong className="font-semibold text-go-ink">{a.heroLead[3]}</strong>
+              {a.heroLead[4]}
             </p>
-            <aside className="mt-5 rounded-2xl border-l-4 border-peri bg-peri-soft/60 px-5 py-4">
-              <p className="font-display-tight text-xl font-semibold text-go-ink">{a.introTerm}</p>
-              <p className="mt-1 text-[0.95rem] text-foreground">{a.termExplainer}</p>
-            </aside>
-            <p className="mt-6 text-lg leading-relaxed">{a.breakdown}</p>
 
-            <h2 className="mt-10 font-display-tight text-3xl font-bold tracking-tight text-go-ink sm:text-4xl">
+            <aside className="mt-8 grid gap-4 rounded-2xl border-l-4 border-peri bg-peri-soft/60 px-5 py-5 sm:grid-cols-2 sm:px-6">
+              {a.missionBox.map((m: { label: string; text: string }) => (
+                <div key={m.label}>
+                  <p className="kicker !text-go-ink">{m.label}</p>
+                  <p className="mt-1 text-[0.98rem] leading-relaxed text-foreground">{m.text}</p>
+                </div>
+              ))}
+            </aside>
+          </div>
+
+          <section aria-labelledby="pillars" className="mt-12">
+            <h2 id="pillars" className="text-center font-display-tight text-3xl font-bold tracking-tight text-go-ink sm:text-4xl">
+              {a.pillarsHeading}
+            </h2>
+            <div className="mt-6 grid gap-5 md:grid-cols-3">
+              {a.pillars.map((p: { icon: string; title: string; core?: string; points: string[] }) => {
+                const Icon = p.icon === "data" ? Microscope : p.icon === "stats" ? BarChart3 : PenLine;
+                const core = Boolean(p.core);
+                return (
+                  <div
+                    key={p.title}
+                    className={`relative rounded-3xl p-6 ${core ? "border-2 border-go bg-peri-soft/50 shadow-lift" : "card-surface"}`}
+                  >
+                    {core && (
+                      <span className="absolute -top-3 left-6 rounded-full bg-go px-3 py-1 font-mono text-[0.7rem] uppercase tracking-widest text-go-foreground">
+                        {p.core}
+                      </span>
+                    )}
+                    <span className={`flex size-11 items-center justify-center rounded-xl ${core ? "bg-go text-go-foreground" : "bg-peri-soft text-peri-ink"}`}>
+                      <Icon className="size-5" aria-hidden />
+                    </span>
+                    <h3 className="mt-4 text-xl font-semibold text-go-ink">{p.title}</h3>
+                    <ul className="mt-3 space-y-2">
+                      {p.points.map((pt) => (
+                        <li key={pt} className="flex items-start gap-2 text-[0.95rem] leading-snug">
+                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-peri" aria-hidden />
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <div className="mx-auto mt-12 max-w-3xl">
+            <h2 className="font-display-tight text-3xl font-bold tracking-tight text-go-ink sm:text-4xl">
               {a.benefitsHeading}
             </h2>
-            <ul className="mt-4 space-y-3">
-              {(a.points ?? []).map((p: string) => (
-                <li key={p} className="flex items-start gap-3 text-lg font-medium">
-                  <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-peri-soft text-peri-ink">
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {a.benefits.map((b: { title: string; text: string }) => (
+                <li key={b.title} className="card-surface flex items-start gap-3 p-4">
+                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-go text-go-foreground">
                     <Check className="size-3.5" strokeWidth={3} aria-hidden />
                   </span>
-                  {p}
+                  <span className="min-w-0">
+                    <strong className="block font-semibold text-go-ink">{b.title}</strong>
+                    <span className="mt-0.5 block text-sm text-muted-foreground">{b.text}</span>
+                  </span>
                 </li>
               ))}
             </ul>
