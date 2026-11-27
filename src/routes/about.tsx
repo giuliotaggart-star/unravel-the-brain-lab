@@ -103,14 +103,6 @@ function About() {
               {a.heroLead[4]}
             </p>
 
-            <aside className="mt-8 grid gap-4 rounded-2xl border-l-4 border-peri bg-peri-soft/60 px-5 py-5 sm:grid-cols-2 sm:px-6">
-              {a.missionBox.map((m: { label: string; text: string }) => (
-                <div key={m.label}>
-                  <p className="kicker !text-go-ink">{m.label}</p>
-                  <p className="mt-1 text-[0.98rem] leading-relaxed text-foreground">{m.text}</p>
-                </div>
-              ))}
-            </aside>
           </div>
 
           <section aria-labelledby="pillars" className="mt-12">
